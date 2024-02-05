@@ -1,0 +1,445 @@
+<data name="sagecrmdss_order" serviceNamespace="" serviceGroup="" transports="http https">
+  <description>sage crm data service</description>
+  
+  <config id="DFACRM">
+    <property name="driverClassName">com.microsoft.sqlserver.jdbc.SQLServerDriver</property>
+    <property name="url">jdbc:sqlserver://dfasql-lab01:1433;databaseName=DFACRM_UAT01</property>
+    <property name="username">API_User</property>
+    <property name="password">@ApiUs3r123!</property>
+  </config>
+
+  <!-- Resource Order -->
+  <resource method="GET" path="/orders">
+         <call-query href="GetOrders" >
+         <with-param name="pagesize" query-param="pagesize" />
+         <with-param name="Orde_reference" query-param="Orde_reference" />
+         <with-param name="Orde_OrderQuoteID" query-param="Orde_OrderQuoteID" />
+         </call-query>
+  </resource>
+
+  <resource method="GET" path="/orders/getNextOrderRef">
+         <call-query href="getNextOrderRef">
+             <with-param name="orde_opportunityid" query-param="orde_opportunityid" />
+         </call-query>
+  </resource>
+
+  <resource method="POST" path="/orders">
+         <call-query href="CreateOrders" >
+          <with-param name="Orde_OrderQuoteID" query-param="Orde_OrderQuoteID"/>
+          <with-param name="Orde_DiscountPC" query-param="Orde_DiscountPC"/>
+          <with-param name="orde_Region" query-param="orde_Region"/>        
+          <with-param name="orde_Stage" query-param="orde_Stage"/>
+          <with-param name="orde_OrderClassification" query-param="orde_OrderClassification"/>
+          <with-param name="orde_Type" query-param="orde_Type"/>
+          <with-param name="Orde_UpdatedDate" query-param="Orde_UpdatedDate"/>
+          <with-param name="Orde_lineitemdisc" query-param="Orde_lineitemdisc"/>
+          <with-param name="Orde_Status" query-param="Orde_Status"/>
+          <with-param name="Orde_discountamt" query-param="Orde_discountamt"/>
+          <with-param name="Orde_rollup" query-param="Orde_rollup"/>
+          <with-param name="Orde_reference" query-param="Orde_reference"/>
+          <with-param name="orde_BuildPrioritySecondary" query-param="orde_BuildPrioritySecondary"/>
+          <with-param name="orde_State" query-param="orde_State"/>
+          <with-param name="orde_tax" query-param="orde_tax"/>
+          <with-param name="Orde_PricingListID" query-param="Orde_PricingListID"/>
+          <with-param name="Orde_currency" query-param="Orde_currency"/>
+          <with-param name="Orde_opportunityid" query-param="Orde_opportunityid"/>
+          <with-param name="orde_ordersigneddate" query-param="orde_ordersigneddate"/>
+          <with-param name="orde_hasOrderDoc" query-param="orde_hasOrderDoc"/>
+          <with-param name="Orde_CreatedDate" query-param="Orde_CreatedDate"/>
+          <with-param name="orde_kam" query-param="orde_kam"/>
+          <with-param name="Orde_Secterr" query-param="Orde_Secterr"/>
+          <with-param name="orde_referenceid" query-param="orde_referenceid"/>
+          <with-param name="Orde_TimeStamp" query-param="Orde_TimeStamp"/>
+          <with-param name="orde_dependancy" query-param="orde_dependancy"/>
+          <with-param name="orde_synchstatus" query-param="orde_synchstatus"/>
+          <with-param name="orde_order_status" query-param="orde_order_status"/>
+          <with-param name="Orde_nettamt" query-param="Orde_nettamt"/>
+          <with-param name="Orde_CreatedBy" query-param="Orde_CreatedBy"/>
+          <with-param name="Orde_WorkflowId" query-param="Orde_WorkflowId"/>
+          <with-param name="Orde_opened" query-param="Orde_opened"/>
+          <with-param name="Orde_grossamt" query-param="Orde_grossamt"/>
+          <with-param name="orde_tax_CID" query-param="orde_tax_CID"/>
+          <with-param name="orde_sales_team" query-param="orde_sales_team"/>
+          <with-param name="orde_Date_Receive" query-param="orde_Date_Receive"/>
+          <with-param name="Orde_lineitemdisc_CID" query-param="Orde_lineitemdisc_CID"/>
+          <with-param name="orde_BuildPriorityPrimary" query-param="orde_BuildPriorityPrimary"/>
+          <with-param name="Orde_nettamt_CID" query-param="Orde_nettamt_CID"/>
+          <with-param name="Orde_NoDiscAmt_CID" query-param="Orde_NoDiscAmt_CID"/>
+          <with-param name="Orde_NoDiscAmt" query-param="Orde_NoDiscAmt"/>
+          <with-param name="orde_DesResp" query-param="orde_DesResp"/>
+          <with-param name="orde_newkam" query-param="orde_newkam"/>
+          <with-param name="Orde_discountamt_CID" query-param="Orde_discountamt_CID"/>
+          <with-param name="Orde_grossamt_CID" query-param="Orde_grossamt_CID"/>
+          <with-param name="Orde_Deleted" query-param="Orde_Deleted"/>
+          <with-param name="orde_Link_Type" query-param="orde_Link_Type"/>
+          <with-param name="Orde_expiredelivery" query-param="Orde_expiredelivery"/>
+          <with-param name="orde_salesadminperson" query-param="orde_salesadminperson"/>
+          <with-param name="Orde_Description" query-param="Orde_Description"/>
+          <with-param name="Orde_UpdatedBy" query-param="Orde_UpdatedBy"/>
+          <with-param name="orde_AMRefA" query-param="orde_AMRefA"/>
+          <with-param name="orde_Link_priority" query-param="orde_Link_priority"/> 
+         </call-query>
+  </resource>
+  
+  <resource method="PUT" path="/orders">
+         <call-query href="UpdateOrders" >
+                <with-param name="Orde_OrderQuoteID" query-param="Orde_OrderQuoteID"/>
+                <with-param name="Orde_DiscountPC" query-param="Orde_DiscountPC"/>
+          <with-param name="orde_Region" query-param="orde_Region"/>        
+          <with-param name="orde_Stage" query-param="orde_Stage"/>
+          <with-param name="orde_OrderClassification" query-param="orde_OrderClassification"/>
+          <with-param name="orde_Type" query-param="orde_Type"/>
+          <with-param name="Orde_UpdatedDate" query-param="Orde_UpdatedDate"/>
+          <with-param name="Orde_lineitemdisc" query-param="Orde_lineitemdisc"/>
+          <with-param name="Orde_Status" query-param="Orde_Status"/>
+          <with-param name="Orde_discountamt" query-param="Orde_discountamt"/>
+          <with-param name="Orde_rollup" query-param="Orde_rollup"/>
+          <with-param name="Orde_reference" query-param="Orde_reference"/>
+          <with-param name="orde_BuildPrioritySecondary" query-param="orde_BuildPrioritySecondary"/>
+          <with-param name="orde_State" query-param="orde_State"/>
+          <with-param name="orde_tax" query-param="orde_tax"/>
+          <with-param name="Orde_PricingListID" query-param="Orde_PricingListID"/>
+          <with-param name="Orde_currency" query-param="Orde_currency"/>
+          <with-param name="Orde_opportunityid" query-param="Orde_opportunityid"/>
+          <with-param name="orde_ordersigneddate" query-param="orde_ordersigneddate"/>
+          <with-param name="orde_hasOrderDoc" query-param="orde_hasOrderDoc"/>
+          <with-param name="Orde_CreatedDate" query-param="Orde_CreatedDate"/>
+             <with-param name="orde_kam" query-param="orde_kam"/>
+          <with-param name="Orde_Secterr" query-param="Orde_Secterr"/>
+          <with-param name="orde_referenceid" query-param="orde_referenceid"/>
+          <with-param name="Orde_TimeStamp" query-param="Orde_TimeStamp"/>
+          <with-param name="orde_dependancy" query-param="orde_dependancy"/>
+          <with-param name="orde_synchstatus" query-param="orde_synchstatus"/>
+          <with-param name="orde_order_status" query-param="orde_order_status"/>
+          <with-param name="Orde_nettamt" query-param="Orde_nettamt"/>
+          <with-param name="Orde_CreatedBy" query-param="Orde_CreatedBy"/>
+          <with-param name="Orde_WorkflowId" query-param="Orde_WorkflowId"/>
+          <with-param name="Orde_opened" query-param="Orde_opened"/>
+          <with-param name="Orde_grossamt" query-param="Orde_grossamt"/>
+          <with-param name="orde_tax_CID" query-param="orde_tax_CID"/>
+          <with-param name="orde_sales_team" query-param="orde_sales_team"/>
+          <with-param name="orde_Date_Receive" query-param="orde_Date_Receive"/>
+          <with-param name="Orde_lineitemdisc_CID" query-param="Orde_lineitemdisc_CID"/>
+          <with-param name="orde_BuildPriorityPrimary" query-param="orde_BuildPriorityPrimary"/>
+          <with-param name="Orde_nettamt_CID" query-param="Orde_nettamt_CID"/>
+          <with-param name="Orde_NoDiscAmt_CID" query-param="Orde_NoDiscAmt_CID"/>
+          <with-param name="Orde_NoDiscAmt" query-param="Orde_NoDiscAmt"/>
+          <with-param name="orde_DesResp" query-param="orde_DesResp"/>
+          <with-param name="orde_newkam" query-param="orde_newkam"/>
+          <with-param name="Orde_discountamt_CID" query-param="Orde_discountamt_CID"/>
+          <with-param name="Orde_grossamt_CID" query-param="Orde_grossamt_CID"/>
+          <with-param name="Orde_Deleted" query-param="Orde_Deleted"/>
+          <with-param name="orde_Link_Type" query-param="orde_Link_Type"/>
+          <with-param name="Orde_expiredelivery" query-param="Orde_expiredelivery"/>
+          <with-param name="orde_salesadminperson" query-param="orde_salesadminperson"/>
+          <with-param name="Orde_Description" query-param="Orde_Description"/>
+          <with-param name="Orde_UpdatedBy" query-param="Orde_UpdatedBy"/>
+          <with-param name="orde_AMRefA" query-param="orde_AMRefA"/>
+          <with-param name="orde_Link_priority" query-param="orde_Link_priority"/> 
+         </call-query>
+  </resource>
+  
+  
+  <!-- Queries Orders -->
+  <query id="GetOrders" useConfig="DFACRM">
+     <sql>
+         SELECT TOP(COALESCE(:pagesize, 10))  
+         Orde_OrderQuoteID, Orde_CreatedBy, Orde_CreatedDate, Orde_UpdatedBy, Orde_UpdatedDate, Orde_TimeStamp, Orde_Deleted, Orde_WorkflowId, 
+         Orde_Secterr, Orde_discountamt, Orde_discountamt_CID, Orde_DiscountPC, Orde_expiredelivery, Orde_grossamt, Orde_grossamt_CID, Orde_lineitemdisc, 
+         Orde_lineitemdisc_CID, Orde_nettamt, Orde_nettamt_CID, Orde_opened, Orde_opportunityid, Orde_reference, Orde_Description, Orde_Status, Orde_currency, 
+         Orde_NoDiscAmt_CID, Orde_NoDiscAmt, Orde_rollup, Orde_PricingListID, orde_synchstatus, orde_tax_CID, orde_tax, orde_Date_Receive, orde_Link_Type, 
+         orde_Type, orde_Stage, orde_State, orde_Region, orde_order_status, orde_hasOrderDoc, orde_salesadminperson, orde_AMRefA, orde_OrderClassification, 
+         orde_BuildPriorityPrimary, orde_BuildPrioritySecondary, orde_dependancy, orde_referenceid, orde_DesResp, orde_ordersigneddate, orde_kam, orde_sales_team, 
+         orde_newkam, orde_Link_priority
+         FROM Orders
+         WHERE Orde_Deleted IS NULL
+         AND (Orde_reference = :Orde_reference OR :Orde_reference IS NULL)
+         AND (Orde_OrderQuoteID = :Orde_OrderQuoteID OR :Orde_OrderQuoteID IS NULL)
+         ORDER BY Orde_CreatedDate DESC
+     </sql>
+     <param name="pagesize" paramType="SCALAR" sqlType="INTEGER" defaultValue="10" type="IN" optional="true" />
+     <param name="Orde_reference" paramType="SCALAR" sqlType="STRING" type="IN" optional="true"/>
+     <param name="Orde_OrderQuoteID" paramType="SCALAR" sqlType="STRING" type="IN" optional="true"/>
+     <result outputType="json" useColumnNumbers="true">{
+         "Orders": {
+           "Order": [
+             {
+               "Orde_OrderQuoteID": $1,
+               "Orde_CreatedBy": $2,
+               "Orde_CreatedDate": $3,
+               "Orde_UpdatedBy": $4,
+               "Orde_UpdatedDate": $5,
+               "Orde_TimeStamp": $6,
+               "Orde_Deleted": $7,
+               "Orde_WorkflowId": $8,
+               "Orde_Secterr": $9,
+               "Orde_discountamt": $10,
+               "Orde_discountamt_CID": $11,
+               "Orde_DiscountPC": $12,
+               "Orde_expiredelivery": $13,
+               "Orde_grossamt": $14,
+               "Orde_grossamt_CID": $15,
+               "Orde_lineitemdisc": $16,
+               "Orde_lineitemdisc_CID": $17,
+               "Orde_nettamt": $18,
+               "Orde_nettamt_CID": $19,
+               "Orde_opened": $20,
+               "Orde_opportunityid": $21,
+               "Orde_reference": $22,
+               "Orde_Description": $23,
+               "Orde_Status": $24,
+               "Orde_currency": $25,
+               "Orde_NoDiscAmt_CID": $26,
+               "Orde_NoDiscAmt": $27,
+               "Orde_rollup": $28,
+               "Orde_PricingListID": $29,
+               "orde_synchstatus": $30,
+               "orde_tax_CID": $31,
+               "orde_tax": $32,
+               "orde_Date_Receive": $33,
+               "orde_Link_Type": $34,
+               "orde_Type": $35,
+               "orde_Stage": $36,
+               "orde_State": $37,
+               "orde_Region": $38,
+               "orde_order_status": $39,
+               "orde_hasOrderDoc": $40,
+               "orde_salesadminperson": $41,
+               "orde_AMRefA": $42,
+               "orde_OrderClassification": $43,
+               "orde_BuildPriorityPrimary": $44,
+               "orde_BuildPrioritySecondary": $45,
+               "orde_dependancy": $46,
+               "orde_referenceid": $47,
+               "orde_DesResp": $48,
+               "orde_ordersigneddate": $49,
+               "orde_kam": $50,
+               "orde_sales_team": $51,
+               "orde_newkam": $52,
+               "orde_Link_priority": $53
+               
+             }
+           ]
+         }
+       }      
+     </result>
+  </query>
+  
+  <!-- Query next order reference -->
+  <query id="getNextOrderRef" useConfig="DFACRM">
+    <sql>
+      DECLARE @NewOrderReference varchar(50)
+  
+    SELECT @NewOrderReference = NULL;
+    WITH CTE
+    AS(
+            SELECT Orde_OrderQuoteID, orde_opportunityid, Orde_CreatedDate, Orde_reference, orde_deleted,
+                    ROW_NUMBER() OVER (PARTITION BY orde_opportunityid ORDER BY Orde_CreatedDate ASC) AS OrderNumber
+            FROM orders
+            WHERE Orde_opportunityid IS NOT NULL
+    )
+    SELECT @NewOrderReference = 'ORD-' + convert(varchar(10),Orde_opportunityid) + '/'+ convert(varchar(10), max(OrderNumber) + 1)
+    FROM CTE
+    WHERE orde_opportunityid = :orde_opportunityid
+    GROUP BY orde_opportunityid
+    
+    SELECT @NewOrderReference AS OrderReference
+    </sql>
+    <param name="orde_opportunityid" paramType="SCALAR" sqlType="INTEGER" type="IN" optional="false" />
+    <result outputType="json" useColumnNumbers="true">{
+            "Order": {
+                "order": $1
+                }
+            }
+        </result>
+  </query>
+  
+  <query id="UpdateOrders" useConfig="DFACRM">
+    <sql>
+       BEGIN TRANSACTION;
+               UPDATE Orders
+                     SET                  
+                          Orde_DiscountPC = COALESCE(?, Orde_DiscountPC),
+                       orde_Region = COALESCE(?, orde_Region),
+                       orde_Stage = COALESCE(?, orde_Stage),
+                       orde_OrderClassification = COALESCE(?, orde_OrderClassification),
+                       orde_Type = COALESCE(?, orde_Type),
+                       Orde_UpdatedDate = COALESCE(?, Orde_UpdatedDate),
+                       Orde_lineitemdisc = COALESCE(?, Orde_lineitemdisc),
+                       Orde_Status = COALESCE(?, Orde_Status),
+                       Orde_discountamt = COALESCE(?, Orde_discountamt),
+                       Orde_rollup = COALESCE(?, Orde_rollup),
+                       Orde_reference = COALESCE(?, Orde_reference),
+                       orde_BuildPrioritySecondary = COALESCE(?, orde_BuildPrioritySecondary),
+                       orde_State = COALESCE(?, orde_State),
+                       orde_tax = COALESCE(?, orde_tax),
+                       Orde_PricingListID = COALESCE(?, Orde_PricingListID),
+                       Orde_currency = COALESCE(?, Orde_currency),
+                       Orde_opportunityid = COALESCE(?, Orde_opportunityid),
+                       orde_ordersigneddate = COALESCE(?, orde_ordersigneddate),
+                       orde_hasOrderDoc = COALESCE(?, orde_hasOrderDoc),
+                       Orde_CreatedDate = COALESCE(?, Orde_CreatedDate),
+                       orde_kam = COALESCE(?, orde_kam),
+                       Orde_Secterr = COALESCE(?, Orde_Secterr),
+                       orde_referenceid = COALESCE(?, orde_referenceid),
+                       Orde_TimeStamp = COALESCE(?, Orde_TimeStamp),
+                       orde_dependancy = COALESCE(?, orde_dependancy),
+                       orde_synchstatus = COALESCE(?, orde_synchstatus),
+                       orde_order_status = COALESCE(?, orde_order_status),
+                       Orde_nettamt = COALESCE(?, Orde_nettamt),
+                       Orde_CreatedBy = COALESCE(?, Orde_CreatedBy),
+                       Orde_WorkflowId = COALESCE(?, Orde_WorkflowId),
+                       Orde_opened = COALESCE(?, Orde_opened),
+                       Orde_grossamt = COALESCE(?, Orde_grossamt),
+                       orde_tax_CID = COALESCE(?, orde_tax_CID),
+                       orde_sales_team = COALESCE(?, orde_sales_team),
+                       orde_Date_Receive = COALESCE(?, orde_Date_Receive),
+                       Orde_lineitemdisc_CID = COALESCE(?, Orde_lineitemdisc_CID),
+                       orde_BuildPriorityPrimary = COALESCE(?, orde_BuildPriorityPrimary),
+                       Orde_nettamt_CID = COALESCE(?, Orde_nettamt_CID),
+                       Orde_NoDiscAmt_CID = COALESCE(?, Orde_NoDiscAmt_CID),               
+                       Orde_NoDiscAmt = COALESCE(?, Orde_NoDiscAmt),
+                       orde_DesResp = COALESCE(?, orde_DesResp),
+                       orde_newkam = COALESCE(?, orde_newkam),
+                       Orde_discountamt_CID = COALESCE(?, Orde_discountamt_CID),
+                       Orde_grossamt_CID = COALESCE(?, Orde_grossamt_CID),
+                       Orde_Deleted = COALESCE(?, Orde_Deleted),
+                       orde_Link_Type = COALESCE(?, orde_Link_Type),
+                       Orde_expiredelivery = COALESCE(?, Orde_expiredelivery),
+                       orde_salesadminperson = COALESCE(?, orde_salesadminperson),
+                       Orde_Description = COALESCE(?, Orde_Description),
+                       Orde_UpdatedBy = COALESCE(?, Orde_UpdatedBy),
+                       orde_AMRefA = COALESCE(?, orde_AMRefA),
+                       orde_Link_priority = COALESCE(?, orde_Link_priority)              
+                      WHERE Orde_OrderQuoteID = ?;
+        COMMIT;             
+    </sql>
+        <param name="Orde_DiscountPC" paramType="SCALAR" sqlType="DOUBLE" type="IN" />
+        <param name="orde_Region" paramType="SCALAR" sqlType="STRING" type="IN" />       
+        <param name="orde_Stage" paramType="SCALAR" sqlType="STRING" type="IN" />
+        <param name="orde_OrderClassification" paramType="SCALAR" sqlType="STRING" type="IN" />
+        <param name="orde_Type" paramType="SCALAR" sqlType="STRING" type="IN" />
+        <param name="Orde_UpdatedDate" paramType="SCALAR" sqlType="TIMESTAMP" type="IN" />
+        <param name="Orde_lineitemdisc" paramType="SCALAR" sqlType="DOUBLE" type="IN" />
+        <param name="Orde_Status" paramType="SCALAR" sqlType="STRING" type="IN" />
+        <param name="Orde_discountamt" paramType="SCALAR" sqlType="DOUBLE" type="IN" />
+        <param name="Orde_rollup" paramType="SCALAR" sqlType="STRING" type="IN" />        
+        <param name="Orde_reference" paramType="SCALAR" sqlType="STRING" type="IN" />
+        <param name="orde_BuildPrioritySecondary" paramType="SCALAR" sqlType="STRING" type="IN" />
+        <param name="orde_State" paramType="SCALAR" sqlType="STRING" type="IN" />
+        <param name="orde_tax" paramType="SCALAR" sqlType="DOUBLE" type="IN" />
+        <param name="Orde_PricingListID" paramType="SCALAR" sqlType="INTEGER" type="IN" />
+        <param name="Orde_currency" paramType="SCALAR" sqlType="STRING" type="IN" />
+        <param name="Orde_opportunityid" paramType="SCALAR" sqlType="INTEGER" type="IN" />
+        <param name="orde_ordersigneddate" paramType="SCALAR" sqlType="TIMESTAMP" type="IN" />
+        <param name="orde_hasOrderDoc" paramType="SCALAR" sqlType="STRING" type="IN" />
+        <param name="Orde_CreatedDate" paramType="SCALAR" sqlType="TIMESTAMP" type="IN" />
+        <param name="orde_kam" paramType="SCALAR" sqlType="STRING" type="IN" />
+        <param name="Orde_Secterr" paramType="SCALAR" sqlType="INTEGER" type="IN" />
+        <param name="orde_referenceid" paramType="SCALAR" sqlType="STRING" type="IN" />
+        <param name="Orde_TimeStamp" paramType="SCALAR" sqlType="TIMESTAMP" type="IN" />
+        <param name="orde_dependancy" paramType="SCALAR" sqlType="STRING" type="IN" />
+        <param name="orde_synchstatus" paramType="SCALAR" sqlType="STRING" type="IN" />
+        <param name="orde_order_status" paramType="SCALAR" sqlType="STRING" type="IN" />
+        <param name="Orde_nettamt" paramType="SCALAR" sqlType="DOUBLE" type="IN" />
+        <param name="Orde_CreatedBy" paramType="SCALAR" sqlType="STRING" type="IN" />
+        <param name="Orde_WorkflowId" paramType="SCALAR" sqlType="INTEGER" type="IN" />
+        <param name="Orde_opened" paramType="SCALAR" sqlType="TIMESTAMP" type="IN" />
+        <param name="Orde_grossamt" paramType="SCALAR" sqlType="DOUBLE" type="IN" />
+        <param name="orde_tax_CID" paramType="SCALAR" sqlType="STRING" type="IN" />
+        <param name="orde_sales_team" paramType="SCALAR" sqlType="STRING" type="IN" />
+        <param name="orde_Date_Receive" paramType="SCALAR" sqlType="TIMESTAMP" type="IN" />
+        <param name="Orde_lineitemdisc_CID" paramType="SCALAR" sqlType="STRING" type="IN" />
+        <param name="orde_BuildPriorityPrimary" paramType="SCALAR" sqlType="STRING" type="IN" />
+        <param name="Orde_nettamt_CID" paramType="SCALAR" sqlType="STRING" type="IN" />
+        <param name="Orde_NoDiscAmt_CID" paramType="SCALAR" sqlType="DOUBLE" type="IN" />
+        <param name="Orde_NoDiscAmt" paramType="SCALAR" sqlType="DOUBLE" type="IN" />
+        <param name="orde_DesResp" paramType="SCALAR" sqlType="STRING" type="IN" />
+        <param name="orde_newkam" paramType="SCALAR" sqlType="STRING" type="IN" />
+        <param name="Orde_discountamt_CID" paramType="SCALAR" sqlType="STRING" type="IN" />
+        <param name="Orde_grossamt_CID" paramType="SCALAR" sqlType="STRING" type="IN" />
+        <param name="Orde_Deleted" paramType="SCALAR" sqlType="STRING" type="IN" />
+        <param name="orde_Link_Type" paramType="SCALAR" sqlType="STRING" type="IN" />
+        <param name="Orde_expiredelivery" paramType="SCALAR" sqlType="TIMESTAMP" type="IN" />
+        <param name="orde_salesadminperson" paramType="SCALAR" sqlType="STRING" type="IN" />
+        <param name="Orde_Description" paramType="SCALAR" sqlType="STRING" type="IN" />
+        <param name="Orde_UpdatedBy" paramType="SCALAR" sqlType="STRING" type="IN" />
+        <param name="orde_AMRefA" paramType="SCALAR" sqlType="STRING" type="IN" />
+        <param name="orde_Link_priority" paramType="SCALAR" sqlType="STRING" type="IN" />
+        <param name="Orde_OrderQuoteID" paramType="SCALAR" sqlType="INTEGER" type="IN" optional="false"/>
+       </query>
+
+  <query id="CreateOrders" useConfig="DFACRM">
+        <sql>
+        BEGIN TRANSACTION;
+        INSERT INTO Orders (
+        Orde_DiscountPC, orde_Region, orde_Stage, orde_OrderClassification, orde_Type, Orde_UpdatedDate,
+        Orde_lineitemdisc, Orde_Status, Orde_discountamt, Orde_rollup, Orde_reference, orde_BuildPrioritySecondary,
+        orde_State, orde_tax, Orde_PricingListID, Orde_currency, Orde_opportunityid, orde_ordersigneddate,
+        orde_hasOrderDoc, Orde_CreatedDate, orde_kam, Orde_Secterr, orde_referenceid, Orde_TimeStamp,
+        orde_dependancy, orde_synchstatus, orde_order_status, Orde_nettamt, Orde_CreatedBy, Orde_WorkflowId,
+        Orde_opened, Orde_grossamt, orde_tax_CID, orde_sales_team, orde_Date_Receive, Orde_lineitemdisc_CID,
+        orde_BuildPriorityPrimary, Orde_nettamt_CID, Orde_NoDiscAmt_CID, Orde_NoDiscAmt, orde_DesResp,
+        orde_newkam, Orde_discountamt_CID, Orde_grossamt_CID, Orde_Deleted, orde_Link_Type,
+        Orde_expiredelivery, orde_salesadminperson, Orde_Description, Orde_UpdatedBy, orde_AMRefA,
+        orde_Link_priority, Orde_OrderQuoteID) 
+        VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, 
+        ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);                
+        COMMIT;             
+        </sql>
+        <param name="Orde_DiscountPC" paramType="SCALAR" sqlType="DOUBLE" type="IN" optional="false"/>
+        <param name="orde_Region" paramType="SCALAR" sqlType="STRING" type="IN" optional="false"/>       
+        <param name="orde_Stage" paramType="SCALAR" sqlType="STRING" type="IN" optional="false"/>
+        <param name="orde_OrderClassification" paramType="SCALAR" sqlType="STRING" type="IN" optional="false"/>
+        <param name="orde_Type" paramType="SCALAR" sqlType="STRING" type="IN" optional="false"/>
+        <param name="Orde_UpdatedDate" paramType="SCALAR" sqlType="TIMESTAMP" type="IN" optional="false"/>
+        <param name="Orde_lineitemdisc" paramType="SCALAR" sqlType="DOUBLE" type="IN" optional="false"/>
+        <param name="Orde_Status" paramType="SCALAR" sqlType="STRING" type="IN" optional="false"/>
+        <param name="Orde_discountamt" paramType="SCALAR" sqlType="DOUBLE" type="IN" optional="false"/>
+        <param name="Orde_rollup" paramType="SCALAR" sqlType="STRING" type="IN" optional="false"/>        
+        <param name="Orde_reference" paramType="SCALAR" sqlType="STRING" type="IN" optional="false"/>
+        <param name="orde_BuildPrioritySecondary" paramType="SCALAR" sqlType="STRING" type="IN" optional="false"/>
+        <param name="orde_State" paramType="SCALAR" sqlType="STRING" type="IN" optional="false"/>
+        <param name="orde_tax" paramType="SCALAR" sqlType="DOUBLE" type="IN" optional="false"/>
+        <param name="Orde_PricingListID" paramType="SCALAR" sqlType="INTEGER" type="IN" optional="false"/>
+        <param name="Orde_currency" paramType="SCALAR" sqlType="STRING" type="IN" optional="false"/>
+        <param name="Orde_opportunityid" paramType="SCALAR" sqlType="INTEGER" type="IN" optional="false"/>
+        <param name="orde_ordersigneddate" paramType="SCALAR" sqlType="TIMESTAMP" type="IN" optional="false"/>
+        <param name="orde_hasOrderDoc" paramType="SCALAR" sqlType="STRING" type="IN" optional="false"/>
+        <param name="Orde_CreatedDate" paramType="SCALAR" sqlType="TIMESTAMP" type="IN" optional="false"/>
+        <param name="orde_kam" paramType="SCALAR" sqlType="STRING" type="IN" optional="false"/>
+        <param name="Orde_Secterr" paramType="SCALAR" sqlType="INTEGER" type="IN" optional="false"/>
+        <param name="orde_referenceid" paramType="SCALAR" sqlType="STRING" type="IN" optional="false"/>
+        <param name="Orde_TimeStamp" paramType="SCALAR" sqlType="TIMESTAMP" type="IN" optional="false"/>
+        <param name="orde_dependancy" paramType="SCALAR" sqlType="STRING" type="IN" optional="false"/>
+        <param name="orde_synchstatus" paramType="SCALAR" sqlType="STRING" type="IN" optional="false"/>
+        <param name="orde_order_status" paramType="SCALAR" sqlType="STRING" type="IN" optional="false"/>
+        <param name="Orde_nettamt" paramType="SCALAR" sqlType="DOUBLE" type="IN" optional="false"/>
+        <param name="Orde_CreatedBy" paramType="SCALAR" sqlType="STRING" type="IN" optional="false"/>
+        <param name="Orde_WorkflowId" paramType="SCALAR" sqlType="INTEGER" type="IN" optional="false"/>
+        <param name="Orde_opened" paramType="SCALAR" sqlType="TIMESTAMP" type="IN" optional="false"/>
+        <param name="Orde_grossamt" paramType="SCALAR" sqlType="DOUBLE" type="IN" optional="false"/>
+        <param name="orde_tax_CID" paramType="SCALAR" sqlType="STRING" type="IN" optional="false"/>
+        <param name="orde_sales_team" paramType="SCALAR" sqlType="STRING" type="IN" optional="false"/>
+        <param name="orde_Date_Receive" paramType="SCALAR" sqlType="TIMESTAMP" type="IN" optional="false"/>
+        <param name="Orde_lineitemdisc_CID" paramType="SCALAR" sqlType="STRING" type="IN" optional="false"/>
+        <param name="orde_BuildPriorityPrimary" paramType="SCALAR" sqlType="STRING" type="IN" optional="false"/>
+        <param name="Orde_nettamt_CID" paramType="SCALAR" sqlType="STRING" type="IN" optional="false"/>
+        <param name="Orde_NoDiscAmt_CID" paramType="SCALAR" sqlType="DOUBLE" type="IN" optional="false"/>
+        <param name="Orde_NoDiscAmt" paramType="SCALAR" sqlType="DOUBLE" type="IN" optional="false"/>
+        <param name="orde_DesResp" paramType="SCALAR" sqlType="STRING" type="IN" optional="false"/>
+        <param name="orde_newkam" paramType="SCALAR" sqlType="STRING" type="IN" optional="false"/>
+        <param name="Orde_discountamt_CID" paramType="SCALAR" sqlType="STRING" type="IN" optional="false"/>
+        <param name="Orde_grossamt_CID" paramType="SCALAR" sqlType="STRING" type="IN" optional="false"/>
+        <param name="Orde_Deleted" paramType="SCALAR" sqlType="STRING" type="IN" optional="false"/>
+        <param name="orde_Link_Type" paramType="SCALAR" sqlType="STRING" type="IN" optional="false"/>
+        <param name="Orde_expiredelivery" paramType="SCALAR" sqlType="TIMESTAMP" type="IN" optional="false"/>
+        <param name="orde_salesadminperson" paramType="SCALAR" sqlType="STRING" type="IN" optional="false"/>
+        <param name="Orde_Description" paramType="SCALAR" sqlType="STRING" type="IN" optional="false"/>
+        <param name="Orde_UpdatedBy" paramType="SCALAR" sqlType="STRING" type="IN" optional="false"/>
+        <param name="orde_AMRefA" paramType="SCALAR" sqlType="STRING" type="IN" optional="false"/>
+        <param name="orde_Link_priority" paramType="SCALAR" sqlType="STRING" type="IN" optional="false"/>
+        <param name="Orde_OrderQuoteID" paramType="SCALAR" sqlType="INTEGER" type="IN" optional="false"/>
+</query>
+
+</data>

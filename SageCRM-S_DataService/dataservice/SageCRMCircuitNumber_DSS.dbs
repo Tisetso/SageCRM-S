@@ -1,0 +1,225 @@
+<data name="sagecrmdss_circuitnumber" serviceNamespace="" serviceGroup="" transports="http https">
+  <description>sage crm data service</description>
+  
+  <config id="DFACRM">
+    <property name="driverClassName">com.microsoft.sqlserver.jdbc.SQLServerDriver</property>
+    <property name="url">jdbc:sqlserver://dfasql-lab01:1433;databaseName=DFACRM_UAT01</property>
+    <property name="username">API_User</property>
+    <property name="password">@ApiUs3r123!</property>
+  </config>
+
+
+  <!-- Resource CircuitNumber -->
+  <resource method="GET" path="/circuitnumber">
+      <call-query href="GetCircuitNumbers" >
+         <with-param name="pagesize" query-param="pagesize" />
+         <with-param name="CrctNb_Name" query-param="CrctNb_Name" />
+         </call-query>
+  </resource>
+  
+  <resource method="GET" path="/circuitnumber/orders">
+      <call-query href="GetCircuitNumbersOrders" >
+         <with-param name="pagesize" query-param="pagesize" />
+         <with-param name="CrctNb_Name" query-param="CrctNb_Name" />
+         </call-query>
+  </resource>
+  
+  <resource method="GET" path="/verifydfacircuitid">
+      <call-query href="VerifydfaCircuitID" >
+         <with-param name="pagesize" query-param="pagesize" />
+         <with-param name="CrctNb_Name" query-param="CrctNb_Name" />
+         </call-query>
+  </resource>
+
+
+  <!-- Queries CircuitNumber -->
+  <query id="GetCircuitNumbers" useConfig="DFACRM">
+      <sql>
+          SELECT TOP(COALESCE(:pagesize, 10))  
+             CrctNb_CircuitNumberID, CrctNb_CreatedBy, CrctNb_CreatedDate, CrctNb_UpdatedBy, CrctNb_UpdatedDate, CrctNb_TimeStamp, 
+             CrctNb_Secterr, CrctNb_Name, CrctNb_WorkflowId, CrctNb_Status, CrctNb_ChannelId, CrctNb_CompanyId, CrctNb_PersonId, CrctNb_OpportunityId, 
+             CrctNb_CaseId, crctnb_RegionRegion_Number, crctnb_CircuitID, crctnb_Circuitnumericvalue, crctnb_Cable_Owner, crctnb_livedata, 
+             crctnb_CircuitIDXRef, crctnb_prefix, crctnb_regioncount, crctnb_orderid, CrctNb_Deleted
+           FROM CircuitNumber
+           WHERE CrctNb_Deleted IS NULL
+           AND (CrctNb_Name = :CrctNb_Name OR :CrctNb_Name IS NULL)
+           ORDER BY CrctNb_CreatedDate DESC 
+      </sql>
+      <param name="pagesize" paramType="SCALAR" sqlType="INTEGER" defaultValue="10" type="IN" optional="false" />
+      <param name="CrctNb_Name" paramType="SCALAR" sqlType="STRING" type="IN" optional="true"/>
+      <result outputType="json" useColumnNumbers="true">{
+             "CircuitNumbers": {
+               "CircuitNumber": [
+                 {
+                   "CrctNb_CircuitNumberID": $1,
+               "CrctNb_CreatedBy": $2,
+               "CrctNb_CreatedDate": $3,
+               "CrctNb_UpdatedBy": $4,
+               "CrctNb_UpdatedDate": $5,
+               "CrctNb_TimeStamp": $6,
+               "CrctNb_Secterr": $7,
+               "CrctNb_Name": $8,
+               "CrctNb_WorkflowId": $9,
+               "CrctNb_Status": $10,
+               "CrctNb_ChannelId": $11,
+               "CrctNb_CompanyId": $12,
+               "CrctNb_PersonId": $13,
+               "CrctNb_OpportunityId": $14,
+               "CrctNb_CaseId": $15,
+               "crctnb_RegionRegion_Number": $16,
+               "crctnb_CircuitID": $17,
+               "crctnb_Circuitnumericvalue": $18,
+               "crctnb_Cable_Owner": $19,
+               "crctnb_livedata": $20,
+               "crctnb_CircuitIDXRef": $21,
+               "crctnb_prefix": $22,
+               "crctnb_regioncount": $23,
+               "crctnb_orderid": $24,
+               "CrctNb_Deleted": $25
+                 }
+               ]
+             }
+           }
+      </result>
+      
+  </query>
+  
+  <query id="GetCircuitNumbersOrders" useConfig="DFACRM">
+      <sql>
+          SELECT TOP(COALESCE(:pagesize, 10))  
+             CrctNb_Name,
+             Orde_OrderQuoteID, Orde_CreatedBy, Orde_CreatedDate, Orde_UpdatedBy, Orde_UpdatedDate, Orde_TimeStamp, Orde_Deleted, Orde_WorkflowId, 
+             Orde_Secterr, Orde_discountamt, Orde_discountamt_CID, Orde_DiscountPC, Orde_expiredelivery, Orde_grossamt, Orde_grossamt_CID, Orde_lineitemdisc, 
+             Orde_lineitemdisc_CID, Orde_nettamt, Orde_nettamt_CID, Orde_opened, Orde_opportunityid, Orde_reference, Orde_Description, Orde_Status, Orde_currency, 
+             Orde_NoDiscAmt_CID, Orde_NoDiscAmt, Orde_rollup, Orde_PricingListID, orde_synchstatus, orde_tax_CID, orde_tax, orde_Date_Receive, orde_Link_Type, 
+             orde_Type, orde_Stage, orde_State, orde_Region, orde_order_status, orde_hasOrderDoc, orde_salesadminperson, orde_AMRefA, orde_OrderClassification, 
+             orde_BuildPriorityPrimary, orde_BuildPrioritySecondary, orde_dependancy, orde_referenceid, orde_DesResp, orde_ordersigneddate, orde_kam, orde_sales_team, 
+             orde_newkam, orde_Link_priority
+           FROM CircuitNumber
+           INNER JOIN Orders ON orde_Circuit_Nr = CrctNb_CircuitNumberID 
+           WHERE CrctNb_Deleted IS NULL
+           AND (CrctNb_Name = :CrctNb_Name OR :CrctNb_Name IS NULL)
+           ORDER BY CrctNb_CreatedDate DESC 
+      </sql>
+      <param name="pagesize" paramType="SCALAR" sqlType="INTEGER" defaultValue="10" type="IN" optional="false" />
+      <param name="CrctNb_Name" paramType="SCALAR" sqlType="STRING" type="IN" optional="false"/>
+      <result outputType="json" useColumnNumbers="true">{
+          "CircuitNumber": {
+              "CrctNb_Name": $1,          
+            "Orders": {
+                "Orde_OrderQuoteID": $2,
+                "Orde_CreatedBy": $3,
+                "Orde_CreatedDate": $4,
+                "Orde_UpdatedBy": $5,
+                "Orde_UpdatedDate": $6,
+                "Orde_TimeStamp": $7,
+                "Orde_Deleted": $8,
+                "Orde_WorkflowId": $9,
+                "Orde_Secterr": $10,
+                "Orde_discountamt": $11,
+                "Orde_discountamt_CID": $12,
+                "Orde_DiscountPC": $13,
+                "Orde_expiredelivery": $14,
+                "Orde_grossamt": $15,
+                "Orde_grossamt_CID": $16,
+                "Orde_lineitemdisc": $17,
+                "Orde_lineitemdisc_CID": $18,
+                "Orde_nettamt": $19,
+                "Orde_nettamt_CID": $20,
+                "Orde_opened": $21,
+                "Orde_opportunityid": $22,
+                "Orde_reference": $23,
+                "Orde_Description": $24,
+                "Orde_Status": $25,
+                "Orde_currency": $26,
+                "Orde_NoDiscAmt_CID": $27,
+                "Orde_NoDiscAmt": $28,
+                "Orde_rollup": $29,
+                "Orde_PricingListID": $30,
+                "orde_synchstatus": $31,
+                "orde_tax_CID": $32,
+                "orde_tax": $33,
+                "orde_Date_Receive": $34,
+                "orde_Link_Type": $35,
+                "orde_Type": $36,
+                "orde_Stage": $37,
+                "orde_State": $38,
+                "orde_Region": $39,
+                "orde_order_status": $40,
+                "orde_hasOrderDoc": $41,
+                "orde_salesadminperson": $42,
+                "orde_AMRefA": $43,
+                "orde_OrderClassification": $44,
+                "orde_BuildPriorityPrimary": $45,
+                "orde_BuildPrioritySecondary": $46,
+                "orde_dependancy": $47,
+                "orde_referenceid": $48,
+                "orde_DesResp": $49,
+                "orde_ordersigneddate": $50,
+                "orde_kam": $51,
+                "orde_sales_team": $52,
+                "orde_newkam": $53,
+                "orde_Link_priority": $54
+            }
+        }
+      }
+      </result>
+      
+  </query>
+  
+  <query id="VerifydfaCircuitID" useConfig="DFACRM">
+      <sql>
+          SELECT TOP(COALESCE(:pagesize, 10))  
+          Orde_OrderQuoteID, CrctNb_Name, Orde_Status, Orde_reference, Orde_Description, oppo_link_type, Prod_ProductID, prod_name, 
+          prod_min_bandwidth, prod_max_bandwidth, prod_bandwidth_code, prod_Active, OrIt_quantity, OrIt_listprice, OrIt_discountrate, 
+          OrIt_quotedprice, prod_productfamilyid, prod_companyid, OrIt_LineItemID, OrIt_productfamilyid
+      FROM dbo.Orders  
+        INNER JOIN dbo.CircuitNumber ON dbo.Orders.orde_Circuit_Nr = dbo.CircuitNumber.CrctNb_CircuitNumberID 
+        INNER JOIN dbo.Opportunity ON dbo.Orders.Orde_opportunityid = dbo.Opportunity.Oppo_OpportunityId 
+        INNER JOIN dbo.Company ON dbo.Opportunity.Oppo_PrimaryCompanyId = dbo.Company.Comp_CompanyId 
+        INNER JOIN dbo.OrderItems ON dbo.Orders.Orde_OrderQuoteID = dbo.OrderItems.OrIt_orderquoteid 
+        INNER JOIN dbo.NewProduct ON dbo.OrderItems.OrIt_productid = dbo.NewProduct.Prod_ProductID
+      WHERE dbo.Orders.Orde_Deleted IS NULL
+        AND (dbo.CircuitNumber.CrctNb_Deleted IS NULL) 
+        AND (dbo.Opportunity.Oppo_Deleted IS NULL) 
+        AND (dbo.NewProduct.Prod_Deleted IS NULL) 
+        AND (dbo.OrderItems.OrIt_listprice > 0) 
+        AND (dbo.NewProduct.prod_bandwidth_code IS NOT NULL) 
+        AND (dbo.Orders.Orde_Status = N'7.5.10')
+          AND (CrctNb_Name = :CrctNb_Name OR :CrctNb_Name IS NULL)
+           ORDER BY CrctNb_CreatedDate DESC
+      </sql>
+      <param name="pagesize" paramType="SCALAR" sqlType="INTEGER" defaultValue="10" type="IN" optional="false" />
+      <param name="CrctNb_Name" paramType="SCALAR" sqlType="STRING" type="IN" optional="false"/>
+      <result outputType="json" useColumnNumbers="true">{
+             "CircuitNumbers": {
+               "CircuitNumber": [
+                 {
+                   "Orde_OrderQuoteID": $1, 
+                    "CrctNb_Name": $2, 
+                    "Orde_Status": $3, 
+                    "Orde_reference": $4, 
+                    "Orde_Description": $5, 
+                    "oppo_link_type": $6, 
+                    "Prod_ProductID": $7, 
+                    "prod_name": $8, 
+                    "prod_min_bandwidth": $9, 
+                    "prod_max_bandwidth": $10, 
+                    "prod_bandwidth_code": $11, 
+                    "prod_Active": $12, 
+                    "OrIt_quantity": $13, 
+                    "OrIt_listprice": $14, 
+                    "OrIt_discountrate": $15, 
+                    "OrIt_quotedprice": $16, 
+                    "prod_productfamilyid": $17, 
+                    "prod_companyid": $18,
+                    "OrIt_LineItemID": $19, 
+                    "OrIt_productfamilyid": $20
+                 }
+               ]
+             }
+           }
+      </result>     
+  </query>
+  
+</data>

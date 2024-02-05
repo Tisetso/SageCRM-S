@@ -1,0 +1,68 @@
+<data name="sagecrmdss_users" serviceNamespace="" serviceGroup="" transports="http https">
+  <description>sage crm data service</description>
+  
+  <config id="DFACRM">
+    <property name="driverClassName">com.microsoft.sqlserver.jdbc.SQLServerDriver</property>
+    <property name="url">jdbc:sqlserver://dfasql-lab01:1433;databaseName=DFACRM_UAT01</property>
+    <property name="username">API_User</property>
+    <property name="password">@ApiUs3r123!</property>
+  </config>
+  
+  <!-- Resource Users -->
+  <resource method="GET" path="/users">
+         <call-query href="GetUsers" >
+         <with-param name="pagesize" query-param="pagesize" />
+         <with-param name="User_LastName" query-param="User_LastName" />
+             <with-param name="User_FirstName" query-param="User_FirstName" />
+             <with-param name="User_EmailAddress" query-param="User_EmailAddress" />
+             <with-param name="User_UserId" query-param="User_UserId" />
+         </call-query>
+  </resource>
+  
+  <!-- Queries CRM Users -->
+	<query id="GetUsers" useConfig="DFACRM">
+	    <sql>
+	        SELECT DISTINCT TOP(COALESCE(:pagesize, 10)) 
+	            User_Logon,      
+	            User_Department, 
+	            User_PrimaryChannelId, 
+	            User_Deleted, 
+	            User_Disabled,
+	            User_LastName, 
+	            User_FirstName, 
+	            User_EmailAddress,
+	            User_UserId
+	        FROM Users
+	        WHERE 
+	            User_Deleted IS NULL
+	            AND (User_LastName = :User_LastName OR :User_LastName IS NULL)
+	            AND (User_FirstName = :User_FirstName OR :User_FirstName IS NULL)
+	            AND (User_EmailAddress = :User_EmailAddress OR :User_EmailAddress IS NULL)
+	            AND (User_UserId = :User_UserId OR :User_UserId IS NULL)
+	    </sql>
+	    <param name="pagesize" paramType="SCALAR" sqlType="INTEGER" type="IN" optional="true" />
+	    <param name="User_LastName" paramType="SCALAR" sqlType="STRING" type="IN" optional="true" />
+	    <param name="User_FirstName" paramType="SCALAR" sqlType="STRING" type="IN" optional="true" />
+	    <param name="User_EmailAddress" paramType="SCALAR" sqlType="STRING" type="IN" optional="true" />
+	    <param name="User_UserId" paramType="SCALAR" sqlType="INTEGER" type="IN" optional="true" />   
+	    <result outputType="json" useColumnNumbers="true">
+	        {
+	            "Users": {
+	                "User": [
+	                    {
+	                        "User_Logon": $1,     
+	                        "User_Department": $2, 
+	                        "User_PrimaryChannelId": $3, 
+	                        "User_Deleted": $4,
+	                        "User_Disabled": $5,
+	                        "User_LastName": $6,
+	                        "User_FirstName": $7, 
+	                        "User_EmailAddress": $8,
+	                        "User_UserId": $9
+	                    }
+	                ]
+	            }
+	        }     
+	    </result>
+	</query>
+</data>

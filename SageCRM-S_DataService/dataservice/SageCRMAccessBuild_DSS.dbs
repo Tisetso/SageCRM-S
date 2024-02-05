@@ -1,0 +1,263 @@
+<data name="sagecrmdss_accessbuild" serviceNamespace="" serviceGroup="" transports="http https">
+  <description>sage crm data service</description>
+  
+  <config id="DFACRM">
+    <property name="driverClassName">com.microsoft.sqlserver.jdbc.SQLServerDriver</property>
+    <property name="url">jdbc:sqlserver://dfasql-lab01:1433;databaseName=DFACRM_UAT01</property>
+    <property name="username">API_User</property>
+    <property name="password">@ApiUs3r123!</property>
+  </config>
+
+        
+  <!-- Resource AccessBuild -->
+  <resource method="GET" path="/accessbuild">
+      <call-query href="GetAllAccessBuilds" >
+         <with-param name="pagesize" query-param="pagesize" />
+         <with-param name="access_Site_Name" query-param="access_Site_Name" />
+         </call-query>
+  </resource>       
+  
+  <resource method="POST" path="/accessbuild">
+      <call-query href="CreateAccessBuild">
+         <with-param name="Access_CompanyId" query-param="Access_CompanyId"/>
+         <with-param name="access_Site_Name" query-param="access_Site_Name"/>
+         <with-param name="access_Site_Address" query-param="access_Site_Address"/>
+         <with-param name="access_Site_Latitude" query-param="access_Site_Latitude"/>
+         <with-param name="access_Site_Longitude" query-param="access_Site_Longitude"/>
+         <with-param name="access_description" query-param="access_description"/>
+         <with-param name="access_Site_Ref" query-param="access_Site_Ref"/>
+         <with-param name="Access_AccessBuildID" query-param="Access_AccessBuildID"/>
+         <with-param name="Access_CreatedBy" query-param="Access_CreatedBy"/>
+         <with-param name="Access_CreatedDate" query-param="Access_CreatedDate"/>
+         <with-param name="Access_UpdatedBy" query-param="Access_UpdatedBy"/>
+         <with-param name="Access_UpdatedDate" query-param="Access_UpdatedDate"/>
+         <with-param name="Access_TimeStamp" query-param="Access_TimeStamp"/>
+         <with-param name="Access_Secterr" query-param="Access_Secterr"/>
+         <with-param name="access_Stage" query-param="access_Stage"/>
+         <with-param name="Access_Status" query-param="Access_Status"/>
+         <with-param name="access_AccessManagingCompany" query-param="access_AccessManagingCompany"/>
+         <with-param name="access_Address_Subburb" query-param="access_Address_Subburb"/>
+         <with-param name="access_Site_Type" query-param="access_Site_Type"/>
+         <with-param name="access_Nr_Entries" query-param="access_Nr_Entries"/>
+         <with-param name="access_LandlordApproval" query-param="access_LandlordApproval"/>
+         <with-param name="access_referenceid" query-param="access_referenceid"/>
+         <with-param name="access_hasRFO" query-param="access_hasRFO"/>
+         <with-param name="access_Client_Contact" query-param="access_Client_Contact"/>
+         <with-param name="access_City" query-param="access_City"/>
+         <with-param name="access_dfaregion" query-param="access_dfaregion"/>
+         <with-param name="access_Client_Region" query-param="access_Client_Region"/>
+         <with-param name="access_accessownership" query-param="access_accessownership"/>
+         <with-param name="Access_UserId" query-param="Access_UserId"/>
+         <with-param name="access_FinanceCostToClient_CID" query-param="access_FinanceCostToClient_CID"/>
+         <with-param name="access_StatusInBuild" query-param="access_StatusInBuild"/>
+         <with-param name="access_hasSeniorPM" query-param="access_hasSeniorPM"/>
+         <with-param name="access_QuickBaseRecordID" query-param="access_QuickBaseRecordID"/>
+         <with-param name="access_aggregationsite" query-param="access_aggregationsite"/>           
+      </call-query>
+  </resource>
+  
+  <resource method="PUT" path="/accessbuild">
+      <call-query href="UpdateAccessBuild">            
+          <with-param name="Access_AccessBuildID" query-param="Access_AccessBuildID" />
+          <with-param name="Access_CompanyId" query-param="Access_CompanyId" />
+          <with-param name="access_Site_Name" query-param="access_Site_Name" />
+          <with-param name="access_Site_Address" query-param="access_Site_Address" />
+          <with-param name="access_Site_Latitude" query-param="access_Site_Latitude" />
+          <with-param name="access_Site_Longitude" query-param="access_Site_Longitude" />
+          <with-param name="access_description" query-param="access_description" />
+          <with-param name="access_Site_Ref" query-param="access_Site_Ref" />                 
+          <with-param name="Access_CreatedBy" query-param="Access_CreatedBy" />
+          <with-param name="Access_CreatedDate" query-param="Access_CreatedDate" />
+          <with-param name="Access_UpdatedBy" query-param="Access_UpdatedBy" />
+          <with-param name="Access_UpdatedDate" query-param="Access_UpdatedDate" />
+          <with-param name="Access_TimeStamp" query-param="Access_TimeStamp" />
+          <with-param name="Access_Secterr" query-param="Access_Secterr" />
+          <with-param name="access_Stage" query-param="access_Stage" />
+          <with-param name="Access_Status" query-param="Access_Status" />
+          <with-param name="access_AccessManagingCompany" query-param="access_AccessManagingCompany" />
+          <with-param name="access_Address_Subburb" query-param="access_Address_Subburb" />
+          <with-param name="access_Site_Type" query-param="access_Site_Type" />
+          <with-param name="access_Nr_Entries" query-param="access_Nr_Entries" />
+          <with-param name="access_LandlordApproval" query-param="access_LandlordApproval" />
+          <with-param name="access_referenceid" query-param="access_referenceid" />
+          <with-param name="access_hasRFO" query-param="access_hasRFO" />
+          <with-param name="access_Client_Contact" query-param="access_Client_Contact" />
+          <with-param name="access_City" query-param="access_City" />
+          <with-param name="access_dfaregion" query-param="access_dfaregion" />
+          <with-param name="access_Client_Region" query-param="access_Client_Region" />
+          <with-param name="access_accessownership" query-param="access_accessownership" />
+          <with-param name="Access_UserId" query-param="Access_UserId" />
+          <with-param name="access_FinanceCostToClient_CID" query-param="access_FinanceCostToClient_CID" />
+          <with-param name="access_StatusInBuild" query-param="access_StatusInBuild" />
+          <with-param name="access_hasSeniorPM" query-param="access_hasSeniorPM" />
+          <with-param name="access_QuickBaseRecordID" query-param="access_QuickBaseRecordID" />
+          <with-param name="access_aggregationsite" query-param="access_aggregationsite" />
+      </call-query>
+  </resource>
+
+  
+  <!-- Queries AccessBuild -->
+  <query id="GetAllAccessBuilds" useConfig="DFACRM">
+    <sql>
+        SELECT TOP(COALESCE(:pagesize, 10)) 
+          Access_CompanyId, access_Site_Name, access_Site_Address, access_Site_Latitude, access_Site_Longitude, access_description, 
+            access_Site_Ref, Access_AccessBuildID, Access_CreatedBy, Access_CreatedDate, Access_UpdatedBy, Access_UpdatedDate, Access_TimeStamp, 
+            Access_Secterr, access_Stage, Access_Status, access_AccessManagingCompany, access_Address_Subburb, access_Site_Type, access_Nr_Entries, 
+            access_LandlordApproval, access_referenceid, access_hasRFO, access_Client_Contact, access_City, access_dfaregion, access_Client_Region, 
+            access_accessownership, Access_UserId, access_FinanceCostToClient_CID, access_StatusInBuild, access_hasSeniorPM, access_QuickBaseRecordID, 
+            access_aggregationsite
+         FROM AccessBuild 
+         WHERE Access_Deleted IS NULL         
+     AND (access_Site_Name = :access_Site_Name OR :access_Site_Name IS NULL)
+     ORDER BY Access_CreatedDate DESC
+    </sql>
+    <param name="pagesize" paramType="SCALAR" sqlType="INTEGER" defaultValue="10" type="IN" optional="false" />
+    <param name="access_Site_Name" paramType="SCALAR" sqlType="STRING" defaultValue="10" type="IN" optional="false" />
+    <result outputType="json" useColumnNumbers="true">
+        {
+            "AccessBuilds": {
+                "AccessBuild": [{
+                    "Access_CompanyId": $1,
+                    "access_Site_Name": $2,
+                    "access_Site_Address": $3,
+                    "access_Site_Latitude": $4,
+                    "access_Site_Longitude": $5,
+                    "access_description": $6,
+                    "access_Site_Ref": $7,
+                    "Access_AccessBuildID": $8,
+                    "Access_CreatedBy": $9,
+                    "Access_CreatedDate": $10,
+                    "Access_UpdatedBy": $11,
+                    "Access_UpdatedDate": $12,
+                    "Access_TimeStamp": $13,
+                    "Access_Secterr": $14,
+                    "access_Stage": $15,
+                    "Access_Status": $16,
+                    "access_AccessManagingCompany": $17,
+                    "access_Address_Subburb": $18,
+                    "access_Site_Type": $19,
+                    "access_Nr_Entries": $20,
+                    "access_LandlordApproval": $21,
+                    "access_referenceid": $22,
+                    "access_hasRFO": $23,
+                    "access_Client_Contact": $24,
+                    "access_City": $25,
+                    "access_dfaregion": $26,
+                    "access_Client_Region": $27,
+                    "access_accessownership": $28,
+                    "Access_UserId": $29,
+                    "access_FinanceCostToClient_CID": $30,
+                    "access_StatusInBuild": $31,
+                    "access_hasSeniorPM": $32,
+                    "access_QuickBaseRecordID": $33,
+                    "access_aggregationsite": $34
+                }]
+            }
+        }
+    </result>
+  </query>
+  
+  <query id="CreateAccessBuild" useConfig="DFACRM">
+    <sql>
+        INSERT INTO AccessBuild (
+            Access_CompanyId, access_Site_Name, access_Site_Address, access_Site_Latitude, access_Site_Longitude, access_description, 
+            access_Site_Ref, Access_AccessBuildID, Access_CreatedBy, Access_CreatedDate, Access_UpdatedBy, Access_UpdatedDate, Access_TimeStamp, 
+            Access_Secterr, access_Stage, Access_Status, access_AccessManagingCompany, access_Address_Subburb, access_Site_Type, access_Nr_Entries, 
+            access_LandlordApproval, access_referenceid, access_hasRFO, access_Client_Contact, access_City, access_dfaregion, access_Client_Region, 
+            access_accessownership, Access_UserId, access_FinanceCostToClient_CID, access_StatusInBuild, access_hasSeniorPM, access_QuickBaseRecordID, 
+            access_aggregationsite ) 
+        VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+    </sql>    
+       <param name="Access_CompanyId" paramType="SCALAR" sqlType="INTEGER" type="IN" optional="false"/>
+       <param name="access_Site_Name" paramType="SCALAR" sqlType="STRING" type="IN" optional="false"/>
+       <param name="access_Site_Address" paramType="SCALAR" sqlType="STRING" type="IN" optional="false"/>
+       <param name="access_Site_Latitude" paramType="SCALAR" sqlType="STRING" type="IN" optional="false"/>
+       <param name="access_Site_Longitude" paramType="SCALAR" sqlType="STRING" type="IN" optional="false"/>
+       <param name="access_description" paramType="SCALAR" sqlType="STRING" type="IN" optional="false"/>
+       <param name="access_Site_Ref" paramType="SCALAR" sqlType="STRING" type="IN" optional="false"/>
+       <param name="Access_AccessBuildID" paramType="SCALAR" sqlType="INTEGER" type="IN" optional="false"/>
+       <param name="Access_CreatedBy" paramType="SCALAR" sqlType="INTEGER" type="IN" optional="false"/>
+       <param name="Access_CreatedDate" paramType="SCALAR" sqlType="STRING" type="IN" optional="false"/>
+       <param name="Access_UpdatedBy" paramType="SCALAR" sqlType="INTEGER" type="IN" optional="false"/>
+       <param name="Access_UpdatedDate" paramType="SCALAR" sqlType="STRING" type="IN" optional="false"/>
+       <param name="Access_TimeStamp" paramType="SCALAR" sqlType="STRING" type="IN" optional="false"/>
+       <param name="Access_Secterr" paramType="SCALAR" sqlType="INTEGER" type="IN" optional="false"/>
+       <param name="access_Stage" paramType="SCALAR" sqlType="STRING" type="IN" optional="false"/>
+       <param name="Access_Status" paramType="SCALAR" sqlType="STRING" type="IN" optional="false"/>
+       <param name="access_AccessManagingCompany" paramType="SCALAR" sqlType="STRING" type="IN" optional="false"/>
+       <param name="access_Address_Subburb" paramType="SCALAR" sqlType="STRING" type="IN" optional="false"/>
+       <param name="access_Site_Type" paramType="SCALAR" sqlType="INTEGER" type="IN" optional="false"/>
+       <param name="access_Nr_Entries" paramType="SCALAR" sqlType="INTEGER" type="IN" optional="false"/>
+       <param name="access_LandlordApproval" paramType="SCALAR" sqlType="STRING" type="IN" optional="false"/>
+       <param name="access_referenceid" paramType="SCALAR" sqlType="STRING" type="IN" optional="false"/>
+       <param name="access_hasRFO" paramType="SCALAR" sqlType="STRING" type="IN" optional="false"/>
+       <param name="access_Client_Contact" paramType="SCALAR" sqlType="INTEGER" type="IN" optional="false"/>
+       <param name="access_City" paramType="SCALAR" sqlType="STRING" type="IN" optional="false"/>
+       <param name="access_dfaregion" paramType="SCALAR" sqlType="INTEGER" type="IN" optional="false"/>
+       <param name="access_Client_Region" paramType="SCALAR" sqlType="STRING" type="IN" optional="false"/>
+       <param name="access_accessownership" paramType="SCALAR" sqlType="STRING" type="IN" optional="false"/>
+       <param name="Access_UserId" paramType="SCALAR" sqlType="INTEGER" type="IN" optional="false"/>
+       <param name="access_FinanceCostToClient_CID" paramType="SCALAR" sqlType="INTEGER" type="IN" optional="false"/>
+       <param name="access_StatusInBuild" paramType="SCALAR" sqlType="STRING" type="IN" optional="false"/>
+       <param name="access_hasSeniorPM" paramType="SCALAR" sqlType="STRING" type="IN" optional="false"/>
+       <param name="access_QuickBaseRecordID" paramType="SCALAR" sqlType="INTEGER" type="IN" optional="false"/>
+       <param name="access_aggregationsite" paramType="SCALAR" sqlType="STRING" type="IN" optional="false"/>
+  </query>
+  
+  <query id="UpdateAccessBuild" useConfig="DFACRM">
+    <sql>
+       BEGIN TRANSACTION;
+               UPDATE AccessBuild 
+                     SET access_Site_Name = COALESCE(?, access_Site_Name), access_Site_Address = COALESCE(?, access_Site_Address), 
+                         access_Site_Latitude = COALESCE(?, access_Site_Latitude), access_Site_Longitude = COALESCE(?, access_Site_Longitude), 
+                         access_description = COALESCE(?, access_description), access_Site_Ref = COALESCE(?, access_Site_Ref), Access_CreatedBy = COALESCE(?, Access_CreatedBy), 
+                         Access_CreatedDate = COALESCE(?, Access_CreatedDate), Access_UpdatedBy = COALESCE(?, Access_UpdatedBy), Access_UpdatedDate = COALESCE(?, Access_UpdatedDate), 
+                         Access_TimeStamp = COALESCE(?, Access_TimeStamp), Access_Secterr = COALESCE(?, Access_Secterr), access_Stage = COALESCE(?, access_Stage), 
+                         Access_Status = COALESCE(?, Access_Status), access_AccessManagingCompany = COALESCE(?, access_AccessManagingCompany), 
+                         access_Address_Subburb = COALESCE(?, access_Address_Subburb), access_Site_Type = COALESCE(?, access_Site_Type), access_Nr_Entries = COALESCE(?, access_Nr_Entries), 
+                         access_LandlordApproval = COALESCE(?, access_LandlordApproval), access_referenceid = COALESCE(?, access_referenceid), access_hasRFO = COALESCE(?, access_hasRFO), 
+                         access_Client_Contact = COALESCE(?, access_Client_Contact), access_City = COALESCE(?, access_City), access_dfaregion = COALESCE(?, access_dfaregion), 
+                         access_Client_Region = COALESCE(?, access_Client_Region), access_accessownership = COALESCE(?, access_accessownership), Access_UserId = COALESCE(?, Access_UserId), 
+                         access_FinanceCostToClient_CID = COALESCE(?, access_FinanceCostToClient_CID), access_StatusInBuild = COALESCE(?, access_StatusInBuild), 
+                         access_hasSeniorPM = COALESCE(?, access_hasSeniorPM), access_QuickBaseRecordID = COALESCE(?, access_QuickBaseRecordID), 
+                         access_aggregationsite = COALESCE(?, access_aggregationsite), Access_CompanyId = COALESCE(?, Access_CompanyId) 
+                     WHERE Access_AccessBuildID = ?;
+        COMMIT;
+    </sql>    
+       <param name="access_Site_Name" paramType="SCALAR" sqlType="STRING" type="IN" optional="false"/>
+       <param name="access_Site_Address" paramType="SCALAR" sqlType="STRING" type="IN" optional="false"/>
+       <param name="access_Site_Latitude" paramType="SCALAR" sqlType="STRING" type="IN" optional="false"/>
+       <param name="access_Site_Longitude" paramType="SCALAR" sqlType="STRING" type="IN" optional="false"/>
+       <param name="access_description" paramType="SCALAR" sqlType="STRING" type="IN" optional="false"/>
+       <param name="access_Site_Ref" paramType="SCALAR" sqlType="STRING" type="IN" optional="false"/>
+       <param name="Access_CreatedBy" paramType="SCALAR" sqlType="INTEGER" type="IN" optional="false"/>
+       <param name="Access_CreatedDate" paramType="SCALAR" sqlType="STRING" type="IN" optional="false"/>
+       <param name="Access_UpdatedBy" paramType="SCALAR" sqlType="INTEGER" type="IN" optional="false"/>
+       <param name="Access_UpdatedDate" paramType="SCALAR" sqlType="STRING" type="IN" optional="false"/>
+       <param name="Access_TimeStamp" paramType="SCALAR" sqlType="STRING" type="IN" optional="false"/>
+       <param name="Access_Secterr" paramType="SCALAR" sqlType="INTEGER" type="IN" optional="false"/>
+       <param name="access_Stage" paramType="SCALAR" sqlType="STRING" type="IN" optional="false"/>
+       <param name="Access_Status" paramType="SCALAR" sqlType="STRING" type="IN" optional="false"/>
+       <param name="access_AccessManagingCompany" paramType="SCALAR" sqlType="STRING" type="IN" optional="false"/>
+       <param name="access_Address_Subburb" paramType="SCALAR" sqlType="STRING" type="IN" optional="false"/>
+       <param name="access_Site_Type" paramType="SCALAR" sqlType="INTEGER" type="IN" optional="false"/>
+       <param name="access_Nr_Entries" paramType="SCALAR" sqlType="INTEGER" type="IN" optional="false"/>
+       <param name="access_LandlordApproval" paramType="SCALAR" sqlType="STRING" type="IN" optional="false"/>
+       <param name="access_referenceid" paramType="SCALAR" sqlType="STRING" type="IN" optional="false"/>
+       <param name="access_hasRFO" paramType="SCALAR" sqlType="STRING" type="IN" optional="false"/>
+       <param name="access_Client_Contact" paramType="SCALAR" sqlType="INTEGER" type="IN" optional="false"/>
+       <param name="access_City" paramType="SCALAR" sqlType="STRING" type="IN" optional="false"/>
+       <param name="access_dfaregion" paramType="SCALAR" sqlType="INTEGER" type="IN" optional="false"/>
+       <param name="access_Client_Region" paramType="SCALAR" sqlType="STRING" type="IN" optional="false"/>
+       <param name="access_accessownership" paramType="SCALAR" sqlType="STRING" type="IN" optional="false"/>
+       <param name="Access_UserId" paramType="SCALAR" sqlType="INTEGER" type="IN" optional="false"/>
+       <param name="access_FinanceCostToClient_CID" paramType="SCALAR" sqlType="INTEGER" type="IN" optional="false"/>
+       <param name="access_StatusInBuild" paramType="SCALAR" sqlType="STRING" type="IN" optional="false"/>
+       <param name="access_hasSeniorPM" paramType="SCALAR" sqlType="STRING" type="IN" optional="false"/>
+       <param name="access_QuickBaseRecordID" paramType="SCALAR" sqlType="INTEGER" type="IN" optional="false"/>
+       <param name="access_aggregationsite" paramType="SCALAR" sqlType="STRING" type="IN" optional="false"/>
+       <param name="Access_CompanyId" paramType="SCALAR" sqlType="INTEGER" type="IN" optional="false"/>
+       <param name="Access_AccessBuildID" paramType="SCALAR" sqlType="INTEGER" type="IN" optional="false"/>
+  </query>
+  
+</data>

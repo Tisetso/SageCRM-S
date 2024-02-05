@@ -1,0 +1,140 @@
+<data name="sagecrmdss_workflowinstances" serviceNamespace="" serviceGroup="" transports="http https">
+  <description>sage crm data service</description>
+  
+  <config id="DFACRM">
+    <property name="driverClassName">com.microsoft.sqlserver.jdbc.SQLServerDriver</property>
+    <property name="url">jdbc:sqlserver://dfasql-lab01:1433;databaseName=DFACRM_UAT01</property>
+    <property name="username">API_User</property>
+    <property name="password">@ApiUs3r123!</property>
+  </config>
+ 
+   <!-- Resource WorkflowInstance -->
+  <resource method="GET" path="/workflowinstance">
+      <call-query href="GetWorkflowInstance" >
+      <with-param name="pagesize" query-param="pagesize" />
+      <with-param name="WkIn_InstanceID" query-param="WkIn_InstanceID" />
+      </call-query>
+  </resource>
+  
+  <resource method="POST" path="/workflowinstance">
+     <call-query href="CreateWorkflowInstance" >
+	     <with-param name="WkIn_InstanceID" query-param="WkIn_InstanceID" />
+	     <with-param name="WkIn_CreatedBy" query-param="WkIn_CreatedBy" />
+	     <with-param name="WkIn_CreatedDate" query-param="WkIn_CreatedDate" />
+	     <with-param name="WkIn_UpdatedBy" query-param="WkIn_UpdatedBy" />
+	     <with-param name="WkIn_UpdatedDate" query-param="WkIn_UpdatedDate" />
+	     <with-param name="WkIn_TimeStamp" query-param="WkIn_TimeStamp" />
+	     <with-param name="WkIn_Deleted" query-param="WkIn_Deleted" />
+	     <with-param name="WkIn_WorkflowId" query-param="WkIn_WorkflowId" />
+	     <with-param name="WkIn_CurrentEntityId" query-param="WkIn_CurrentEntityId" />
+	     <with-param name="WkIn_CurrentRecordId" query-param="WkIn_CurrentRecordId" />
+	     <with-param name="WkIn_CurrentStateId" query-param="WkIn_CurrentStateId" />          
+     </call-query>
+  </resource>
+  
+  <resource method="PUT" path="/workflowinstance">
+         <call-query href="UpdateWorkflowInstance" >
+			<with-param name="WkIn_InstanceID" query-param="WkIn_InstanceID" />
+			<with-param name="WkIn_CreatedBy" query-param="WkIn_CreatedBy" />
+			<with-param name="WkIn_CreatedDate" query-param="WkIn_CreatedDate" />
+			<with-param name="WkIn_UpdatedBy" query-param="WkIn_UpdatedBy" />
+			<with-param name="WkIn_UpdatedDate" query-param="WkIn_UpdatedDate" />
+			<with-param name="WkIn_TimeStamp" query-param="WkIn_TimeStamp" />
+			<with-param name="WkIn_Deleted" query-param="WkIn_Deleted" />
+			<with-param name="WkIn_WorkflowId" query-param="WkIn_WorkflowId" />
+			<with-param name="WkIn_CurrentEntityId" query-param="WkIn_CurrentEntityId" />
+			<with-param name="WkIn_CurrentRecordId" query-param="WkIn_CurrentRecordId" />
+			<with-param name="WkIn_CurrentStateId" query-param="WkIn_CurrentStateId" />          
+         </call-query>
+  </resource>
+  
+  
+  <!-- Queries WorkflowInstance -->
+  <query id="GetWorkflowInstance" useConfig="DFACRM">
+     <sql>
+         SELECT TOP(COALESCE(:pagesize, 10)) 
+          WkIn_InstanceID, WkSt_Name, WkIn_CreatedBy, WkIn_CreatedDate, WkIn_UpdatedBy, WkIn_UpdatedDate, WkIn_TimeStamp, 
+      WkIn_Deleted, WkIn_WorkflowId, WkIn_CurrentEntityId, WkIn_CurrentRecordId, WkIn_CurrentStateId
+         FROM WorkflowInstance
+         INNER JOIN WorkflowState ON WkSt_StateId = WkIn_InstanceID
+         WHERE WkIn_Deleted IS NULL
+         AND (WkIn_InstanceID = :WkIn_InstanceID OR :WkIn_InstanceID IS NULL)
+         ORDER BY WkIn_CreatedDate DESC
+     </sql>
+     <param name="pagesize" paramType="SCALAR" sqlType="INTEGER" defaultValue="10" type="IN" optional="false" />
+     <param name="WkIn_InstanceID" paramType="SCALAR" sqlType="INTEGER" type="IN" optional="false"/>
+     <result outputType="json" useColumnNumbers="true">{
+         "WorkflowInstances": {
+           "WorkflowInstance": [{
+              "WkIn_InstanceID": $1,
+              "WkSt_Name": $2,
+              "WkIn_CreatedBy": $3,
+              "WkIn_CreatedDate": $4,
+              "WkIn_UpdatedBy": $5,
+              "WkIn_UpdatedDate": $6,
+              "WkIn_TimeStamp": $7,
+              "WkIn_Deleted": $8,
+              "WkIn_WorkflowId": $9,
+              "WkIn_CurrentEntityId": $10,
+              "WkIn_CurrentRecordId": $11,
+              "WkIn_CurrentStateId": $12
+           }]
+         }
+       }      
+     </result>
+  </query>
+
+  <query id="CreateWorkflowInstance" useConfig="DFACRM">
+        <sql>
+                BEGIN TRANSACTION;
+                INSERT INTO WorkflowInstance (WkIn_InstanceID, WkIn_CreatedBy, WkIn_CreatedDate, WkIn_UpdatedBy, WkIn_UpdatedDate, 
+                WkIn_TimeStamp, WkIn_Deleted, WkIn_WorkflowId, WkIn_CurrentEntityId, WkIn_CurrentRecordId, WkIn_CurrentStateId) 
+                VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);                
+                COMMIT;              
+        </sql>
+        <param name="WkIn_InstanceID" paramType="SCALAR" sqlType="INTEGER" type="IN" optional="false"/>
+        <param name="WkIn_CreatedBy" paramType="SCALAR" sqlType="INTEGER" type="IN" optional="false"/>       
+        <param name="WkIn_CreatedDate" paramType="SCALAR" sqlType="TIMESTAMP" type="IN" optional="false"/>
+        <param name="WkIn_UpdatedBy" paramType="SCALAR" sqlType="INTEGER" type="IN" optional="false"/>
+        <param name="WkIn_UpdatedDate" paramType="SCALAR" sqlType="TIMESTAMP" type="IN" optional="false"/>
+        <param name="WkIn_TimeStamp" paramType="SCALAR" sqlType="TIMESTAMP" type="IN" optional="false"/>
+        <param name="WkIn_Deleted" paramType="SCALAR" sqlType="INTEGER" type="IN" optional="false"/>
+        <param name="WkIn_WorkflowId" paramType="SCALAR" sqlType="INTEGER" type="IN" optional="false"/>
+        <param name="WkIn_CurrentEntityId" paramType="SCALAR" sqlType="INTEGER" type="IN" optional="false"/>
+        <param name="WkIn_CurrentRecordId" paramType="SCALAR" sqlType="INTEGER" type="IN" optional="false"/>        
+        <param name="WkIn_CurrentStateId" paramType="SCALAR" sqlType="INTEGER" type="IN" optional="false"/>        
+  </query>
+
+  <query id="UpdateWorkflowInstance" useConfig="DFACRM">
+    <sql>
+        BEGIN TRANSACTION;
+                UPDATE WorkflowInstance
+                        SET 
+                        WkIn_CreatedBy = COALESCE(?, WkIn_CreatedBy),
+                        WkIn_CreatedDate = COALESCE(?, WkIn_CreatedDate),
+                        WkIn_UpdatedBy = COALESCE(?, WkIn_UpdatedBy),
+                        WkIn_UpdatedDate = COALESCE(?, WkIn_UpdatedDate),
+                        WkIn_TimeStamp = COALESCE(?, WkIn_TimeStamp),
+                        WkIn_Deleted = COALESCE(?, WkIn_Deleted),
+                        WkIn_WorkflowId = COALESCE(?, WkIn_WorkflowId),
+                        WkIn_CurrentEntityId = COALESCE(?, WkIn_CurrentEntityId),
+                        WkIn_CurrentRecordId = COALESCE(?, WkIn_CurrentRecordId),
+                        WkIn_CurrentStateId = COALESCE(?, WkIn_CurrentStateId)                                       
+                WHERE WkIn_InstanceID = ?;
+        COMMIT;             
+    </sql>        
+        <param name="WkIn_CreatedBy" paramType="SCALAR" sqlType="INTEGER" type="IN" optional="false"/>       
+        <param name="WkIn_CreatedDate" paramType="SCALAR" sqlType="TIMESTAMP" type="IN" optional="false"/>
+        <param name="WkIn_UpdatedBy" paramType="SCALAR" sqlType="INTEGER" type="IN" optional="false"/>
+        <param name="WkIn_UpdatedDate" paramType="SCALAR" sqlType="TIMESTAMP" type="IN" optional="false"/>
+        <param name="WkIn_TimeStamp" paramType="SCALAR" sqlType="TIMESTAMP" type="IN" optional="false"/>
+        <param name="WkIn_Deleted" paramType="SCALAR" sqlType="INTEGER" type="IN" optional="false"/>
+        <param name="WkIn_WorkflowId" paramType="SCALAR" sqlType="INTEGER" type="IN" optional="false"/>
+        <param name="WkIn_CurrentEntityId" paramType="SCALAR" sqlType="INTEGER" type="IN" optional="false"/>
+        <param name="WkIn_CurrentRecordId" paramType="SCALAR" sqlType="INTEGER" type="IN" optional="false"/>        
+        <param name="WkIn_CurrentStateId" paramType="SCALAR" sqlType="INTEGER" type="IN" optional="false"/>
+        <param name="WkIn_InstanceID" paramType="SCALAR" sqlType="INTEGER" type="IN" optional="false"/>
+  </query>
+  
+ 
+</data>

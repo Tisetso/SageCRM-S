@@ -1,0 +1,107 @@
+<data name="sagecrmdss_company" serviceNamespace="" serviceGroup="" transports="http https">
+  <description>sage crm data service</description>
+  
+  <config id="DFACRM">
+    <property name="driverClassName">com.microsoft.sqlserver.jdbc.SQLServerDriver</property>
+    <property name="url">jdbc:sqlserver://dfasql-lab01:1433;databaseName=DFACRM_UAT01</property>
+    <property name="username">API_User</property>
+    <property name="password">@ApiUs3r123!</property>
+  </config>
+
+  <!-- Resource Company -->
+  <resource method="GET" path="/company">
+     <call-query href="GetCompany" >
+      <with-param name="pagesize" query-param="pagesize" />
+      <with-param name="Comp_CompanyId" query-param="Comp_CompanyId" />
+      <with-param name="Comp_IdCust" query-param="Comp_IdCust" />
+     </call-query>
+  </resource>
+
+  <resource method="GET" path="/company/products">
+     <call-query href="GetProductsByCompanyId" >
+      <with-param name="pagesize" query-param="pagesize" />
+      <with-param name="prod_companyid" query-param="prod_companyid" />
+      <with-param name="prod_productfamilyid" query-param="prod_productfamilyid" />
+     </call-query>
+  </resource>
+  
+  <!-- Queries Company -->
+  <query id="GetCompany" useConfig="DFACRM">
+     <sql>
+         SELECT DISTINCT TOP(COALESCE(:pagesize, 10))  
+       Comp_CompanyId,                
+             Comp_Name, 
+             Comp_PrimaryPersonId, 
+             Comp_PrimaryUserId, 
+             Comp_Status, 
+             comp_TAM, 
+             comp_TAM_Manager, 
+             comp_team,             
+             Comp_IdCust 
+          FROM Company
+          WHERE Comp_Deleted IS NULL
+          AND (Comp_CompanyId = :Comp_CompanyId OR :Comp_CompanyId IS NULL)
+          AND (Comp_IdCust = :Comp_IdCust OR :Comp_IdCust IS NULL)
+     </sql>
+     <param name="pagesize" paramType="SCALAR" sqlType="INTEGER" type="IN" optional="false" />
+     <param name="Comp_CompanyId" paramType="SCALAR" sqlType="INTEGER" type="IN" optional="false" />
+     <param name="Comp_IdCust" paramType="SCALAR" sqlType="STRING" type="IN" optional="false" />
+     <result outputType="json" useColumnNumbers="true">{
+           "Companies": {
+             "Company": [{
+                "Comp_CompanyId": $1,
+                "Comp_Name": $2,
+                "Comp_PrimaryPersonId": $3,
+                "Comp_PrimaryUserId": $4,
+                "Comp_Status": $5,
+                "comp_TAM": $6,
+                "comp_TAM_Manager": $7,
+                "comp_team": $8,
+                "Comp_IdCust": $9
+             }]
+           }
+         }      
+     </result>
+  </query>
+  
+  <query id="GetProductsByCompanyId" useConfig="DFACRM">
+     <sql>
+         SELECT DISTINCT TOP(COALESCE(:pagesize, 10))  
+          prod_name, Pric_PricingID, pric_price, prod_companyid, pric_price_CID, pric_UOMID, prli_years, prli_Description, prod_bandwidth_code, 
+          Prod_ProductID, prod_QuoteCategory, prod_annuity, prod_min_bandwidth, prod_max_bandwidth, prod_productfamilyid
+         FROM Pricing
+         INNER JOIN PricingList ON PrLi_PricingListID = pric_PricingListID
+         INNER JOIN Newproduct ON Prod_productid = pric_ProductID
+         WHERE Prod_Deleted IS NULL 
+         AND pric_Active = 'Y'
+         AND (prod_companyid = :prod_companyid OR :prod_companyid IS NULL)
+         AND (prod_productfamilyid = :prod_productfamilyid OR :prod_productfamilyid IS NULL)
+     </sql>
+     <param name="pagesize" paramType="SCALAR" sqlType="INTEGER" type="IN" optional="true" />
+     <param name="prod_companyid" paramType="SCALAR" sqlType="INTEGER" type="IN" optional="true" />
+     <param name="prod_productfamilyid" paramType="SCALAR" sqlType="INTEGER" type="IN" optional="true" />
+     <result outputType="json" useColumnNumbers="true">{
+           "PricingLists": {
+             "PricingList":[{
+                "prod_name": $1,
+        "Pric_PricingID": $2, 
+        "pric_price": $3, 
+        "prod_companyid": $4,  
+        "pric_price_CID": $5, 
+        "pric_UOMID": $6, 
+        "prli_years": $7, 
+        "prli_Description": $8,             
+        "prod_bandwidth_code": $9, 
+        "Prod_ProductID": $10, 
+        "prod_QuoteCategory": $11, 
+        "prod_annuity": $12,
+        "prod_min_bandwidth": $13,
+        "prod_max_bandwidth": $14,
+        "prod_productfamilyid": $15
+             }]
+           }
+         }      
+     </result>
+  </query>
+  
+</data>

@@ -1,0 +1,31 @@
+<data name="sagecrmdss_edwareidentity" serviceNamespace="" serviceGroup="" transports="http https">
+  <description>sage crm data service</description>
+  
+  <config id="DFACRM">
+    <property name="driverClassName">com.microsoft.sqlserver.jdbc.SQLServerDriver</property>
+    <property name="url">jdbc:sqlserver://dfasql-lab01:1433;databaseName=DFACRM_UAT01</property>
+    <property name="username">API_User</property>
+    <property name="password">@ApiUs3r123!</property>
+  </config>
+
+  <!-- Resource eware_get_identity_id -->
+  <resource method="GET" path="/getNextEwareIdentityId">
+         <description>get next eware_get_identity_id</description>
+         <call-query href="getNextEwareIdentityId">
+                <with-param name="entityType" query-param="entityType" />
+         </call-query>
+  </resource>
+       
+  <!-- Query E-ware IdentityId -->
+  <query id="getNextEwareIdentityId" useConfig="DFACRM">
+    <sql>EXEC pr_next_eware_identity_id @entityType = :entityType</sql>
+    <param name="entityType" paramType="SCALAR" sqlType="STRING" type="IN" optional="false" />
+    <result outputType="json" useColumnNumbers="true">{
+            "Opportunities": {
+                "Opportunity": $1
+                }
+            }
+        </result>
+  </query>
+  
+</data>

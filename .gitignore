@@ -1,0 +1,33 @@
+# Ignore compiled artifacts and build directories
+target/
+
+# Ignore IDE-specific files and directories
+.idea/
+*.iml
+
+# Ignore logs and temporary files
+logs/
+tmp/
+
+# Ignore configuration files that contain sensitive information
+repository/conf/security/keystores/
+repository/conf/datasources/
+
+# Ignore deployment artifacts
+repository/deployment/server/
+
+# Ignore generated artifacts
+repository/components/plugins/
+repository/components/dropins/
+repository/components/lib/
+repository/components/dropins/
+repository/components/patches/
+
+# Ignore system-generated files
+repository/data/
+repository/database/
+repository/components/default/dropins/
+
+# Ignore build-related files
+build/
+bin/

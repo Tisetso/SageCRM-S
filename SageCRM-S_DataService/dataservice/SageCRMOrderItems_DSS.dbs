@@ -1,0 +1,249 @@
+<data name="sagecrmdss_orderitems" serviceNamespace="" serviceGroup="" transports="http https">
+  <description>sage crm data service</description>
+  
+  <config id="DFACRM">
+    <property name="driverClassName">com.microsoft.sqlserver.jdbc.SQLServerDriver</property>
+    <property name="url">jdbc:sqlserver://dfasql-lab01:1433;databaseName=DFACRM_UAT01</property>
+    <property name="username">API_User</property>
+    <property name="password">@ApiUs3r123!</property>
+  </config>
+
+
+  
+  <!-- Resource Order items -->
+   <resource method="GET" path="/orderitems">
+          <call-query href="GetOrdersItems" >
+          <with-param name="pagesize" query-param="pagesize" />
+          <with-param name="OrIt_orderquoteid" query-param="OrIt_orderquoteid" />
+          <with-param name="OrIt_LineItemID" query-param="OrIt_LineItemID" />
+          </call-query>
+   </resource>
+   
+   <resource method="POST" path="/orderitems">
+          <call-query href="addOrderItems" >
+            <with-param  name="OrIt_LineItemID"  query-param="OrIt_LineItemID" />
+            <with-param  name="OrIt_linenumber"  query-param="OrIt_linenumber" />
+            <with-param  name="OrIt_listprice"  query-param="OrIt_listprice" />
+            <with-param  name="OrIt_orderquoteid"  query-param="OrIt_orderquoteid" />
+            <with-param  name="OrIt_productid"  query-param="OrIt_productid" />
+            <with-param  name="OrIt_CreatedBy"  query-param="OrIt_CreatedBy" />
+            <with-param  name="OrIt_CreatedDate"  query-param="OrIt_CreatedDate" />
+            <with-param  name="OrIt_UpdatedBy"  query-param="OrIt_UpdatedBy" />
+            <with-param  name="OrIt_TimeStamp"  query-param="OrIt_TimeStamp" />
+            <with-param  name="OrIt_discount_CID"  query-param="OrIt_discount_CID" />
+            <with-param  name="OrIt_discount"  query-param="OrIt_discount" />
+            <with-param  name="OrIt_discountsum_CID"  query-param="OrIt_discountsum_CID" />
+            <with-param  name="OrIt_discountsum"  query-param="OrIt_discountsum" />
+            <with-param  name="OrIt_listprice_CID"  query-param="OrIt_listprice_CID" />
+            <with-param  name="OrIt_quantity"  query-param="OrIt_quantity" />
+            <with-param  name="OrIt_LineType"  query-param="OrIt_LineType" />
+            <with-param  name="OrIt_tax_CID"  query-param="OrIt_tax_CID" />
+            <with-param  name="OrIt_taxrate"  query-param="OrIt_taxrate" />
+            <with-param  name="OrIt_discountrate"  query-param="OrIt_discountrate" />
+            <with-param  name="OrIt_tax"  query-param="OrIt_tax" />
+            <with-param  name="orit_listquoteprice"  query-param="orit_listquoteprice" />
+            <with-param  name="orit_listquoteprice_CID"  query-param="orit_listquoteprice_CID" />
+            <with-param  name="OrIt_quotedprice_CID"  query-param="OrIt_quotedprice_CID" />
+            <with-param  name="OrIt_quotedprice"  query-param="OrIt_quotedprice" />
+            <with-param  name="OrIt_quotedpricetotal_CID"  query-param="OrIt_quotedpricetotal_CID" />
+            <with-param  name="OrIt_quotedpricetotal"  query-param="OrIt_quotedpricetotal" />
+            <with-param  name="OrIt_UOMID"  query-param="Oppo_CustomerOrIt_UOMIDRef" />
+            <with-param  name="OrIt_productfamilyid" query-param="OrIt_productfamilyid" />
+          </call-query>
+   </resource>
+   
+   <resource method="PUT" path="/orderitems">
+          <call-query href="UpdateOrdersItems" >
+            <with-param  name="OrIt_LineItemID"  query-param="OrIt_LineItemID" />
+            <with-param  name="OrIt_linenumber"  query-param="OrIt_linenumber" />
+            <with-param  name="OrIt_listprice"  query-param="OrIt_listprice" />
+            <with-param  name="OrIt_orderquoteid"  query-param="OrIt_orderquoteid" />
+            <with-param  name="OrIt_productid"  query-param="OrIt_productid" />
+            <with-param  name="OrIt_CreatedBy"  query-param="OrIt_CreatedBy" />
+            <with-param  name="OrIt_CreatedDate"  query-param="OrIt_CreatedDate" />
+            <with-param  name="OrIt_UpdatedBy"  query-param="OrIt_UpdatedBy" />
+            <with-param  name="OrIt_TimeStamp"  query-param="OrIt_TimeStamp" />
+            <with-param  name="OrIt_discount_CID"  query-param="OrIt_discount_CID" />
+            <with-param  name="OrIt_discount"  query-param="OrIt_discount" />
+            <with-param  name="OrIt_discountsum_CID"  query-param="OrIt_discountsum_CID" />
+            <with-param  name="OrIt_discountsum"  query-param="OrIt_discountsum" />
+            <with-param  name="OrIt_listprice_CID"  query-param="OrIt_listprice_CID" />
+            <with-param  name="OrIt_quantity"  query-param="OrIt_quantity" />
+            <with-param  name="OrIt_LineType"  query-param="OrIt_LineType" />
+            <with-param  name="OrIt_tax_CID"  query-param="OrIt_tax_CID" />
+            <with-param  name="OrIt_taxrate"  query-param="OrIt_taxrate" />
+            <with-param  name="OrIt_discountrate"  query-param="OrIt_discountrate" />
+            <with-param  name="OrIt_tax"  query-param="OrIt_tax" />
+            <with-param  name="orit_listquoteprice"  query-param="orit_listquoteprice" />
+            <with-param  name="orit_listquoteprice_CID"  query-param="orit_listquoteprice_CID" />
+            <with-param  name="OrIt_quotedprice_CID"  query-param="OrIt_quotedprice_CID" />
+            <with-param  name="OrIt_quotedprice"  query-param="OrIt_quotedprice" />
+            <with-param  name="OrIt_quotedpricetotal_CID"  query-param="OrIt_quotedpricetotal_CID" />
+            <with-param  name="OrIt_quotedpricetotal"  query-param="OrIt_quotedpricetotal" />
+            <with-param  name="OrIt_UOMID"  query-param="Oppo_CustomerOrIt_UOMIDRef" />
+            <with-param  name="OrIt_productfamilyid" query-param="OrIt_productfamilyid" />
+          </call-query>
+   </resource>
+
+  <!-- Queries OrderItems -->
+  <query id="GetOrdersItems" useConfig="DFACRM">
+     <sql>
+         SELECT TOP(COALESCE(:pagesize, 10))  
+          OrIt_LineItemID, OrIt_linenumber, OrIt_listprice, OrIt_orderquoteid, OrIt_productid, OrIt_CreatedBy, OrIt_CreatedDate, OrIt_UpdatedBy, OrIt_TimeStamp, 
+          OrIt_discount_CID, OrIt_discount, OrIt_discountsum_CID, OrIt_discountsum, OrIt_listprice_CID, OrIt_quantity, OrIt_LineType, OrIt_tax_CID, OrIt_taxrate, 
+          OrIt_discountrate, OrIt_tax, orit_listquoteprice, orit_listquoteprice_CID, OrIt_quotedprice_CID, OrIt_quotedprice, OrIt_quotedpricetotal_CID, 
+          OrIt_quotedpricetotal, OrIt_UOMID, OrIt_productfamilyid
+         FROM OrderItems
+         WHERE OrIt_Deleted IS NULL
+         AND (OrIt_orderquoteid = :OrIt_orderquoteid OR :OrIt_orderquoteid IS NULL)
+         AND (OrIt_LineItemID = :OrIt_LineItemID OR :OrIt_LineItemID IS NULL)
+         ORDER BY OrIt_CreatedDate DESC
+     </sql>
+     <param name="pagesize" paramType="SCALAR" sqlType="INTEGER" defaultValue="10" type="IN" optional="true" />
+     <param name="OrIt_orderquoteid" paramType="SCALAR" sqlType="INTEGER" type="IN" optional="true"/>
+     <param name="OrIt_LineItemID" paramType="SCALAR" sqlType="INTEGER" type="IN" optional="true"/>
+     <result outputType="json" useColumnNumbers="true">{
+         "OrderItems": {
+           "OrderItem": [
+             {
+                "OrIt_LineItemID": $1,
+                "OrIt_linenumber": $2,
+                "OrIt_listprice": $3,
+                "OrIt_orderquoteid": $4,
+                "OrIt_productid": $5,
+                "OrIt_CreatedBy": $6,
+                "OrIt_CreatedDate": $7,
+                "OrIt_UpdatedBy": $8,
+                "OrIt_TimeStamp": $9,
+                "OrIt_discount_CID": $10,
+                "OrIt_discount": $11,
+                "OrIt_discountsum_CID": $12,
+                "OrIt_discountsum": $13,
+                "OrIt_listprice_CID": $14,    
+                "OrIt_quantity": $15,
+                "OrIt_LineType": $16, 
+                "OrIt_tax_CID": $17,
+                "OrIt_taxrate": $18,
+                "OrIt_discountrate": $19,
+                "OrIt_tax": $20,
+                "orit_listquoteprice": $21, 
+                "orit_listquoteprice_CID": $22,
+                "OrIt_quotedprice_CID": $23,
+                "OrIt_quotedprice": $24,
+                "OrIt_quotedpricetotal_CID": $25,
+                "OrIt_quotedpricetotal": $26, 
+                "OrIt_UOMID": $27, 
+                "OrIt_productfamilyid": $28 
+             }
+           ]
+         }
+       }      
+     </result>
+  </query>
+  
+  <query id="addOrderItems" useConfig="DFACRM">
+    <sql>
+        BEGIN TRANSACTION;
+          INSERT INTO OrderItems (OrIt_LineItemID, OrIt_linenumber, OrIt_listprice, OrIt_orderquoteid, OrIt_productid, OrIt_CreatedBy, OrIt_CreatedDate, OrIt_UpdatedBy, 
+          OrIt_TimeStamp, OrIt_discount_CID, OrIt_discount, OrIt_discountsum_CID, OrIt_discountsum, OrIt_listprice_CID, OrIt_quantity, OrIt_LineType, OrIt_tax_CID, OrIt_taxrate, 
+          OrIt_discountrate, OrIt_tax, orit_listquoteprice, orit_listquoteprice_CID, OrIt_quotedprice_CID, OrIt_quotedprice, OrIt_quotedpricetotal_CID, OrIt_quotedpricetotal,
+           OrIt_UOMID, OrIt_productfamilyid)
+          VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?);
+        COMMIT;
+    </sql>
+        <param name="OrIt_LineItemID" paramType="SCALAR" sqlType="INTEGER" type="IN" optional="false"/> 
+        <param name="OrIt_linenumber" paramType="SCALAR" sqlType="INTEGER" type="IN" optional="false"/> 
+        <param name="OrIt_listprice" paramType="SCALAR" sqlType="DOUBLE" type="IN" optional="false"/> 
+        <param name="OrIt_orderquoteid" paramType="SCALAR" sqlType="INTEGER" type="IN" optional="false"/> 
+        <param name="OrIt_productid" paramType="SCALAR" sqlType="INTEGER" type="IN" optional="false"/> 
+        <param name="OrIt_CreatedBy" paramType="SCALAR" sqlType="STRING" type="IN" optional="false"/> 
+        <param name="OrIt_CreatedDate" paramType="SCALAR" sqlType="STRING" type="IN" optional="false"/> 
+        <param name="OrIt_UpdatedBy" paramType="SCALAR" sqlType="INTEGER" type="IN" optional="false"/> 
+        <param name="OrIt_TimeStamp" paramType="SCALAR" sqlType="STRING" type="IN" optional="false"/> 
+        <param name="OrIt_discount_CID" paramType="SCALAR" sqlType="INTEGER" type="IN" optional="false"/> 
+        <param name="OrIt_discount" paramType="SCALAR" sqlType="INTEGER" type="IN" optional="false"/> 
+        <param name="OrIt_discountsum_CID" paramType="SCALAR" sqlType="INTEGER" type="IN" optional="false"/> 
+        <param name="OrIt_discountsum" paramType="SCALAR" sqlType="DOUBLE" type="IN" optional="false"/> 
+        <param name="OrIt_listprice_CID" paramType="SCALAR" sqlType="INTEGER" type="IN" optional="false"/> 
+        <param name="OrIt_quantity" paramType="SCALAR" sqlType="INTEGER" type="IN" optional="false"/> 
+        <param name="OrIt_LineType" paramType="SCALAR" sqlType="STRING" type="IN" optional="false"/> 
+        <param name="OrIt_tax_CID" paramType="SCALAR" sqlType="INTEGER" type="IN" optional="false"/> 
+        <param name="OrIt_taxrate" paramType="SCALAR" sqlType="DOUBLE" type="IN" optional="false"/> 
+        <param name="OrIt_discountrate" paramType="SCALAR" sqlType="DOUBLE" type="IN" optional="false"/> 
+        <param name="OrIt_tax" paramType="SCALAR" sqlType="DOUBLE" type="IN" optional="false"/> 
+        <param name="orit_listquoteprice" paramType="SCALAR" sqlType="DOUBLE" type="IN" optional="false"/> 
+        <param name="orit_listquoteprice_CID" paramType="SCALAR" sqlType="DOUBLE" type="IN" optional="false"/> 
+        <param name="OrIt_quotedprice_CID" paramType="SCALAR" sqlType="INTEGER" type="IN" optional="false"/> 
+        <param name="OrIt_quotedprice" paramType="SCALAR" sqlType="DOUBLE" type="IN" optional="false"/> 
+        <param name="OrIt_quotedpricetotal_CID" paramType="SCALAR" sqlType="INTEGER" type="IN" optional="false"/> 
+        <param name="OrIt_quotedpricetotal" paramType="SCALAR" sqlType="DOUBLE" type="IN" optional="false"/> 
+        <param name="OrIt_UOMID" paramType="SCALAR" sqlType="INTEGER" type="IN" optional="false"/> 
+        <param name="OrIt_productfamilyid" paramType="SCALAR" sqlType="INTEGER" type="IN" optional="false"/>
+  </query>
+  
+  <query id="UpdateOrdersItems" useConfig="DFACRM">
+    <sql>
+       BEGIN TRANSACTION;
+         UPDATE OrderItems
+           SET                                
+              OrIt_linenumber = COALESCE(?, OrIt_linenumber),
+              OrIt_listprice = COALESCE(?, OrIt_listprice),
+              OrIt_orderquoteid = COALESCE(?, OrIt_orderquoteid),
+              OrIt_productid = COALESCE(?, OrIt_productid),
+              OrIt_CreatedBy = COALESCE(?, OrIt_CreatedBy),
+              OrIt_CreatedDate = COALESCE(?, OrIt_CreatedDate),
+              OrIt_UpdatedBy = COALESCE(?, OrIt_UpdatedBy),
+              OrIt_TimeStamp = COALESCE(?, OrIt_TimeStamp),
+              OrIt_discount_CID = COALESCE(?, OrIt_discount_CID),
+              OrIt_discount = COALESCE(?, OrIt_discount),
+              OrIt_discountsum_CID = COALESCE(?, OrIt_discountsum_CID),
+              OrIt_discountsum = COALESCE(?, OrIt_discountsum),
+              OrIt_listprice_CID = COALESCE(?, OrIt_listprice_CID),    
+              OrIt_quantity = COALESCE(?, OrIt_quantity),
+              OrIt_LineType = COALESCE(?, OrIt_LineType), 
+              OrIt_tax_CID = COALESCE(?, OrIt_tax_CID),
+              OrIt_taxrate = COALESCE(?, OrIt_taxrate),
+              OrIt_discountrate = COALESCE(?, OrIt_discountrate),
+              OrIt_tax = COALESCE(?, OrIt_tax),
+              orit_listquoteprice = COALESCE(?, orit_listquoteprice), 
+              orit_listquoteprice_CID = COALESCE(?, orit_listquoteprice_CID),
+              OrIt_quotedprice_CID = COALESCE(?, OrIt_quotedprice_CID),
+              OrIt_quotedprice = COALESCE(?, OrIt_quotedprice),
+              OrIt_quotedpricetotal_CID = COALESCE(?, OrIt_quotedpricetotal_CID),
+              OrIt_quotedpricetotal = COALESCE(?, OrIt_quotedpricetotal), 
+              OrIt_UOMID = COALESCE(?, OrIt_UOMID), 
+              OrIt_productfamilyid = COALESCE(?, OrIt_productfamilyid)             
+            WHERE "OrIt_LineItemID" = ?;
+        COMMIT;             
+    </sql>         
+    <param name="OrIt_linenumber" paramType="SCALAR" sqlType="INTEGER" type="IN" optional="false"/> 
+    <param name="OrIt_listprice" paramType="SCALAR" sqlType="DOUBLE" type="IN" optional="false"/> 
+    <param name="OrIt_orderquoteid" paramType="SCALAR" sqlType="INTEGER" type="IN" optional="false"/> 
+    <param name="OrIt_productid" paramType="SCALAR" sqlType="INTEGER" type="IN" optional="false"/> 
+    <param name="OrIt_CreatedBy" paramType="SCALAR" sqlType="STRING" type="IN" optional="false"/> 
+    <param name="OrIt_CreatedDate" paramType="SCALAR" sqlType="STRING" type="IN" optional="false"/> 
+    <param name="OrIt_UpdatedBy" paramType="SCALAR" sqlType="INTEGER" type="IN" optional="false"/> 
+    <param name="OrIt_TimeStamp" paramType="SCALAR" sqlType="STRING" type="IN" optional="false"/> 
+    <param name="OrIt_discount_CID" paramType="SCALAR" sqlType="INTEGER" type="IN" optional="false"/> 
+    <param name="OrIt_discount" paramType="SCALAR" sqlType="INTEGER" type="IN" optional="false"/> 
+    <param name="OrIt_discountsum_CID" paramType="SCALAR" sqlType="INTEGER" type="IN" optional="false"/> 
+    <param name="OrIt_discountsum" paramType="SCALAR" sqlType="DOUBLE" type="IN" optional="false"/> 
+    <param name="OrIt_listprice_CID" paramType="SCALAR" sqlType="INTEGER" type="IN" optional="false"/> 
+    <param name="OrIt_quantity" paramType="SCALAR" sqlType="INTEGER" type="IN" optional="false"/> 
+    <param name="OrIt_LineType" paramType="SCALAR" sqlType="STRING" type="IN" optional="false"/> 
+    <param name="OrIt_tax_CID" paramType="SCALAR" sqlType="INTEGER" type="IN" optional="false"/> 
+    <param name="OrIt_taxrate" paramType="SCALAR" sqlType="DOUBLE" type="IN" optional="false"/> 
+    <param name="OrIt_discountrate" paramType="SCALAR" sqlType="DOUBLE" type="IN" optional="false"/> 
+    <param name="OrIt_tax" paramType="SCALAR" sqlType="DOUBLE" type="IN" optional="false"/> 
+    <param name="orit_listquoteprice" paramType="SCALAR" sqlType="DOUBLE" type="IN" optional="false"/> 
+    <param name="orit_listquoteprice_CID" paramType="SCALAR" sqlType="DOUBLE" type="IN" optional="false"/> 
+    <param name="OrIt_quotedprice_CID" paramType="SCALAR" sqlType="INTEGER" type="IN" optional="false"/> 
+    <param name="OrIt_quotedprice" paramType="SCALAR" sqlType="DOUBLE" type="IN" optional="false"/> 
+    <param name="OrIt_quotedpricetotal_CID" paramType="SCALAR" sqlType="INTEGER" type="IN" optional="false"/> 
+    <param name="OrIt_quotedpricetotal" paramType="SCALAR" sqlType="DOUBLE" type="IN" optional="false"/> 
+    <param name="OrIt_UOMID" paramType="SCALAR" sqlType="INTEGER" type="IN" optional="false"/> 
+    <param name="OrIt_productfamilyid" paramType="SCALAR" sqlType="INTEGER" type="IN" optional="false"/>
+    <param name="OrIt_LineItemID" paramType="SCALAR" sqlType="INTEGER" type="IN" optional="false"/>
+  </query>
+
+</data>

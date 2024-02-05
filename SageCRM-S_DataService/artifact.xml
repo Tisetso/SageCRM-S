@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?><artifacts>
+    <artifact name="SageCRMAccessBuild_DSS" groupId="za.co.dfafrica.dataservice" version="1.0.0" type="service/dataservice" serverRole="DataServicesServer">
+        <file>dataservice/SageCRMAccessBuild_DSS.dbs</file>
+    </artifact>
+    <artifact name="SageCRMOpportunity_DSS" groupId="za.co.dfafrica.dataservice" version="1.0.0" type="service/dataservice" serverRole="DataServicesServer">
+        <file>dataservice/SageCRMOpportunity_DSS.dbs</file>
+    </artifact>
+    <artifact name="SageCRMOrder_DSS" groupId="za.co.dfafrica.dataservice" version="1.0.0" type="service/dataservice" serverRole="DataServicesServer">
+        <file>dataservice/SageCRMOrder_DSS.dbs</file>
+    </artifact>
+    <artifact name="SageCRMUsers_DSS" groupId="za.co.dfafrica.dataservice" version="1.0.0" type="service/dataservice" serverRole="DataServicesServer">
+        <file>dataservice/SageCRMUsers_DSS.dbs</file>
+    </artifact>
+    <artifact name="SageCRMCircuitNumber_DSS" groupId="za.co.dfafrica.dataservice" version="1.0.0" type="service/dataservice" serverRole="DataServicesServer">
+        <file>dataservice/SageCRMCircuitNumber_DSS.dbs</file>
+    </artifact>
+    <artifact name="SageCRMEdwareIdentity_DSS" groupId="za.co.dfafrica.dataservice" version="1.0.0" type="service/dataservice" serverRole="DataServicesServer">
+        <file>dataservice/SageCRMEdwareIdentity_DSS.dbs</file>
+    </artifact>
+    <artifact name="SageCRMCompany_DSS" groupId="za.co.dfafrica.dataservice" version="1.0.0" type="service/dataservice" serverRole="DataServicesServer">
+        <file>dataservice/SageCRMCompany_DSS.dbs</file>
+    </artifact>
+    <artifact name="SageCRMWorkflowInstance_DSS" groupId="za.co.dfafrica.dataservice" version="1.0.0" type="service/dataservice" serverRole="DataServicesServer">
+        <file>dataservice/SageCRMWorkflowInstance_DSS.dbs</file>
+    </artifact>
+    <artifact name="SageCRMWorkflow_DSS" groupId="za.co.dfafrica.dataservice" version="1.0.0" type="service/dataservice" serverRole="DataServicesServer">
+        <file>dataservice/SageCRMWorkflow_DSS.dbs</file>
+    </artifact>
+    <artifact name="SageCRMOrderItems_DSS" groupId="za.co.dfafrica.dataservice" version="1.0.0" type="service/dataservice" serverRole="DataServicesServer">
+        <file>dataservice/SageCRMOrderItems_DSS.dbs</file>
+    </artifact>
+    <artifact name="SageCRMProducts_DSS" groupId="za.co.dfafrica.dataservice" version="1.0.0" type="service/dataservice" serverRole="DataServicesServer">
+        <file>dataservice/SageCRMProducts_DSS.dbs</file>
+    </artifact>
+</artifacts>
