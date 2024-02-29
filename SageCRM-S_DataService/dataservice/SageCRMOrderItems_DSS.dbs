@@ -11,7 +11,7 @@
 
   
   <!-- Resource Order items -->
-   <resource method="GET" path="/orderitems">
+   <resource method="GET" path="/orderitems" returnRequestStatus="true">
           <call-query href="GetOrdersItems" >
           <with-param name="pagesize" query-param="pagesize" />
           <with-param name="OrIt_orderquoteid" query-param="OrIt_orderquoteid" />
@@ -19,7 +19,7 @@
           </call-query>
    </resource>
    
-   <resource method="POST" path="/orderitems">
+   <resource method="POST" path="/orderitems" returnRequestStatus="true">
           <call-query href="addOrderItems" >
             <with-param  name="OrIt_LineItemID"  query-param="OrIt_LineItemID" />
             <with-param  name="OrIt_linenumber"  query-param="OrIt_linenumber" />
@@ -52,7 +52,7 @@
           </call-query>
    </resource>
    
-   <resource method="PUT" path="/orderitems">
+   <resource method="PUT" path="/orderitems" returnRequestStatus="true">
           <call-query href="UpdateOrdersItems" >
             <with-param  name="OrIt_LineItemID"  query-param="OrIt_LineItemID" />
             <with-param  name="OrIt_linenumber"  query-param="OrIt_linenumber" />

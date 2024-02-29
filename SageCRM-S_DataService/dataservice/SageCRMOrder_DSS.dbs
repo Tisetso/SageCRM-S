@@ -9,7 +9,7 @@
   </config>
 
   <!-- Resource Order -->
-  <resource method="GET" path="/orders">
+  <resource method="GET" path="/orders" returnRequestStatus="true">
          <call-query href="GetOrders" >
          <with-param name="pagesize" query-param="pagesize" />
          <with-param name="Orde_reference" query-param="Orde_reference" />
@@ -17,13 +17,13 @@
          </call-query>
   </resource>
 
-  <resource method="GET" path="/orders/getNextOrderRef">
+  <resource method="GET" path="/orders/getNextOrderRef" returnRequestStatus="true">
          <call-query href="getNextOrderRef">
              <with-param name="orde_opportunityid" query-param="orde_opportunityid" />
          </call-query>
   </resource>
 
-  <resource method="POST" path="/orders">
+  <operation name="createorders" returnRequestStatus="true">
          <call-query href="CreateOrders" >
           <with-param name="Orde_OrderQuoteID" query-param="Orde_OrderQuoteID"/>
           <with-param name="Orde_DiscountPC" query-param="Orde_DiscountPC"/>
@@ -79,12 +79,12 @@
           <with-param name="orde_AMRefA" query-param="orde_AMRefA"/>
           <with-param name="orde_Link_priority" query-param="orde_Link_priority"/> 
          </call-query>
-  </resource>
+  </operation>
   
-  <resource method="PUT" path="/orders">
+  <operation name="updateorders" returnRequestStatus="true">
          <call-query href="UpdateOrders" >
-                <with-param name="Orde_OrderQuoteID" query-param="Orde_OrderQuoteID"/>
-                <with-param name="Orde_DiscountPC" query-param="Orde_DiscountPC"/>
+          <with-param name="Orde_OrderQuoteID" query-param="Orde_OrderQuoteID"/>
+          <with-param name="Orde_DiscountPC" query-param="Orde_DiscountPC"/>
           <with-param name="orde_Region" query-param="orde_Region"/>        
           <with-param name="orde_Stage" query-param="orde_Stage"/>
           <with-param name="orde_OrderClassification" query-param="orde_OrderClassification"/>
@@ -104,7 +104,7 @@
           <with-param name="orde_ordersigneddate" query-param="orde_ordersigneddate"/>
           <with-param name="orde_hasOrderDoc" query-param="orde_hasOrderDoc"/>
           <with-param name="Orde_CreatedDate" query-param="Orde_CreatedDate"/>
-             <with-param name="orde_kam" query-param="orde_kam"/>
+          <with-param name="orde_kam" query-param="orde_kam"/>
           <with-param name="Orde_Secterr" query-param="Orde_Secterr"/>
           <with-param name="orde_referenceid" query-param="orde_referenceid"/>
           <with-param name="Orde_TimeStamp" query-param="Orde_TimeStamp"/>
@@ -137,7 +137,7 @@
           <with-param name="orde_AMRefA" query-param="orde_AMRefA"/>
           <with-param name="orde_Link_priority" query-param="orde_Link_priority"/> 
          </call-query>
-  </resource>
+  </operation>
   
   
   <!-- Queries Orders -->

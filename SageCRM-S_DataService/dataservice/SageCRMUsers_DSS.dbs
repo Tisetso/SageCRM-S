@@ -9,7 +9,7 @@
   </config>
   
   <!-- Resource Users -->
-  <resource method="GET" path="/users">
+  <resource method="GET" path="/users" returnRequestStatus="true">
          <call-query href="GetUsers" >
          <with-param name="pagesize" query-param="pagesize" />
          <with-param name="User_LastName" query-param="User_LastName" />

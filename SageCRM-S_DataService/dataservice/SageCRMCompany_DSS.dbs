@@ -9,7 +9,7 @@
   </config>
 
   <!-- Resource Company -->
-  <resource method="GET" path="/company">
+  <resource method="GET" path="/company" returnRequestStatus="true">
      <call-query href="GetCompany" >
       <with-param name="pagesize" query-param="pagesize" />
       <with-param name="Comp_CompanyId" query-param="Comp_CompanyId" />
@@ -17,7 +17,7 @@
      </call-query>
   </resource>
 
-  <resource method="GET" path="/company/products">
+  <resource method="GET" path="/company/products" returnRequestStatus="true">
      <call-query href="GetProductsByCompanyId" >
       <with-param name="pagesize" query-param="pagesize" />
       <with-param name="prod_companyid" query-param="prod_companyid" />

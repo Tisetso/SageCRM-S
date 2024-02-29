@@ -10,7 +10,7 @@
  
 
 	<!-- Resource Workflow -->
-	<resource method="GET" path="/workflow">
+	<resource method="GET" path="/workflow" returnRequestStatus="true">
 		<call-query href="GetWorkflowByName" >
 		<with-param name="pagesize" query-param="pagesize" />
 		<with-param name="Work_Description" query-param="Work_Description" />

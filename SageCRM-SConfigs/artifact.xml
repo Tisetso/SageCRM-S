@@ -1,1 +1,38 @@
-<?xml version="1.0" encoding="UTF-8"?><artifacts/>
+<?xml version="1.0" encoding="UTF-8"?><artifacts>
+    <artifact name="EdwareIdentity_EP" groupId="za.co.dfafrica.endpoint" version="1.0.0" type="synapse/endpoint" serverRole="EnterpriseServiceBus">
+        <file>src/main/synapse-config/endpoints/EdwareIdentity_EP.xml</file>
+    </artifact>
+    <artifact name="edwareidentity_API" groupId="za.co.dfafrica.api" version="1.0.0" type="synapse/api" serverRole="EnterpriseServiceBus">
+        <file>src/main/synapse-config/api/edwareidentity_API.xml</file>
+    </artifact>
+    <artifact name="edwareidentity_swagger" groupId="za.co.dfafrica.metadata" version="1.0.0" type="synapse/metadata" serverRole="EnterpriseServiceBus">
+        <file>src/main/resources/metadata/edwareidentity_swagger.yaml</file>
+    </artifact>
+    <artifact name="edwareidentity_metadata" groupId="za.co.dfafrica.metadata" version="1.0.0" type="synapse/metadata" serverRole="EnterpriseServiceBus">
+        <file>src/main/resources/metadata/edwareidentity_metadata.yaml</file>
+    </artifact>
+    <artifact name="accessbuild_API" groupId="za.co.dfafrica.api" version="1.0.0" type="synapse/api" serverRole="EnterpriseServiceBus">
+        <file>src/main/synapse-config/api/accessbuild_API.xml</file>
+    </artifact>
+    <artifact name="accessbuild_API_swagger" groupId="za.co.dfafrica.metadata" version="1.0.0" type="synapse/metadata" serverRole="EnterpriseServiceBus">
+        <file>src/main/resources/metadata/accessbuild_API_swagger.yaml</file>
+    </artifact>
+    <artifact name="accessbuild_API_metadata" groupId="za.co.dfafrica.metadata" version="1.0.0" type="synapse/metadata" serverRole="EnterpriseServiceBus">
+        <file>src/main/resources/metadata/accessbuild_API_metadata.yaml</file>
+    </artifact>
+    <artifact name="AccessBuildGetAll_EP" groupId="za.co.dfafrica.endpoint" version="1.0.0" type="synapse/endpoint" serverRole="EnterpriseServiceBus">
+        <file>src/main/synapse-config/endpoints/AccessBuildGetAll_EP.xml</file>
+    </artifact>
+    <artifact name="AccessBuildGetByName_EP" groupId="za.co.dfafrica.endpoint" version="1.0.0" type="synapse/endpoint" serverRole="EnterpriseServiceBus">
+        <file>src/main/synapse-config/endpoints/AccessBuildGetByName_EP.xml</file>
+    </artifact>
+    <artifact name="AccessBuildPost_EP" groupId="za.co.dfafrica.endpoint" version="1.0.0" type="synapse/endpoint" serverRole="EnterpriseServiceBus">
+        <file>src/main/synapse-config/endpoints/AccessBuildPost_EP.xml</file>
+    </artifact>
+    <artifact name="AccessBuildPut_EP" groupId="za.co.dfafrica.endpoint" version="1.0.0" type="synapse/endpoint" serverRole="EnterpriseServiceBus">
+        <file>src/main/synapse-config/endpoints/AccessBuildPut_EP.xml</file>
+    </artifact>
+    <artifact name="AccessBuildCreate_SQ" groupId="za.co.dfafrica.sequence" version="1.0.0" type="synapse/sequence" serverRole="EnterpriseServiceBus">
+        <file>src/main/synapse-config/sequences/AccessBuildCreate_SQ.xml</file>
+    </artifact>
+</artifacts>

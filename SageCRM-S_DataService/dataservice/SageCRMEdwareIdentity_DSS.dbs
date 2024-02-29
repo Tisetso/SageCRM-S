@@ -9,7 +9,7 @@
   </config>
 
   <!-- Resource eware_get_identity_id -->
-  <resource method="GET" path="/getNextEwareIdentityId">
+  <resource method="GET" path="/getNextEwareIdentityId" returnRequestStatus="true">
          <description>get next eware_get_identity_id</description>
          <call-query href="getNextEwareIdentityId">
                 <with-param name="entityType" query-param="entityType" />
@@ -21,8 +21,8 @@
     <sql>EXEC pr_next_eware_identity_id @entityType = :entityType</sql>
     <param name="entityType" paramType="SCALAR" sqlType="STRING" type="IN" optional="false" />
     <result outputType="json" useColumnNumbers="true">{
-            "Opportunities": {
-                "Opportunity": $1
+            "results": {
+                "result": $1
                 }
             }
         </result>

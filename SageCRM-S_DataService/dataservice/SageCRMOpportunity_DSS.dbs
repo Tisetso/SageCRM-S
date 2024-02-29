@@ -8,14 +8,14 @@
     <property name="password">@ApiUs3r123!</property>
   </config>
   
-  <resource method="GET" path="/opportunity">
+  <resource method="GET" path="/opportunity" returnRequestStatus="true">
          <call-query href="GetAllOpportunities" >
          <with-param name="pagesize" query-param="pagesize" />
          <with-param name="Oppo_OpportunityId" query-param="Oppo_OpportunityId"/>
          </call-query>
   </resource>
 
-  <resource method="POST" path="/opportunity">
+  <operation name="createopportunity" returnRequestStatus="true">
          <call-query href="CreateOpportunity">
                 <!-- Include input parameters based on your database schema -->
                <with-param name="Oppo_OpportunityId" query-param="Oppo_OpportunityId" />
@@ -60,9 +60,9 @@
                <with-param name="oppo_rtf_dfa_region_b" query-param="oppo_rtf_dfa_region_b" />
                <with-param name="oppo_rtf_dfa_territorycode_b" query-param="oppo_rtf_dfa_territorycode_b" />
          </call-query>
-  </resource>
+  </operation>
 
-  <resource method="PUT" path="/opportunity">
+  <operation name="updateopportunity" returnRequestStatus="true">
          <call-query href="UpdateOpportunity">
           <with-param name="Oppo_OpportunityId" query-param="Oppo_OpportunityId" />
           <with-param name="Oppo_CustomerRef" query-param="Oppo_CustomerRef" />
@@ -106,7 +106,7 @@
           <with-param name="oppo_rtf_dfa_region_b" query-param="oppo_rtf_dfa_region_b" />
           <with-param name="oppo_rtf_dfa_territorycode_b" query-param="oppo_rtf_dfa_territorycode_b" />
          </call-query>
-  </resource>
+  </operation>
 
   
   <!-- Queries Opportunity -->
@@ -190,119 +190,149 @@
               oppo_ReferenceID, oppo_link_type, oppo_SalesAdminPerson, oppo_dfaregion, Oppo_BulkDealId, oppo_pricinglist,
               oppo_capacity, oppo_QBSRPRecordID, Oppo_Source, oppo_rtf_dfa_region, oppo_rtf_dfa_territorycode,
               oppo_rtf_dfa_region_b, oppo_rtf_dfa_territorycode_b)
-          VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?);
+          VALUES (:Oppo_OpportunityId, :Oppo_CustomerRef, :Oppo_PrimaryCompanyId, :Oppo_PrimaryPersonId, :Oppo_AssignedUserId,
+                :Oppo_Description, :Oppo_Opened, :Oppo_Status, :Oppo_Stage, :Oppo_TargetClose, :Oppo_CreatedBy, :Oppo_CreatedDate,
+                :Oppo_UpdatedBy, :Oppo_UpdatedDate, :Oppo_TimeStamp, :Oppo_SecTerr, :Oppo_AccessBuildId, :oppo_Site_B,
+                :oppo_Circuit_Type, :Oppo_Forecast_CID, :Oppo_Total_CID, :oppo_TotalOrders_CID, :oppo_totalQuotes_CID,
+                :oppo_TotalInvoices, :oppo_Nr_Fibres, :oppo_Client_Region, :oppo_WorkflowStage, :oppo_workflow_State,
+                :oppo_ReferenceID, :oppo_link_type, :oppo_SalesAdminPerson, :oppo_dfaregion, :Oppo_BulkDealId, :oppo_pricinglist,
+                :oppo_capacity, :oppo_QBSRPRecordID, :Oppo_Source, :oppo_rtf_dfa_region, :oppo_rtf_dfa_territorycode,
+                :oppo_rtf_dfa_region_b, :oppo_rtf_dfa_territorycode_b);
           COMMIT;
     </sql>
-      <param name="Oppo_OpportunityId" paramType="SCALAR" sqlType="INTEGER" type="IN" optional="true" />
-         <param name="Oppo_CustomerRef" paramType="SCALAR" sqlType="INTEGER" type="IN" optional="true" />
-         <param name="Oppo_PrimaryCompanyId" paramType="SCALAR" sqlType="INTEGER" type="IN" optional="true" />
-         <param name="Oppo_PrimaryPersonId" paramType="SCALAR" sqlType="INTEGER" type="IN" optional="true" />
-         <param name="Oppo_AssignedUserId" paramType="SCALAR" sqlType="INTEGER" type="IN" optional="true" />
-         <param name="Oppo_Description" paramType="SCALAR" sqlType="STRING" type="IN" optional="true" />
-         <param name="Oppo_Opened" paramType="SCALAR" sqlType="TIMESTAMP" type="IN" optional="true" />
-         <param name="Oppo_Status" paramType="SCALAR" sqlType="STRING" type="IN" optional="true" />
-         <param name="Oppo_Stage" paramType="SCALAR" sqlType="STRING" type="IN" optional="true" />
-         <param name="Oppo_TargetClose" paramType="SCALAR" sqlType="TIMESTAMP" type="IN" optional="true" />
-         <param name="Oppo_CreatedBy" paramType="SCALAR" sqlType="INTEGER" type="IN" optional="true" />
-         <param name="Oppo_CreatedDate" paramType="SCALAR" sqlType="TIMESTAMP" type="IN" optional="true" />
-         <param name="Oppo_UpdatedBy" paramType="SCALAR" sqlType="INTEGER" type="IN" optional="true" />
-         <param name="Oppo_UpdatedDate" paramType="SCALAR" sqlType="TIMESTAMP" type="IN" optional="true" />
-         <param name="Oppo_TimeStamp" paramType="SCALAR" sqlType="TIMESTAMP" type="IN" optional="true" />
-         <param name="Oppo_SecTerr" paramType="SCALAR" sqlType="INTEGER" type="IN" optional="true" />
-         <param name="Oppo_AccessBuildId" paramType="SCALAR" sqlType="INTEGER" type="IN" optional="true" />
-         <param name="oppo_Site_B" paramType="SCALAR" sqlType="INTEGER" type="IN" optional="true" />
-         <param name="oppo_Circuit_Type" paramType="SCALAR" sqlType="STRING" type="IN" optional="true" />
-         <param name="Oppo_Forecast_CID" paramType="SCALAR" sqlType="INTEGER" type="IN" optional="true" />
-         <param name="Oppo_Total_CID" paramType="SCALAR" sqlType="INTEGER" type="IN" optional="true" />
-         <param name="oppo_TotalOrders_CID" paramType="SCALAR" sqlType="INTEGER" type="IN" optional="true" />
-         <param name="oppo_totalQuotes_CID" paramType="SCALAR" sqlType="INTEGER" type="IN" optional="true" />
-         <param name="oppo_TotalInvoices" paramType="SCALAR" sqlType="INTEGER" type="IN" optional="true" />
-         <param name="oppo_Nr_Fibres" paramType="SCALAR" sqlType="INTEGER" type="IN" optional="true" />
-         <param name="oppo_Client_Region" paramType="SCALAR" sqlType="STRING" type="IN" optional="true" />
-         <param name="oppo_WorkflowStage" paramType="SCALAR" sqlType="STRING" type="IN" optional="true" />
-         <param name="oppo_workflow_State" paramType="SCALAR" sqlType="STRING" type="IN" optional="true" />
-         <param name="oppo_ReferenceID" paramType="SCALAR" sqlType="INTEGER" type="IN" optional="true" />
-         <param name="oppo_link_type" paramType="SCALAR" sqlType="STRING" type="IN" optional="true" />
-         <param name="oppo_SalesAdminPerson" paramType="SCALAR" sqlType="INTEGER" type="IN" optional="true" />
-         <param name="oppo_dfaregion" paramType="SCALAR" sqlType="STRING" type="IN" optional="true" />
-         <param name="Oppo_BulkDealId" paramType="SCALAR" sqlType="INTEGER" type="IN" optional="true" />
-         <param name="oppo_pricinglist" paramType="SCALAR" sqlType="STRING" type="IN" optional="true" />
-         <param name="oppo_capacity" paramType="SCALAR" sqlType="INTEGER" type="IN" optional="true" />
-         <param name="oppo_QBSRPRecordID" paramType="SCALAR" sqlType="STRING" type="IN" optional="true" />
-         <param name="Oppo_Source" paramType="SCALAR" sqlType="STRING" type="IN" optional="true" />
-         <param name="oppo_rtf_dfa_region" paramType="SCALAR" sqlType="STRING" type="IN" optional="true" />
-         <param name="oppo_rtf_dfa_territorycode" paramType="SCALAR" sqlType="STRING" type="IN" optional="true" />
-         <param name="oppo_rtf_dfa_region_b" paramType="SCALAR" sqlType="STRING" type="IN" optional="true" />
-         <param name="oppo_rtf_dfa_territorycode_b" paramType="SCALAR" sqlType="STRING" type="IN" optional="true" />
+      	<param name="Oppo_OpportunityId" paramType="SCALAR" sqlType="INTEGER" defaultValue="10" type="IN" optional="true" />
+		<param name="Oppo_AccessBuildId" paramType="SCALAR" sqlType="INTEGER" defaultValue="10" type="IN" optional="true" />
+		<param name="Oppo_AssignedUserId" paramType="SCALAR" sqlType="INTEGER" defaultValue="10" type="IN" optional="true" />
+		<param name="Oppo_BulkDealId" paramType="SCALAR" sqlType="INTEGER" defaultValue="10" type="IN" optional="true" />
+		<param name="oppo_capacity" paramType="SCALAR" sqlType="STRING" defaultValue="10" type="IN" optional="true" />
+		<param name="oppo_Circuit_Type" paramType="SCALAR" sqlType="STRING" defaultValue="10" type="IN" optional="true" />
+		<param name="oppo_Client_Region" paramType="SCALAR" sqlType="STRING" defaultValue="10" type="IN" optional="true" />
+		<param name="Oppo_CreatedBy" paramType="SCALAR" sqlType="INTEGER" defaultValue="10" type="IN" optional="true" />
+		<param name="Oppo_CreatedDate" paramType="SCALAR" sqlType="STRING" defaultValue="10" type="IN" optional="true" />
+		<param name="Oppo_CustomerRef" paramType="SCALAR" sqlType="STRING" defaultValue="10" type="IN" optional="true" />
+		<param name="Oppo_Description" paramType="SCALAR" sqlType="STRING" defaultValue="10" type="IN" optional="true" />
+		<param name="oppo_dfaregion" paramType="SCALAR" sqlType="INTEGER" defaultValue="10" type="IN" optional="true" />
+		<param name="Oppo_Forecast_CID" paramType="SCALAR" sqlType="INTEGER" defaultValue="10" type="IN" optional="true" />
+		<param name="oppo_link_type" paramType="SCALAR" sqlType="STRING" defaultValue="10" type="IN" optional="true" />
+		<param name="oppo_Nr_Fibres" paramType="SCALAR" sqlType="STRING" defaultValue="10" type="IN" optional="true" />
+		<param name="Oppo_Opened" paramType="SCALAR" sqlType="STRING" defaultValue="10" type="IN" optional="true" />
+		<param name="Oppo_OpportunityId" paramType="SCALAR" sqlType="INTEGER" defaultValue="10" type="IN" optional="true" />
+		<param name="oppo_pricinglist" paramType="SCALAR" sqlType="STRING" defaultValue="10" type="IN" optional="true" />
+		<param name="Oppo_PrimaryCompanyId" paramType="SCALAR" sqlType="INTEGER" defaultValue="10" type="IN" optional="true" />
+		<param name="Oppo_PrimaryPersonId" paramType="SCALAR" sqlType="INTEGER" defaultValue="10" type="IN" optional="true" />
+		<param name="oppo_QBSRPRecordID" paramType="SCALAR" sqlType="STRING" defaultValue="10" type="IN" optional="true" />
+		<param name="oppo_ReferenceID" paramType="SCALAR" sqlType="STRING" defaultValue="10" type="IN" optional="true" />
+		<param name="oppo_rtf_dfa_region" paramType="SCALAR" sqlType="STRING" defaultValue="10" type="IN" optional="true" />
+		<param name="oppo_rtf_dfa_region_b" paramType="SCALAR" sqlType="STRING" defaultValue="10" type="IN" optional="true" />
+		<param name="oppo_rtf_dfa_territorycode" paramType="SCALAR" sqlType="STRING" defaultValue="10" type="IN" optional="true" />
+		<param name="oppo_rtf_dfa_territorycode_b" paramType="SCALAR" sqlType="STRING" defaultValue="10" type="IN" optional="true" />
+		<param name="oppo_SalesAdminPerson" paramType="SCALAR" sqlType="INTEGER" defaultValue="10" type="IN" optional="true" />
+		<param name="Oppo_SecTerr" paramType="SCALAR" sqlType="INTEGER" defaultValue="10" type="IN" optional="true" />
+		<param name="oppo_Site_B" paramType="SCALAR" sqlType="INTEGER" defaultValue="10" type="IN" optional="true" />
+		<param name="Oppo_Source" paramType="SCALAR" sqlType="STRING" defaultValue="10" type="IN" optional="true" />
+		<param name="Oppo_Stage" paramType="SCALAR" sqlType="STRING" defaultValue="10" type="IN" optional="true" />
+		<param name="Oppo_Status" paramType="SCALAR" sqlType="STRING" defaultValue="10" type="IN" optional="true" />
+		<param name="Oppo_TargetClose" paramType="SCALAR" sqlType="STRING" defaultValue="10" type="IN" optional="true" />
+		<param name="Oppo_TimeStamp" paramType="SCALAR" sqlType="STRING" defaultValue="10" type="IN" optional="true" />
+		<param name="Oppo_Total_CID" paramType="SCALAR" sqlType="INTEGER" defaultValue="10" type="IN" optional="true" />
+		<param name="oppo_TotalInvoices" paramType="SCALAR" sqlType="NUMERIC" defaultValue="10" type="IN" optional="true" />
+		<param name="oppo_TotalOrders_CID" paramType="SCALAR" sqlType="INTEGER" defaultValue="10" type="IN" optional="true" />
+		<param name="oppo_totalQuotes_CID" paramType="SCALAR" sqlType="INTEGER" defaultValue="10" type="IN" optional="true" />
+		<param name="Oppo_UpdatedBy" paramType="SCALAR" sqlType="INTEGER" defaultValue="10" type="IN" optional="true" />
+		<param name="Oppo_UpdatedDate" paramType="SCALAR" sqlType="STRING" defaultValue="10" type="IN" optional="true" />
+		<param name="oppo_workflow_State" paramType="SCALAR" sqlType="STRING" defaultValue="10" type="IN" optional="true" />
+		<param name="oppo_WorkflowStage" paramType="SCALAR" sqlType="STRING" defaultValue="10" type="IN" optional="true" />
   </query>
   
   <query id="UpdateOpportunity" useConfig="DFACRM">
     <sql>
-              BEGIN TRANSACTION; 
-                     UPDATE Opportunity 
-                     SET Oppo_CustomerRef = COALESCE(?, Oppo_CustomerRef), Oppo_PrimaryCompanyId = COALESCE(?, Oppo_PrimaryCompanyId), 
-                            Oppo_PrimaryPersonId = COALESCE(?, Oppo_PrimaryPersonId), Oppo_AssignedUserId = COALESCE(?, Oppo_AssignedUserId), 
-                            Oppo_Description = COALESCE(?, Oppo_Description), Oppo_Opened = COALESCE(?, Oppo_Opened), 
-                            Oppo_Status = COALESCE(?, Oppo_Status), Oppo_Stage = COALESCE(?, Oppo_Stage), Oppo_TargetClose = COALESCE(?, Oppo_TargetClose), 
-                            Oppo_CreatedBy = COALESCE(?, Oppo_CreatedBy), Oppo_CreatedDate = COALESCE(?, Oppo_CreatedDate), 
-                            Oppo_UpdatedBy = COALESCE(?, Oppo_UpdatedBy), Oppo_UpdatedDate = COALESCE(?, Oppo_UpdatedDate), 
-                            Oppo_TimeStamp = COALESCE(?, Oppo_TimeStamp), Oppo_SecTerr = COALESCE(?, Oppo_SecTerr), Oppo_AccessBuildId = COALESCE(?, Oppo_AccessBuildId), 
-                            oppo_Site_B = COALESCE(?, oppo_Site_B), oppo_Circuit_Type = COALESCE(?, oppo_Circuit_Type), Oppo_Forecast_CID = COALESCE(?, Oppo_Forecast_CID), 
-                            Oppo_Total_CID = COALESCE(?, Oppo_Total_CID), oppo_TotalOrders_CID = COALESCE(?, oppo_TotalOrders_CID), 
-                            oppo_totalQuotes_CID = COALESCE(?, oppo_totalQuotes_CID), oppo_TotalInvoices = COALESCE(?, oppo_TotalInvoices), 
-                            oppo_Nr_Fibres = COALESCE(?, oppo_Nr_Fibres), oppo_Client_Region = COALESCE(?, oppo_Client_Region), 
-                            oppo_WorkflowStage = COALESCE(?, oppo_WorkflowStage), oppo_workflow_State = COALESCE(?, oppo_workflow_State), 
-                            oppo_ReferenceID = COALESCE(?, oppo_ReferenceID), oppo_link_type = COALESCE(?, oppo_link_type), 
-                            oppo_SalesAdminPerson = COALESCE(?, oppo_SalesAdminPerson), oppo_dfaregion = COALESCE(?, oppo_dfaregion), 
-                            Oppo_BulkDealId = COALESCE(?, Oppo_BulkDealId), oppo_pricinglist = COALESCE(?, oppo_pricinglist), oppo_capacity = COALESCE(?, oppo_capacity), 
-                            oppo_QBSRPRecordID = COALESCE(?, oppo_QBSRPRecordID), Oppo_Source = COALESCE(?, Oppo_Source), oppo_rtf_dfa_region = COALESCE(?, oppo_rtf_dfa_region), 
-                            oppo_rtf_dfa_territorycode = COALESCE(?, oppo_rtf_dfa_territorycode), oppo_rtf_dfa_region_b = COALESCE(?, oppo_rtf_dfa_region_b), 
-                            oppo_rtf_dfa_territorycode_b = COALESCE(?, oppo_rtf_dfa_territorycode_b) 
-                     WHERE Oppo_OpportunityId = ?; 
-              COMMIT;
-              
+        BEGIN TRANSACTION; 
+           UPDATE Opportunity 
+                SET Oppo_CustomerRef = COALESCE(:Oppo_CustomerRef, Oppo_CustomerRef), 
+                    Oppo_PrimaryCompanyId = COALESCE(:Oppo_PrimaryCompanyId, Oppo_PrimaryCompanyId), 
+                    Oppo_PrimaryPersonId = COALESCE(:Oppo_PrimaryPersonId, Oppo_PrimaryPersonId), 
+                    Oppo_AssignedUserId = COALESCE(:Oppo_AssignedUserId, Oppo_AssignedUserId), 
+                    Oppo_Description = COALESCE(:Oppo_Description, Oppo_Description), 
+                    Oppo_Opened = COALESCE(:Oppo_Opened, Oppo_Opened), 
+                    Oppo_Status = COALESCE(:Oppo_Status, Oppo_Status), 
+                    Oppo_Stage = COALESCE(:Oppo_Stage, Oppo_Stage), 
+                    Oppo_TargetClose = COALESCE(:Oppo_TargetClose, Oppo_TargetClose), 
+                    Oppo_CreatedBy = COALESCE(:Oppo_CreatedBy, Oppo_CreatedBy), 
+                    Oppo_CreatedDate = COALESCE(:Oppo_CreatedDate, Oppo_CreatedDate), 
+                    Oppo_UpdatedBy = COALESCE(:Oppo_UpdatedBy, Oppo_UpdatedBy), 
+                    Oppo_UpdatedDate = COALESCE(:Oppo_UpdatedDate, Oppo_UpdatedDate), 
+                    Oppo_TimeStamp = COALESCE(:Oppo_TimeStamp, Oppo_TimeStamp), 
+                    Oppo_SecTerr = COALESCE(:Oppo_SecTerr, Oppo_SecTerr), 
+                    Oppo_AccessBuildId = COALESCE(:Oppo_AccessBuildId, Oppo_AccessBuildId), 
+                    oppo_Site_B = COALESCE(:oppo_Site_B, oppo_Site_B), 
+                    oppo_Circuit_Type = COALESCE(:oppo_Circuit_Type, oppo_Circuit_Type), 
+                    Oppo_Forecast_CID = COALESCE(:Oppo_Forecast_CID, Oppo_Forecast_CID), 
+                    Oppo_Total_CID = COALESCE(:Oppo_Total_CID, Oppo_Total_CID), 
+                    oppo_TotalOrders_CID = COALESCE(:oppo_TotalOrders_CID, oppo_TotalOrders_CID), 
+                    oppo_totalQuotes_CID = COALESCE(:oppo_totalQuotes_CID, oppo_totalQuotes_CID), 
+                    oppo_TotalInvoices = COALESCE(:oppo_TotalInvoices, oppo_TotalInvoices), 
+                    oppo_Nr_Fibres = COALESCE(:oppo_Nr_Fibres, oppo_Nr_Fibres), 
+                    oppo_Client_Region = COALESCE(:oppo_Client_Region, oppo_Client_Region), 
+                    oppo_WorkflowStage = COALESCE(:oppo_WorkflowStage, oppo_WorkflowStage), 
+                    oppo_workflow_State = COALESCE(:oppo_workflow_State, oppo_workflow_State), 
+                    oppo_ReferenceID = COALESCE(:oppo_ReferenceID, oppo_ReferenceID), 
+                    oppo_link_type = COALESCE(:oppo_link_type, oppo_link_type), 
+                    oppo_SalesAdminPerson = COALESCE(:oppo_SalesAdminPerson, oppo_SalesAdminPerson), 
+                    oppo_dfaregion = COALESCE(:oppo_dfaregion, oppo_dfaregion), 
+                    Oppo_BulkDealId = COALESCE(:Oppo_BulkDealId, Oppo_BulkDealId), 
+                    oppo_pricinglist = COALESCE(:oppo_pricinglist, oppo_pricinglist), 
+                    oppo_capacity = COALESCE(:oppo_capacity, oppo_capacity), 
+                    oppo_QBSRPRecordID = COALESCE(:oppo_QBSRPRecordID, oppo_QBSRPRecordID), 
+                    Oppo_Source = COALESCE(:Oppo_Source, Oppo_Source), 
+                    oppo_rtf_dfa_region = COALESCE(:oppo_rtf_dfa_region, oppo_rtf_dfa_region), 
+                    oppo_rtf_dfa_territorycode = COALESCE(:oppo_rtf_dfa_territorycode, oppo_rtf_dfa_territorycode), 
+                    oppo_rtf_dfa_region_b = COALESCE(:oppo_rtf_dfa_region_b, oppo_rtf_dfa_region_b), 
+                    oppo_rtf_dfa_territorycode_b = COALESCE(:oppo_rtf_dfa_territorycode_b, oppo_rtf_dfa_territorycode_b) 
+             WHERE Oppo_OpportunityId = COALESCE(:Oppo_OpportunityId, Oppo_OpportunityId);
+        COMMIT;              
     </sql>
-              <param name="Oppo_CustomerRef" paramType="SCALAR" sqlType="INTEGER" type="IN" optional="true" />
-              <param name="Oppo_PrimaryCompanyId" paramType="SCALAR" sqlType="INTEGER" type="IN" optional="true" />
-              <param name="Oppo_PrimaryPersonId" paramType="SCALAR" sqlType="INTEGER" type="IN" optional="true" />
-              <param name="Oppo_AssignedUserId" paramType="SCALAR" sqlType="INTEGER" type="IN" optional="true" />
-              <param name="Oppo_Description" paramType="SCALAR" sqlType="STRING" type="IN" optional="true" />
-              <param name="Oppo_Opened" paramType="SCALAR" sqlType="TIMESTAMP" type="IN" optional="true" />
-              <param name="Oppo_Status" paramType="SCALAR" sqlType="STRING" type="IN" optional="true" />
-              <param name="Oppo_Stage" paramType="SCALAR" sqlType="STRING" type="IN" optional="true" />
-              <param name="Oppo_TargetClose" paramType="SCALAR" sqlType="TIMESTAMP" type="IN" optional="true" />
-              <param name="Oppo_CreatedBy" paramType="SCALAR" sqlType="INTEGER" type="IN" optional="true" />
-              <param name="Oppo_CreatedDate" paramType="SCALAR" sqlType="TIMESTAMP" type="IN" optional="true" />
-              <param name="Oppo_UpdatedBy" paramType="SCALAR" sqlType="INTEGER" type="IN" optional="true" />
-              <param name="Oppo_UpdatedDate" paramType="SCALAR" sqlType="TIMESTAMP" type="IN" optional="true" />
-              <param name="Oppo_TimeStamp" paramType="SCALAR" sqlType="TIMESTAMP" type="IN" optional="true" />
-              <param name="Oppo_SecTerr" paramType="SCALAR" sqlType="INTEGER" type="IN" optional="true" />
-              <param name="Oppo_AccessBuildId" paramType="SCALAR" sqlType="INTEGER" type="IN" optional="true" />
-              <param name="oppo_Site_B" paramType="SCALAR" sqlType="INTEGER" type="IN" optional="true" />
-              <param name="oppo_Circuit_Type" paramType="SCALAR" sqlType="STRING" type="IN" optional="true" />
-              <param name="Oppo_Forecast_CID" paramType="SCALAR" sqlType="INTEGER" type="IN" optional="true" />
-              <param name="Oppo_Total_CID" paramType="SCALAR" sqlType="INTEGER" type="IN" optional="true" />
-              <param name="oppo_TotalOrders_CID" paramType="SCALAR" sqlType="INTEGER" type="IN" optional="true" />
-              <param name="oppo_totalQuotes_CID" paramType="SCALAR" sqlType="INTEGER" type="IN" optional="true" />
-              <param name="oppo_TotalInvoices" paramType="SCALAR" sqlType="INTEGER" type="IN" optional="true" />
-              <param name="oppo_Nr_Fibres" paramType="SCALAR" sqlType="INTEGER" type="IN" optional="true" />
-              <param name="oppo_Client_Region" paramType="SCALAR" sqlType="STRING" type="IN" optional="true" />
-              <param name="oppo_WorkflowStage" paramType="SCALAR" sqlType="STRING" type="IN" optional="true" />
-              <param name="oppo_workflow_State" paramType="SCALAR" sqlType="STRING" type="IN" optional="true" />
-              <param name="oppo_ReferenceID" paramType="SCALAR" sqlType="INTEGER" type="IN" optional="true" />
-              <param name="oppo_link_type" paramType="SCALAR" sqlType="STRING" type="IN" optional="true" />
-              <param name="oppo_SalesAdminPerson" paramType="SCALAR" sqlType="INTEGER" type="IN" optional="true" />
-              <param name="oppo_dfaregion" paramType="SCALAR" sqlType="STRING" type="IN" optional="true" />
-              <param name="Oppo_BulkDealId" paramType="SCALAR" sqlType="INTEGER" type="IN" optional="true" />
-              <param name="oppo_pricinglist" paramType="SCALAR" sqlType="STRING" type="IN" optional="true" />
-              <param name="oppo_capacity" paramType="SCALAR" sqlType="INTEGER" type="IN" optional="true" />
-              <param name="oppo_QBSRPRecordID" paramType="SCALAR" sqlType="STRING" type="IN" optional="true" />
-              <param name="Oppo_Source" paramType="SCALAR" sqlType="STRING" type="IN" optional="true" />
-              <param name="oppo_rtf_dfa_region" paramType="SCALAR" sqlType="STRING" type="IN" optional="true" />
-              <param name="oppo_rtf_dfa_territorycode" paramType="SCALAR" sqlType="STRING" type="IN" optional="true" />
-              <param name="oppo_rtf_dfa_region_b" paramType="SCALAR" sqlType="STRING" type="IN" optional="true" />
-              <param name="oppo_rtf_dfa_territorycode_b" paramType="SCALAR" sqlType="STRING" type="IN" optional="true" />
-              <param name="Oppo_OpportunityId" paramType="SCALAR" sqlType="INTEGER" type="IN" optional="true" />
+        <param name="Oppo_OpportunityId" paramType="SCALAR" sqlType="INTEGER" defaultValue="10" type="IN" optional="true" />
+		<param name="Oppo_AccessBuildId" paramType="SCALAR" sqlType="INTEGER" defaultValue="10" type="IN" optional="true" />
+		<param name="Oppo_AssignedUserId" paramType="SCALAR" sqlType="INTEGER" defaultValue="10" type="IN" optional="true" />
+		<param name="Oppo_BulkDealId" paramType="SCALAR" sqlType="INTEGER" defaultValue="10" type="IN" optional="true" />
+		<param name="oppo_capacity" paramType="SCALAR" sqlType="STRING" defaultValue="10" type="IN" optional="true" />
+		<param name="oppo_Circuit_Type" paramType="SCALAR" sqlType="STRING" defaultValue="10" type="IN" optional="true" />
+		<param name="oppo_Client_Region" paramType="SCALAR" sqlType="STRING" defaultValue="10" type="IN" optional="true" />
+		<param name="Oppo_CreatedBy" paramType="SCALAR" sqlType="INTEGER" defaultValue="10" type="IN" optional="true" />
+		<param name="Oppo_CreatedDate" paramType="SCALAR" sqlType="STRING" defaultValue="10" type="IN" optional="true" />
+		<param name="Oppo_CustomerRef" paramType="SCALAR" sqlType="STRING" defaultValue="10" type="IN" optional="true" />
+		<param name="Oppo_Description" paramType="SCALAR" sqlType="STRING" defaultValue="10" type="IN" optional="true" />
+		<param name="oppo_dfaregion" paramType="SCALAR" sqlType="INTEGER" defaultValue="10" type="IN" optional="true" />
+		<param name="Oppo_Forecast_CID" paramType="SCALAR" sqlType="INTEGER" defaultValue="10" type="IN" optional="true" />
+		<param name="oppo_link_type" paramType="SCALAR" sqlType="STRING" defaultValue="10" type="IN" optional="true" />
+		<param name="oppo_Nr_Fibres" paramType="SCALAR" sqlType="STRING" defaultValue="10" type="IN" optional="true" />
+		<param name="Oppo_Opened" paramType="SCALAR" sqlType="STRING" defaultValue="10" type="IN" optional="true" />
+		<param name="Oppo_OpportunityId" paramType="SCALAR" sqlType="INTEGER" defaultValue="10" type="IN" optional="true" />
+		<param name="oppo_pricinglist" paramType="SCALAR" sqlType="STRING" defaultValue="10" type="IN" optional="true" />
+		<param name="Oppo_PrimaryCompanyId" paramType="SCALAR" sqlType="INTEGER" defaultValue="10" type="IN" optional="true" />
+		<param name="Oppo_PrimaryPersonId" paramType="SCALAR" sqlType="INTEGER" defaultValue="10" type="IN" optional="true" />
+		<param name="oppo_QBSRPRecordID" paramType="SCALAR" sqlType="STRING" defaultValue="10" type="IN" optional="true" />
+		<param name="oppo_ReferenceID" paramType="SCALAR" sqlType="STRING" defaultValue="10" type="IN" optional="true" />
+		<param name="oppo_rtf_dfa_region" paramType="SCALAR" sqlType="STRING" defaultValue="10" type="IN" optional="true" />
+		<param name="oppo_rtf_dfa_region_b" paramType="SCALAR" sqlType="STRING" defaultValue="10" type="IN" optional="true" />
+		<param name="oppo_rtf_dfa_territorycode" paramType="SCALAR" sqlType="STRING" defaultValue="10" type="IN" optional="true" />
+		<param name="oppo_rtf_dfa_territorycode_b" paramType="SCALAR" sqlType="STRING" defaultValue="10" type="IN" optional="true" />
+		<param name="oppo_SalesAdminPerson" paramType="SCALAR" sqlType="INTEGER" defaultValue="10" type="IN" optional="true" />
+		<param name="Oppo_SecTerr" paramType="SCALAR" sqlType="INTEGER" defaultValue="10" type="IN" optional="true" />
+		<param name="oppo_Site_B" paramType="SCALAR" sqlType="INTEGER" defaultValue="10" type="IN" optional="true" />
+		<param name="Oppo_Source" paramType="SCALAR" sqlType="STRING" defaultValue="10" type="IN" optional="true" />
+		<param name="Oppo_Stage" paramType="SCALAR" sqlType="STRING" defaultValue="10" type="IN" optional="true" />
+		<param name="Oppo_Status" paramType="SCALAR" sqlType="STRING" defaultValue="10" type="IN" optional="true" />
+		<param name="Oppo_TargetClose" paramType="SCALAR" sqlType="STRING" defaultValue="10" type="IN" optional="true" />
+		<param name="Oppo_TimeStamp" paramType="SCALAR" sqlType="STRING" defaultValue="10" type="IN" optional="true" />
+		<param name="Oppo_Total_CID" paramType="SCALAR" sqlType="INTEGER" defaultValue="10" type="IN" optional="true" />
+		<param name="oppo_TotalInvoices" paramType="SCALAR" sqlType="NUMERIC" defaultValue="10" type="IN" optional="true" />
+		<param name="oppo_TotalOrders_CID" paramType="SCALAR" sqlType="INTEGER" defaultValue="10" type="IN" optional="true" />
+		<param name="oppo_totalQuotes_CID" paramType="SCALAR" sqlType="INTEGER" defaultValue="10" type="IN" optional="true" />
+		<param name="Oppo_UpdatedBy" paramType="SCALAR" sqlType="INTEGER" defaultValue="10" type="IN" optional="true" />
+		<param name="Oppo_UpdatedDate" paramType="SCALAR" sqlType="STRING" defaultValue="10" type="IN" optional="true" />
+		<param name="oppo_workflow_State" paramType="SCALAR" sqlType="STRING" defaultValue="10" type="IN" optional="true" />
+		<param name="oppo_WorkflowStage" paramType="SCALAR" sqlType="STRING" defaultValue="10" type="IN" optional="true" />
   </query>
 
   

@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<api context="/sagecrmdapi_accessbuild" name="accessbuild_API" xmlns="http://ws.apache.org/ns/synapse">
+    <resource methods="GET" uri-template="/getall">
+        <inSequence>
+            <log description="AUDIT_ENTRY" level="custom" separator=",">
+                <property expression="$url:pagesize" name="AUDIT_ENTRY"/>
+            </log>
+            <property expression="$url:pagesize" name="uri.var.pagesize" scope="default" type="STRING"/>
+            <call>
+                <endpoint key="AccessBuildGetAll_EP"/>
+            </call>
+            <log description="AUDIT_ENTRY" level="custom" separator=",">
+                <property expression="json-eval($)" name="AUDIT_REENTRY"/>
+            </log>
+            <respond/>
+        </inSequence>
+        <outSequence/>
+        <faultSequence/>
+    </resource>
+    <resource methods="GET" uri-template="/getbyname">
+        <inSequence>
+            <log description="AUDIT_ENTRY" level="custom" separator=",">
+                <property expression="$url:access_Site_Name" name="AUDIT_ENTRY"/>
+            </log>
+            <property expression="$url:access_Site_Name" name="uri.var.access_Site_Name" scope="default" type="STRING"/>
+            <call>
+                <endpoint key="AccessBuildGetByName_EP"/>
+            </call>
+            <log description="AUDIT_ENTRY" level="custom" separator=",">
+                <property expression="json-eval($.access_Site_Name)" name="AUDIT_REENTRY"/>
+            </log>
+            <respond/>
+        </inSequence>
+        <outSequence/>
+        <faultSequence/>
+    </resource>
+    <resource methods="POST" uri-template="/create">
+        <inSequence>
+            <log description="AUDIT_ENTRY" level="custom" separator=",">
+                <property expression="json-eval($)" name="AUDIT_ENTRY"/>
+            </log>
+            <property description="Payload" expression="json-eval($)" name="OriginalPayload" scope="default" type="STRING"/>
+            <payloadFactory media-type="json">
+                <format>
+			        {
+			            "Access_AccessBuildID": "$1",
+			            "access_FinanceCostToClient_CID": "$2",
+			            "Access_CreatedBy": "$3",
+			            "Access_UserId": "$4",
+			            "Access_TimeStamp": "$5",
+			            "Access_Status": "$6",
+			            "access_LandlordApproval": "$7",
+			            "Access_CreatedDate": "$8",
+			            "access_Client_Region": "$9",
+			            "access_Stage": "$10",
+			            "access_Site_Name": "$11",
+			            "access_Client_Contact": "$12",
+			            "access_dfaregion": "$13",
+			            "access_Site_Latitude": "$14",
+			            "access_Site_Address": "$15",
+			            "access_AccessManagingCompany": "$16",
+			            "Access_UpdatedDate": "$17",
+			            "access_City": "$18",
+			            "access_referenceid": "$19",
+			            "access_accessownership": "$20",
+			            "access_StatusInBuild": "$21",
+			            "access_Site_Type": "$22",
+			            "access_Site_Longitude": "$23",
+			            "Access_Secterr": "$24",
+			            "access_Nr_Entries": "$25",
+			            "Access_CompanyId": "$26",
+			            "Access_UpdatedBy": "$27",
+			            "access_Address_Subburb": "$28"
+			        }
+			    </format>
+                <args>
+                    <arg evaluator="json" expression="$.Access_AccessBuildID"/>
+                    <arg evaluator="json" expression="$.access_FinanceCostToClient_CID"/>
+                    <arg evaluator="json" expression="$.Access_CreatedBy"/>
+                    <arg evaluator="json" expression="$.Access_UserId"/>
+                    <arg evaluator="json" expression="$.Access_TimeStamp"/>
+                    <arg evaluator="json" expression="$.Access_Status"/>
+                    <arg evaluator="json" expression="$.access_LandlordApproval"/>
+                    <arg evaluator="json" expression="$.Access_CreatedDate"/>
+                    <arg evaluator="json" expression="$.access_Client_Region"/>
+                    <arg evaluator="json" expression="$.access_Stage"/>
+                    <arg evaluator="json" expression="$.access_Site_Name"/>
+                    <arg evaluator="json" expression="$.access_Client_Contact"/>
+                    <arg evaluator="json" expression="$.access_dfaregion"/>
+                    <arg evaluator="json" expression="$.access_Site_Latitude"/>
+                    <arg evaluator="json" expression="$.access_Site_Address"/>
+                    <arg evaluator="json" expression="$.access_AccessManagingCompany"/>
+                    <arg evaluator="json" expression="$.Access_UpdatedDate"/>
+                    <arg evaluator="json" expression="$.access_City"/>
+                    <arg evaluator="json" expression="$.access_referenceid"/>
+                    <arg evaluator="json" expression="$.access_accessownership"/>
+                    <arg evaluator="json" expression="$.access_StatusInBuild"/>
+                    <arg evaluator="json" expression="$.access_Site_Type"/>
+                    <arg evaluator="json" expression="$.access_Site_Longitude"/>
+                    <arg evaluator="json" expression="$.Access_Secterr"/>
+                    <arg evaluator="json" expression="$.access_Nr_Entries"/>
+                    <arg evaluator="json" expression="$.Access_CompanyId"/>
+                    <arg evaluator="json" expression="$.Access_UpdatedBy"/>
+                    <arg evaluator="json" expression="$.access_Address_Subburb"/>
+                </args>
+            </payloadFactory>
+            <log description="AuditTempExit" level="custom">
+                <property expression="get-property('OriginalPayload')" name="audit.tempExit.updateCase"/>
+            </log>
+            <sequence key="AccessBuildCreate_SQ"/>
+            <log description="AUDIT_EXIT" level="custom" separator=",">
+                <property expression="json-eval($)" name="AUDIT_EXIT"/>
+            </log>
+        </inSequence>
+        <outSequence/>
+        <faultSequence/>
+    </resource>
+    <resource methods="PUT" uri-template="/update">
+        <inSequence/>
+        <outSequence/>
+        <faultSequence/>
+    </resource>
+</api>

@@ -1,7 +1,4 @@
 <?xml version="1.0" encoding="UTF-8"?><artifacts>
-    <artifact name="SageCRMAccessBuild_DSS" groupId="za.co.dfafrica.dataservice" version="1.0.0" type="service/dataservice" serverRole="DataServicesServer">
-        <file>dataservice/SageCRMAccessBuild_DSS.dbs</file>
-    </artifact>
     <artifact name="SageCRMOpportunity_DSS" groupId="za.co.dfafrica.dataservice" version="1.0.0" type="service/dataservice" serverRole="DataServicesServer">
         <file>dataservice/SageCRMOpportunity_DSS.dbs</file>
     </artifact>
@@ -31,5 +28,8 @@
     </artifact>
     <artifact name="SageCRMProducts_DSS" groupId="za.co.dfafrica.dataservice" version="1.0.0" type="service/dataservice" serverRole="DataServicesServer">
         <file>dataservice/SageCRMProducts_DSS.dbs</file>
+    </artifact>
+    <artifact name="SageCRMAccessbuild_DSS" groupId="za.co.dfafrica.dataservice" version="1.0.0" type="service/dataservice" serverRole="DataServicesServer">
+        <file>dataservice/SageCRMAccessbuild_DSS.dbs</file>
     </artifact>
 </artifacts>

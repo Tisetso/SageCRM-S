@@ -1,0 +1,48 @@
+openapi: 3.0.1
+info:
+  title: accessbuild_API
+  description: API Definition of accessbuild_API
+  version: 1.0.0
+servers:
+- url: http://localhost:8290/sagecrmdapi_accessbuild
+paths:
+  /getall:
+    get:
+      responses:
+        default:
+          description: Default response
+  /getbyname:
+    get:
+      responses:
+        default:
+          description: Default response
+  /create:
+    post:
+      requestBody:
+        description: Sample Payload
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                payload:
+                  type: object
+        required: false
+      responses:
+        default:
+          description: Default response
+  /update:
+    put:
+      requestBody:
+        description: Sample Payload
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                payload:
+                  type: object
+        required: false
+      responses:
+        default:
+          description: Default response

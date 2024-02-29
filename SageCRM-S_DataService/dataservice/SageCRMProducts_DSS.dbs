@@ -10,10 +10,15 @@
 
 
   <!-- Resource Product -->
-  <resource method="GET" path="/products">
+  <resource method="GET" path="/products" returnRequestStatus="true">
          <call-query href="GetProducts" >
          <with-param name="pagesize" query-param="pagesize" />
          <with-param name="Prod_ProductID" query-param="Prod_ProductID" />
+         <with-param name="prli_years" query-param="prli_years" />
+         <with-param name="prod_companyid" query-param="prod_companyid" />
+         <with-param name="PrFa_ProductFamilyID" query-param="PrFa_ProductFamilyID" />
+         <with-param name="prod_name" query-param="prod_name" />
+         
          </call-query>
   </resource>
   
@@ -21,8 +26,19 @@
   <query id="GetProducts" useConfig="DFACRM">
      <sql>
          SELECT DISTINCT TOP(COALESCE(:pagesize, 10))
-                   Pric_PricingID, pric_price, prod_companyid,  pric_price_CID, pric_UOMID, prli_years, prli_Description, 
-                   prod_name, prod_bandwidth_code, Prod_ProductID, prod_QuoteCategory, prod_annuity, PrFa_ProductFamilyID
+                   Pric_PricingID, 
+                   pric_price, 
+                   prod_companyid,  
+                   pric_price_CID, 
+                   pric_UOMID, 
+                   prli_years, 
+                   prli_Description, 
+                   prod_name, 
+                   prod_bandwidth_code, 
+                   Prod_ProductID, 
+                   prod_QuoteCategory, 
+                   prod_annuity, 
+                   PrFa_ProductFamilyID
                FROM Pricing
                INNER JOIN PricingList ON PrLi_PricingListID = pric_PricingListID
                INNER JOIN Newproduct ON Prod_productid = pric_ProductID
@@ -30,9 +46,17 @@
                WHERE Prod_Deleted IS NULL 
                AND pric_Active = 'Y'
                AND (Prod_ProductID = :Prod_ProductID OR :Prod_ProductID IS NULL)
+               AND (prli_years = :prli_years OR :prli_years IS NULL)
+               AND (prod_companyid = :prod_companyid OR :prod_companyid IS NULL)
+               AND (PrFa_ProductFamilyID = :PrFa_ProductFamilyID OR :PrFa_ProductFamilyID IS NULL)
+               AND (prod_name = :prod_name OR :prod_name IS NULL)
      </sql>
      <param name="pagesize" paramType="SCALAR" sqlType="INTEGER" defaultValue="10" type="IN" optional="false" />
       <param name="Prod_ProductID" paramType="SCALAR" sqlType="INTEGER" type="IN" optional="false" />
+      <param name="prli_years" paramType="SCALAR" sqlType="INTEGER" type="IN" optional="false" />
+      <param name="prod_companyid" paramType="SCALAR" sqlType="INTEGER" type="IN" optional="false" />
+      <param name="PrFa_ProductFamilyID" paramType="SCALAR" sqlType="INTEGER" type="IN" optional="false" />
+      <param name="prod_name" paramType="SCALAR" sqlType="STRING" type="IN" optional="false" />
      <result outputType="json" useColumnNumbers="true">{
                  "PricingLists": {
                    "PricingList": [{

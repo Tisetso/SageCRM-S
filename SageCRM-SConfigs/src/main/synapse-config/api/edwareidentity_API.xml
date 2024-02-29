@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<api context="/sagecrmapi_edwareidentity" name="edwareidentity_API" xmlns="http://ws.apache.org/ns/synapse">
+    <resource methods="GET">
+        <inSequence>
+            <log description="AUDIT_ENTRY" level="custom" separator=",">
+                <property expression="$body" name="AUDIT_ENTRY"/>
+            </log>
+            <property description="entityType" expression="$url:entityType" name="uri.var.entityType" scope="default" type="STRING"/>
+            <call>
+                <endpoint key="EdwareIdentity_EP"/>
+            </call>
+            <respond/>
+        </inSequence>
+        <outSequence/>
+        <faultSequence/>
+    </resource>
+</api>

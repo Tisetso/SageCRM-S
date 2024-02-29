@@ -10,21 +10,21 @@
 
 
   <!-- Resource CircuitNumber -->
-  <resource method="GET" path="/circuitnumber">
+  <resource method="GET" path="/circuitnumber" returnRequestStatus="true">
       <call-query href="GetCircuitNumbers" >
          <with-param name="pagesize" query-param="pagesize" />
          <with-param name="CrctNb_Name" query-param="CrctNb_Name" />
          </call-query>
   </resource>
   
-  <resource method="GET" path="/circuitnumber/orders">
+  <resource method="GET" path="/circuitnumber/orders" returnRequestStatus="true">
       <call-query href="GetCircuitNumbersOrders" >
          <with-param name="pagesize" query-param="pagesize" />
          <with-param name="CrctNb_Name" query-param="CrctNb_Name" />
          </call-query>
   </resource>
   
-  <resource method="GET" path="/verifydfacircuitid">
+  <resource method="GET" path="/verifydfacircuitid" returnRequestStatus="true">
       <call-query href="VerifydfaCircuitID" >
          <with-param name="pagesize" query-param="pagesize" />
          <with-param name="CrctNb_Name" query-param="CrctNb_Name" />
