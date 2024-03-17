@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<sequence name="getUser_SQ" trace="disable" xmlns="http://ws.apache.org/ns/synapse">
+    <log description="userId" level="custom" separator=",">
+        <property expression="$ctx:userId" name="userId"/>
+    </log>
+    <dblookup>
+        <connection>
+            <pool>
+                <driver>com.microsoft.sqlserver.jdbc.SQLServerDriver</driver>
+                <url>jdbc:sqlserver://DFASQL-LAB01:1433;databaseName=DFACRM_UAT01;</url>
+                <user>API_User</user>
+                <password>@ApiUs3r123!</password>
+            </pool>
+        </connection>
+        <statement>
+            <sql><![CDATA[SELECT
+                User_Logon,      
+                User_Department, 
+                User_PrimaryChannelId, 
+                User_Deleted, 
+                User_Disabled,
+                User_LastName, 
+                User_FirstName, 
+                User_EmailAddress,
+                User_UserId
+            FROM Users
+            WHERE 
+                User_Deleted IS NULL
+                AND User_UserId = ? 
+      ]]></sql>
+            <parameter expression="$ctx:userId" type="VARCHAR"/>
+            <result column="User_Department" name="User_Department"/>
+            <result column="User_PrimaryChannelId" name="User_PrimaryChannelId"/>
+            <result column="User_Logon" name="User_Logon"/>
+            <result column="User_Disabled" name="User_Disabled"/>
+            <result column="User_Deleted" name="User_Deleted"/>
+            <result column="User_LastName" name="User_LastName"/>
+            <result column="User_UserId" name="User_UserId"/>
+            <result column="User_EmailAddress" name="User_EmailAddress"/>
+            <result column="User_FirstName" name="User_FirstName"/>
+        </statement>
+    </dblookup>
+    <log description="User" level="custom" separator=",">
+        <property expression="json-eval($)" name="User"/>
+    </log>
+</sequence>

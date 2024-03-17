@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<sequence name="getWorkflowInstance_SQ" trace="disable" xmlns="http://ws.apache.org/ns/synapse">
+    <property description="entityType" expression="get-property('entityType')" name="entityType" scope="default" type="STRING"/>
+    <log description="WorkflowInstance" level="custom" separator=",">
+        <property expression="get-property('entityType')" name="entityType"/>
+    </log>
+    <switch source="$ctx:entityType">
+        <case regex="(?i)AccessBuild">
+            <log description="AccessBuild"/>
+            <property description="WkIn_WorkflowId" name="WkIn_WorkflowId" scope="default" type="INTEGER" value="51"/>
+            <property description="WkIn_CurrentEntityId" name="WkIn_CurrentEntityId" scope="default" type="INTEGER" value="10236"/>
+            <property description="WkIn_CurrentStateId" name="WkIn_CurrentStateId" scope="default" type="INTEGER" value="282"/>
+        </case>
+        <case regex="(?i)Opportunity">
+            <log description="Opportunity"/>
+            <property description="Opportunity" name="WkIn_WorkflowId" scope="default" type="INTEGER" value="2"/>
+            <property description="WkIn_CurrentEntityId" name="WkIn_CurrentEntityId" scope="default" type="INTEGER" value="10"/>
+            <property description="WkIn_CurrentStateId" name="WkIn_CurrentStateId" scope="default" type="INTEGER" value="1196"/>
+        </case>
+        <case regex="(?i)Orders">
+            <log description="Orders"/>
+            <property description="Orders" name="WkIn_WorkflowId" scope="default" type="INTEGER" value="53"/>
+            <property description="WkIn_CurrentEntityId" name="WkIn_CurrentEntityId" scope="default" type="INTEGER" value="10159"/>
+            <property description="WkIn_CurrentStateId" name="WkIn_CurrentStateId" scope="default" type="INTEGER" value="445"/>
+        </case>
+        <case regex="(?i)Quote">
+            <log description="Quote"/>
+            <property description="Orders" name="WkIn_WorkflowId" scope="default" type="INTEGER" value="54"/>
+            <property description="WkIn_CurrentEntityId" name="WkIn_CurrentEntityId" scope="default" type="INTEGER" value="10160"/>
+            <property description="WkIn_CurrentStateId" name="WkIn_CurrentStateId" scope="default" type="INTEGER" value="473"/>
+        </case>
+        <case regex="(?i)OrderItems">
+            <log description="OrderItems"/>
+            <property description="OrderItems" name="WkIn_WorkflowId" scope="default" type="INTEGER" value="53"/>
+            <property description="WkIn_CurrentEntityId" name="WkIn_CurrentEntityId" scope="default" type="INTEGER" value="10159"/>
+            <property description="WkIn_CurrentStateId" name="WkIn_CurrentStateId" scope="default" type="INTEGER" value="445"/>
+        </case>
+        <default>
+            <log description="Default"/>
+        </default>
+    </switch>
+    <property description="entityType" name="entityType" scope="default" type="STRING" value="WorkflowInstance"/>
+    <sequence key="getNextIdentityId_SQ"/>
+    <property description="nextWorkflowInstanceID" expression="get-property('nextIdentityID')" name="nextWorkflowInstanceID" scope="default" type="INTEGER"/>
+    <dbreport>
+        <connection>
+            <pool>
+                <driver>com.microsoft.sqlserver.jdbc.SQLServerDriver</driver>
+                <url>jdbc:sqlserver://DFASQL-LAB01:1433;databaseName=DFACRM_UAT01;</url>
+                <user>API_User</user>
+                <password>@ApiUs3r123!</password>
+            </pool>
+        </connection>
+        <statement>
+            <sql><![CDATA[
+	            BEGIN TRANSACTION;
+	              INSERT INTO WorkflowInstance (
+	                WkIn_InstanceID, 
+	                WkIn_CreatedBy, 
+	                WkIn_CreatedDate, 
+	                WkIn_UpdatedBy, 
+	                WkIn_UpdatedDate, 
+	                WkIn_TimeStamp, 
+	                WkIn_WorkflowId, 
+	                WkIn_CurrentEntityId, 
+	                WkIn_CurrentRecordId, 
+	                WkIn_CurrentStateId) 
+	              VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?);               
+	            COMMIT;  
+            ]]></sql>
+            <parameter expression="get-property('nextWorkflowInstanceID')" type="INTEGER"/>
+            <parameter expression="$ctx:User_UserId" type="INTEGER"/>
+            <parameter expression="$ctx:currentDate" type="VARCHAR"/>
+            <parameter expression="$ctx:User_UserId" type="INTEGER"/>
+            <parameter expression="$ctx:currentDate" type="VARCHAR"/>
+            <parameter expression="$ctx:currentDate" type="VARCHAR"/>
+            <parameter expression="get-property('WkIn_WorkflowId')" type="INTEGER"/>
+            <parameter expression="get-property('WkIn_CurrentEntityId')" type="INTEGER"/>
+            <parameter expression="$ctx:CurrentRecordId" type="VARCHAR"/>
+            <parameter expression="get-property('WkIn_CurrentStateId')" type="INTEGER"/>
+        </statement>
+    </dbreport>
+    <payloadFactory description="WorkflowInstance" media-type="json">
+        <format>{              
+              "WkIn_InstanceID": $1,
+              "WkIn_CreatedBy": $2,
+              "WkIn_CreatedDate": "$3",
+              "WkIn_UpdatedBy": $4,
+              "WkIn_UpdatedDate": "$5",
+              "WkIn_TimeStamp": "$6",
+              "WkIn_WorkflowId": $7,
+              "WkIn_CurrentEntityId": $8,
+              "WkIn_CurrentRecordId": $9,
+              "WkIn_CurrentStateId": $10
+        }</format>
+        <args>
+            <arg evaluator="xml" expression="get-property('nextWorkflowInstanceID')"/>
+            <arg evaluator="xml" expression="$ctx:User_UserId"/>
+            <arg evaluator="xml" expression="$ctx:currentDate"/>
+            <arg evaluator="xml" expression="$ctx:User_UserId"/>
+            <arg evaluator="xml" expression="$ctx:currentDate"/>
+            <arg evaluator="xml" expression="$ctx:currentDate"/>
+            <arg evaluator="xml" expression="get-property('WkIn_WorkflowId')"/>
+            <arg evaluator="xml" expression="get-property('WkIn_CurrentEntityId')"/>
+            <arg evaluator="xml" expression="$ctx:CurrentRecordId"/>
+            <arg evaluator="xml" expression="get-property('WkIn_CurrentStateId')"/>
+        </args>
+    </payloadFactory>
+    <log description="WorkflowInstance" level="custom" separator=",">
+        <property expression="json-eval($)" name="WorkflowInstance"/>
+    </log>
+</sequence>

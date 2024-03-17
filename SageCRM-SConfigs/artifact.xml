@@ -35,4 +35,19 @@
     <artifact name="AccessBuildCreate_SQ" groupId="za.co.dfafrica.sequence" version="1.0.0" type="synapse/sequence" serverRole="EnterpriseServiceBus">
         <file>src/main/synapse-config/sequences/AccessBuildCreate_SQ.xml</file>
     </artifact>
+    <artifact name="getRegions_SQ" groupId="za.co.dfafrica.sequence" version="1.0.0" type="synapse/sequence" serverRole="EnterpriseServiceBus">
+        <file>src/main/synapse-config/sequences/getRegions_SQ.xml</file>
+    </artifact>
+    <artifact name="getNextIdentityId_SQ" groupId="za.co.dfafrica.sequence" version="1.0.0" type="synapse/sequence" serverRole="EnterpriseServiceBus">
+        <file>src/main/synapse-config/sequences/getNextIdentityId_SQ.xml</file>
+    </artifact>
+    <artifact name="getCustomerId_SQ" groupId="za.co.dfafrica.sequence" version="1.0.0" type="synapse/sequence" serverRole="EnterpriseServiceBus">
+        <file>src/main/synapse-config/sequences/getCustomerId_SQ.xml</file>
+    </artifact>
+    <artifact name="getUser_SQ" groupId="za.co.dfafrica.sequence" version="1.0.0" type="synapse/sequence" serverRole="EnterpriseServiceBus">
+        <file>src/main/synapse-config/sequences/getUser_SQ.xml</file>
+    </artifact>
+    <artifact name="getWorkflowInstance_SQ" groupId="za.co.dfafrica.sequence" version="1.0.0" type="synapse/sequence" serverRole="EnterpriseServiceBus">
+        <file>src/main/synapse-config/sequences/getWorkflowInstance_SQ.xml</file>
+    </artifact>
 </artifacts>

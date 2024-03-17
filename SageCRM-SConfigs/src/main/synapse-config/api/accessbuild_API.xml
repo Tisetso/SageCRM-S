@@ -36,81 +36,250 @@
     </resource>
     <resource methods="POST" uri-template="/create">
         <inSequence>
+            <!-- Handle default case if necessary -->
             <log description="AUDIT_ENTRY" level="custom" separator=",">
                 <property expression="json-eval($)" name="AUDIT_ENTRY"/>
             </log>
-            <property description="Payload" expression="json-eval($)" name="OriginalPayload" scope="default" type="STRING"/>
-            <payloadFactory media-type="json">
-                <format>
-			        {
-			            "Access_AccessBuildID": "$1",
-			            "access_FinanceCostToClient_CID": "$2",
-			            "Access_CreatedBy": "$3",
-			            "Access_UserId": "$4",
-			            "Access_TimeStamp": "$5",
-			            "Access_Status": "$6",
-			            "access_LandlordApproval": "$7",
-			            "Access_CreatedDate": "$8",
-			            "access_Client_Region": "$9",
-			            "access_Stage": "$10",
-			            "access_Site_Name": "$11",
-			            "access_Client_Contact": "$12",
-			            "access_dfaregion": "$13",
-			            "access_Site_Latitude": "$14",
-			            "access_Site_Address": "$15",
-			            "access_AccessManagingCompany": "$16",
-			            "Access_UpdatedDate": "$17",
-			            "access_City": "$18",
-			            "access_referenceid": "$19",
-			            "access_accessownership": "$20",
-			            "access_StatusInBuild": "$21",
-			            "access_Site_Type": "$22",
-			            "access_Site_Longitude": "$23",
-			            "Access_Secterr": "$24",
-			            "access_Nr_Entries": "$25",
-			            "Access_CompanyId": "$26",
-			            "Access_UpdatedBy": "$27",
-			            "access_Address_Subburb": "$28"
-			        }
-			    </format>
-                <args>
-                    <arg evaluator="json" expression="$.Access_AccessBuildID"/>
-                    <arg evaluator="json" expression="$.access_FinanceCostToClient_CID"/>
-                    <arg evaluator="json" expression="$.Access_CreatedBy"/>
-                    <arg evaluator="json" expression="$.Access_UserId"/>
-                    <arg evaluator="json" expression="$.Access_TimeStamp"/>
-                    <arg evaluator="json" expression="$.Access_Status"/>
-                    <arg evaluator="json" expression="$.access_LandlordApproval"/>
-                    <arg evaluator="json" expression="$.Access_CreatedDate"/>
-                    <arg evaluator="json" expression="$.access_Client_Region"/>
-                    <arg evaluator="json" expression="$.access_Stage"/>
-                    <arg evaluator="json" expression="$.access_Site_Name"/>
-                    <arg evaluator="json" expression="$.access_Client_Contact"/>
-                    <arg evaluator="json" expression="$.access_dfaregion"/>
-                    <arg evaluator="json" expression="$.access_Site_Latitude"/>
-                    <arg evaluator="json" expression="$.access_Site_Address"/>
-                    <arg evaluator="json" expression="$.access_AccessManagingCompany"/>
-                    <arg evaluator="json" expression="$.Access_UpdatedDate"/>
-                    <arg evaluator="json" expression="$.access_City"/>
-                    <arg evaluator="json" expression="$.access_referenceid"/>
-                    <arg evaluator="json" expression="$.access_accessownership"/>
-                    <arg evaluator="json" expression="$.access_StatusInBuild"/>
-                    <arg evaluator="json" expression="$.access_Site_Type"/>
-                    <arg evaluator="json" expression="$.access_Site_Longitude"/>
-                    <arg evaluator="json" expression="$.Access_Secterr"/>
-                    <arg evaluator="json" expression="$.access_Nr_Entries"/>
-                    <arg evaluator="json" expression="$.Access_CompanyId"/>
-                    <arg evaluator="json" expression="$.Access_UpdatedBy"/>
-                    <arg evaluator="json" expression="$.access_Address_Subburb"/>
-                </args>
-            </payloadFactory>
-            <log description="AuditTempExit" level="custom">
-                <property expression="get-property('OriginalPayload')" name="audit.tempExit.updateCase"/>
+            <propertyGroup>
+                <property expression="get-property(&quot;SYSTEM_DATE&quot;, &quot;yyyy-MM-dd HH:mm:ss.SSS&quot;)" name="currentDate" scope="default" type="STRING"/>
+                <property expression="json-eval($)" name="originalPayload" scope="default" type="STRING"/>
+                <property expression="json-eval($.salesAdmin)" name="userId" scope="default" type="INTEGER"/>
+                <property expression="json-eval($.accountnumber)" name="customerId" scope="default" type="STRING"/>
+                <property expression="json-eval($.access_Client_Region)" name="clientRegion" scope="default" type="STRING"/>
+            </propertyGroup>
+            <sequence key="getUser_SQ"/>
+            <dblookup description="checkExistingSite">
+                <connection>
+                    <pool>
+                        <driver>com.microsoft.sqlserver.jdbc.SQLServerDriver</driver>
+                        <url>jdbc:sqlserver://DFASQL-LAB01:1433;databaseName=DFACRM_UAT01;</url>
+                        <user>API_User</user>
+                        <password>@ApiUs3r123!</password>
+                    </pool>
+                </connection>
+                <statement>
+                    <sql><![CDATA[
+                    SELECT TOP(1) 
+                        Access_AccessBuildID, 
+                        Access_CreatedBy, 
+                        Access_CreatedDate, 
+                        access_accessownership, 
+                        access_AccessManagingCompany, 
+                        access_Site_Name, 
+                        access_Site_Address, 
+                        access_City, 
+                        access_Stage, 
+                        access_Site_Latitude, 
+                        access_Site_Longitude  
+                    FROM AccessBuild 
+                    WHERE Access_Deleted IS NULL 
+                    AND access_Site_Name = ? 
+                    AND access_Site_Address = ? 
+                    ORDER BY Access_CreatedDate DESC]]></sql>
+                    <parameter expression="//sitename" type="VARCHAR"/>
+                    <parameter expression="//address" type="VARCHAR"/>
+                    <result column="access_Site_Latitude" name="access_Site_Latitude"/>
+                    <result column="access_AccessManagingCompany" name="access_AccessManagingCompany"/>
+                    <result column="access_Site_Address" name="access_Site_Address"/>
+                    <result column="access_Site_Longitude" name="access_Site_Longitude"/>
+                    <result column="Access_CreatedBy" name="Access_CreatedBy"/>
+                    <result column="Access_CreatedDate" name="Access_CreatedDate"/>
+                    <result column="access_City" name="access_City"/>
+                    <result column="Access_AccessBuildID" name="Access_AccessBuildID"/>
+                    <result column="access_accessownership" name="access_accessownership"/>
+                    <result column="access_Stage" name="access_Stage"/>
+                    <result column="access_Site_Name" name="access_Site_Name"/>
+                </statement>
+            </dblookup>
+            <log description="access_Site_Name" level="custom" separator=",">
+                <property expression="get-property('access_Site_Name')" name="access_Site_Name"/>
             </log>
-            <sequence key="AccessBuildCreate_SQ"/>
+            <filter regex="true" source="boolean(get-property('access_Site_Name'))">
+                <then>
+                    <dbreport>
+                        <connection>
+                            <pool>
+                                <driver>com.microsoft.sqlserver.jdbc.SQLServerDriver</driver>
+                                <url>jdbc:sqlserver://DFASQL-LAB01:1433;databaseName=DFACRM_UAT01;</url>
+                                <user>API_User</user>
+                                <password>@ApiUs3r123!</password>
+                            </pool>
+                        </connection>
+                        <statement>
+                            <sql><![CDATA[
+                                  UPDATE AccessBuild
+                                    SET access_Site_Latitude = ?,
+	                                    access_Site_Longitude = ?,
+	                                    Access_UpdatedBy = ?,                                    
+	                                    Access_UpdatedDate = ?,
+	                                    Access_TimeStamp = ?
+	                               WHERE Access_AccessBuildID = ?
+                              ]]></sql>
+                            <parameter expression="json-eval($ctx:originalPayload.latitude)" type="VARCHAR"/>
+                            <parameter expression="json-eval($ctx:originalPayload.longitude)" type="VARCHAR"/>
+                            <parameter type="INTEGER" value="925"/>
+                            <parameter expression="$ctx:currentDate" type="VARCHAR"/>
+                            <parameter expression="$ctx:currentDate" type="VARCHAR"/>
+                            <parameter expression="get-property('Access_AccessBuildID')" type="INTEGER"/>
+                        </statement>
+                    </dbreport>
+                    <payloadFactory description="AccessBuild NotExist" media-type="json">
+                        <format>{
+                                "Access_AccessBuildID": $1,
+                                "Access_CompanyId": $2,
+                                "access_Site_Name": "$3",
+                                "access_Site_Address": "$4",
+                                "access_Site_Latitude": "$5",
+                                "access_Site_Longitude": "$6",
+                                "access_description": "$7",
+                                "Access_CreatedBy": $8,
+                                "Access_UpdatedBy": $9,
+                                "access_AccessManagingCompany": "$10",
+                                "access_dfaregion": "$11",
+                                "access_Client_Region": "$12",
+                                "access_accessownership": "$13",
+                                "Access_WorkflowId": $14,
+                                "Access_CreatedDate": "$15",
+                                "Access_UpdatedDate": "$16",
+                                "Access_TimeStamp": "$17", 
+                                "access_Client_Contact": "$18"                              
+                        }</format>
+                        <args>
+                            <arg evaluator="xml" expression="get-property('Access_AccessBuildID')"/>
+                            <arg evaluator="xml" expression="get-property('Access_CompanyId')"/>
+                            <arg evaluator="json" expression="$ctx:originalPayload.sitename"/>
+                            <arg evaluator="json" expression="$ctx:originalPayload.address"/>
+                            <arg evaluator="json" expression="$ctx:originalPayload.latitude"/>
+                            <arg evaluator="json" expression="$ctx:originalPayload.longitude"/>
+                            <arg evaluator="json" expression="$ctx:originalPayload.sitename"/>
+                            <arg evaluator="xml" expression="get-property('Access_CreatedBy')"/>
+                            <arg evaluator="json" expression="$ctx:originalPayload.salesAdmin"/>
+                            <arg evaluator="json" expression="$ctx:originalPayload.accessmanagingcompany"/>
+                            <arg evaluator="json" expression="$ctx:originalPayload.access_dfaregion"/>
+                            <arg evaluator="json" expression="$ctx:originalPayload.access_Client_Region"/>
+                            <arg evaluator="json" expression="$ctx:originalPayload.accessownership"/>
+                            <arg evaluator="xml" expression="get-property('Access_WorkflowId')"/>
+                            <arg evaluator="xml" expression="get-property('Access_CreatedDate')"/>
+                            <arg evaluator="xml" expression="$ctx:currentDate"/>
+                            <arg evaluator="xml" expression="get-property('Access_TimeStamp')"/>
+                            <arg evaluator="xml" expression="get-property('access_Client_Contact')"/>
+                        </args>
+                    </payloadFactory>
+                </then>
+                <else>
+                    <sequence key="getCustomerId_SQ"/>
+                    <property description="entityType" name="entityType" scope="default" type="STRING" value="AccessBuild"/>
+                    <sequence key="getNextIdentityId_SQ"/>
+                    <propertyGroup>
+                        <property expression="get-property('nextIdentityID')" name="nextAccessBuildID" scope="default" type="INTEGER"/>
+                        <property expression="get-property('nextIdentityID')" name="CurrentRecordId" scope="default" type="INTEGER"/>
+                    </propertyGroup>
+                    <sequence key="getWorkflowInstance_SQ"/>
+                    <enrich>
+                        <source clone="true" type="body"/>
+                        <target property="requestBody" type="property"/>
+                    </enrich>
+                    <property expression="json-eval($.WkIn_InstanceID)" name="Access_WorkflowId" scope="default" type="INTEGER"/>
+                    <dbreport>
+                        <connection>
+                            <pool>
+                                <driver>com.microsoft.sqlserver.jdbc.SQLServerDriver</driver>
+                                <url>jdbc:sqlserver://DFASQL-LAB01:1433;databaseName=DFACRM_UAT01;</url>
+                                <user>API_User</user>
+                                <password>@ApiUs3r123!</password>
+                            </pool>
+                        </connection>
+                        <statement>
+                            <sql><![CDATA[                                
+                                  INSERT INTO AccessBuild (
+                                    Access_AccessBuildID,
+                                    Access_CompanyId,
+                                    access_Site_Name,
+                                    access_Site_Address,
+                                    access_Site_Latitude,
+                                    access_Site_Longitude,
+                                    access_description,
+                                    Access_CreatedBy,
+                                    Access_UpdatedBy,
+                                    access_AccessManagingCompany,
+                                    access_dfaregion,
+                                    access_Client_Region,
+                                    access_accessownership,
+                                    Access_WorkflowId,
+                                    Access_CreatedDate,
+                                    Access_UpdatedDate,
+                                    Access_TimeStamp,
+                                    access_Client_Contact)
+                                  VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);                                               
+                              ]]></sql>
+                            <parameter expression="$ctx:nextAccessBuildID" type="INTEGER"/>
+                            <parameter expression="$ctx:Comp_CompanyId" type="INTEGER"/>
+                            <parameter expression="json-eval($ctx:originalPayload.sitename)" type="VARCHAR"/>
+                            <parameter expression="json-eval($ctx:originalPayload.address)" type="VARCHAR"/>
+                            <parameter expression="json-eval($ctx:originalPayload.latitude)" type="VARCHAR"/>
+                            <parameter expression="json-eval($ctx:originalPayload.longitude)" type="VARCHAR"/>
+                            <parameter expression="json-eval($ctx:originalPayload.sitename)" type="VARCHAR"/>
+                            <parameter expression="json-eval($ctx:originalPayload.salesAdmin)" type="VARCHAR"/>
+                            <parameter expression="json-eval($ctx:originalPayload.salesAdmin)" type="VARCHAR"/>
+                            <parameter expression="json-eval($ctx:originalPayload.accessmanagingcompany)" type="VARCHAR"/>
+                            <parameter expression="json-eval($ctx:originalPayload.access_dfaregion)" type="INTEGER"/>
+                            <parameter expression="json-eval($ctx:originalPayload.access_Client_Region)" type="VARCHAR"/>
+                            <parameter expression="json-eval($ctx:originalPayload.accessownership)" type="VARCHAR"/>
+                            <parameter expression="get-property('Access_WorkflowId')" type="INTEGER"/>
+                            <parameter expression="$ctx:currentDate" type="VARCHAR"/>
+                            <parameter expression="$ctx:currentDate" type="VARCHAR"/>
+                            <parameter expression="$ctx:currentDate" type="VARCHAR"/>
+                            <parameter expression="$ctx:Comp_PrimaryUserId" type="INTEGER"/>
+                        </statement>
+                    </dbreport>
+                    <payloadFactory description="AccessBuild NotExist" media-type="json">
+                        <format>{
+                                "Access_AccessBuildID": $1,
+                                "Access_CompanyId": $2,
+                                "access_Site_Name": "$3",
+                                "access_Site_Address": "$4",
+                                "access_Site_Latitude": "$5",
+                                "access_Site_Longitude": "$6",
+                                "access_description": "$7",
+                                "Access_CreatedBy": $8,
+                                "Access_UpdatedBy": $9,
+                                "access_AccessManagingCompany": "$10",
+                                "access_dfaregion": "$11",
+                                "access_Client_Region": "$12",
+                                "access_accessownership": "$13",
+                                "Access_WorkflowId": $14,
+                                "Access_CreatedDate": "$15",
+                                "Access_UpdatedDate": "$16",
+                                "Access_TimeStamp": "$17", 
+                                "access_Client_Contact": "$18"                              
+                        }</format>
+                        <args>
+                            <arg evaluator="xml" expression="$ctx:nextAccessBuildID"/>
+                            <arg evaluator="xml" expression="$ctx:Comp_CompanyId"/>
+                            <arg evaluator="json" expression="$ctx:originalPayload.sitename"/>
+                            <arg evaluator="json" expression="$ctx:originalPayload.address"/>
+                            <arg evaluator="json" expression="$ctx:originalPayload.latitude"/>
+                            <arg evaluator="json" expression="$ctx:originalPayload.longitude"/>
+                            <arg evaluator="json" expression="$ctx:originalPayload.sitename"/>
+                            <arg evaluator="json" expression="$ctx:originalPayload.salesAdmin"/>
+                            <arg evaluator="json" expression="$ctx:originalPayload.salesAdmin"/>
+                            <arg evaluator="json" expression="$ctx:originalPayload.accessmanagingcompany"/>
+                            <arg evaluator="json" expression="$ctx:originalPayload.access_dfaregion"/>
+                            <arg evaluator="json" expression="$ctx:originalPayload.access_Client_Region"/>
+                            <arg evaluator="json" expression="$ctx:originalPayload.accessownership"/>
+                            <arg evaluator="xml" expression="get-property('Access_WorkflowId')"/>
+                            <arg evaluator="xml" expression="$ctx:currentDate"/>
+                            <arg evaluator="xml" expression="$ctx:currentDate"/>
+                            <arg evaluator="xml" expression="$ctx:currentDate"/>
+                            <arg evaluator="xml" expression="$ctx:Comp_PrimaryUserId"/>
+                        </args>
+                    </payloadFactory>
+                </else>
+            </filter>
             <log description="AUDIT_EXIT" level="custom" separator=",">
                 <property expression="json-eval($)" name="AUDIT_EXIT"/>
             </log>
+            <respond/>
         </inSequence>
         <outSequence/>
         <faultSequence/>

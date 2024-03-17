@@ -13,10 +13,51 @@
         <target xpath="get-property(OriginalPayload)"/>
     </enrich>
     <payloadFactory media-type="json">
-        <format>$1</format>
+        <format>{
+    "_createAccessBuild": {
+        "Access_AccessBuildID": $1,
+        "Access_CompanyId": $1,
+        "access_Site_Name": "$1",
+        "access_Site_Address": "$1",
+        "access_Site_Latitude": "$1",
+        "access_Site_Longitude": "$1",
+        "access_description": "$1",
+        "access_Site_Ref": "$1",
+        "Access_CreatedBy": $1,
+        "Access_CreatedDate": "$1",
+        "Access_UpdatedBy": $1,
+        "Access_UpdatedDate": "$1",
+        "Access_TimeStamp": "$1",
+        "Access_Secterr": $1,
+        "access_Stage": "$1",
+        "Access_Status": "$1",
+        "access_AccessManagingCompany": "$1",
+        "access_Address_Subburb": "$1",
+        "access_Site_Type": $1,
+        "access_Nr_Entries": $1,
+        "access_LandlordApproval": "$1",
+        "access_referenceid": "$1",
+        "access_hasRFO": "$1",
+        "access_Client_Contact": $1,
+        "access_City": "$1",
+        "access_dfaregion": $1,
+        "access_Client_Region": "$1",
+        "access_accessownership": "$1",
+        "Access_UserId": $1,
+        "access_FinanceCostToClient_CID": $1,
+        "access_StatusInBuild": "$1",
+        "access_hasSeniorPM": "$1",
+        "access_QuickBaseRecordID": $1,
+        "access_aggregationsite": "$1"
+    }
+}
+</format>
         <args>
             <arg evaluator="json" expression="$"/>
         </args>
     </payloadFactory>
+    <call>
+        <endpoint key="AccessBuildPost_EP"/>
+    </call>
     <respond/>
 </sequence>

@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<sequence name="getCustomerId_SQ" trace="disable" xmlns="http://ws.apache.org/ns/synapse">
+    <log description="customerId" level="custom" separator=",">
+        <property expression="$ctx:customerId" name="customerId"/>
+    </log>
+    <dblookup>
+        <connection>
+            <pool>
+                <driver>com.microsoft.sqlserver.jdbc.SQLServerDriver</driver>
+                <url>jdbc:sqlserver://DFASQL-LAB01:1433;databaseName=DFACRM_UAT01;</url>
+                <user>API_User</user>
+                <password>@ApiUs3r123!</password>
+            </pool>
+        </connection>
+        <statement>
+            <sql><![CDATA[SELECT
+            		Comp_CompanyId, 
+   					comp_Account_Manager, 
+   					Comp_PrimaryUserId, 
+   					Comp_Name, 
+   					Comp_Type, 
+   					Comp_Status, 
+   					Comp_IdCust, 
+   					comp_Portfolio_Manager 
+				FROM company  
+				WHERE Comp_Deleted IS NULL         
+				AND Comp_IdCust = ? 
+			]]></sql>
+            <parameter expression="$ctx:customerId" type="VARCHAR"/>
+            <result column="comp_Account_Manager" name="comp_Account_Manager"/>
+            <result column="Comp_CompanyId" name="Comp_CompanyId"/>
+            <result column="Comp_IdCust" name="Comp_IdCust"/>
+            <result column="Comp_Name" name="Comp_Name"/>
+            <result column="comp_Portfolio_Manager" name="comp_Portfolio_Manager"/>
+            <result column="Comp_PrimaryUserId" name="Comp_PrimaryUserId"/>
+            <result column="Comp_Type" name="Comp_Type"/>
+            <result column="Comp_Status" name="Comp_Status"/>
+        </statement>
+    </dblookup>
+    <payloadFactory description="Company" media-type="json">
+        <format>{
+			  "comp_Account_Manager": $1,
+			  "Comp_PrimaryUserId": $2,
+			  "Comp_Name": "$3",
+			  "Comp_Type": "$4",
+			  "Comp_Status": "$5",
+			  "Comp_IdCust": "$6",
+			  "comp_Portfolio_Manager": $7,
+			  "Comp_CompanyId": $8
+		}</format>
+        <args>
+            <arg evaluator="xml" expression="get-property('comp_Account_Manager')"/>
+            <arg evaluator="xml" expression="get-property('Comp_PrimaryUserId')"/>
+            <arg evaluator="xml" expression="get-property('Comp_Name')"/>
+            <arg evaluator="xml" expression="get-property('Comp_Type')"/>
+            <arg evaluator="xml" expression="get-property('Comp_Status')"/>
+            <arg evaluator="xml" expression="get-property('Comp_IdCust')"/>
+            <arg evaluator="xml" expression="get-property('comp_Portfolio_Manager')"/>
+            <arg evaluator="xml" expression="get-property('Comp_CompanyId')"/>
+        </args>
+    </payloadFactory>
+    <log description="nextIdentityID" level="custom" separator=",">
+        <property expression="json-eval($)" name="Company"/>
+    </log>
+</sequence>

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <endpoint name="AccessBuildPost_EP" xmlns="http://ws.apache.org/ns/synapse">
-    <http method="post" uri-template="https://localhost:8253/services/sagecrmdss_accessbuild/accessbuild">
+    <http method="post" uri-template="https://localhost:8253/services/sagecrmdss_accessbuild/createsite">
         <suspendOnFailure>
             <initialDuration>-1</initialDuration>
             <progressionFactor>1.0</progressionFactor>

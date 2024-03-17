@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<sequence name="getRegions_SQ" trace="disable" xmlns="http://ws.apache.org/ns/synapse">
+    <log description="GET_REGIONS">
+        <property expression="$ctx:clientRegion" name="GET_REGIONGS"/>
+    </log>
+    <switch source="$ctx:clientRegion">
+        <case regex="(?i)kwazulu natal region">
+            <property description="KwaZulu-Natal region" name="regionCode" scope="default" type="STRING" value="6000"/>
+        </case>
+        <case regex="(?i)western region">
+            <property description="Western region" name="regionCode" scope="default" type="STRING" value="6001"/>
+        </case>
+        <case regex="(?i)gauteng south region">
+            <property description="Gauteng South region" name="regionCode" scope="default" type="STRING" value="6002"/>
+        </case>
+        <case regex="(?i)northern region">
+            <property description="Northern region" name="regionCode" scope="default" type="STRING" value="6003"/>
+        </case>
+        <case regex="(?i)eastern cape">
+            <property description="Eastern Cape" name="regionCode" scope="default" type="STRING" value="6004"/>
+        </case>
+        <case regex="(?i)mpumalanga">
+            <property description="Mpumalanga" name="regionCode" scope="default" type="STRING" value="6005"/>
+        </case>
+        <case regex="(?i)limpopo">
+            <property description="Limpopo" name="regionCode" scope="default" type="STRING" value="6006"/>
+        </case>
+        <case regex="(?i)central regions">
+            <property description="Central regions" name="regionCode" scope="default" type="STRING" value="6007"/>
+        </case>
+        <case regex="(?i)mozambique region">
+            <property description="Mozambique region" name="regionCode" scope="default" type="STRING" value="6009"/>
+        </case>
+        <case regex="(?i)central region">
+            <property description="Central region" name="regionCode" scope="default" type="STRING" value="6011"/>
+        </case>
+        <case regex="(?i)eastern region">
+            <property description="Eastern region" name="regionCode" scope="default" type="STRING" value="6012"/>
+        </case>
+        <case regex="(?i)gauteng south - bloemfontein">
+            <property description="Gauteng South - Bloemfontein" name="regionCode" scope="default" type="STRING" value="6013"/>
+        </case>
+        <case regex="(?i)kznr - port elizabeth">
+            <property description="KwaZulu-Natal Region - Port Elizabeth" name="regionCode" scope="default" type="STRING" value="6014"/>
+        </case>
+        <case regex="(?i)gauteng south - potchefstroom">
+            <property description="Gauteng South - Potchefstroom" name="regionCode" scope="default" type="STRING" value="6015"/>
+        </case>
+        <case regex="(?i)northern region - rustenburg">
+            <property description="Northern region - Rustenburg" name="regionCode" scope="default" type="STRING" value="6016"/>
+        </case>
+        <case regex="(?i)long haul nelspruit - mpumalanga">
+            <property description="Long Haul Nelspruit - Mpumalanga" name="regionCode" scope="default" type="STRING" value="6017"/>
+        </case>
+        <case regex="(?i)wr-george knysna and mosselbay">
+            <property description="WR-George Knysna and Mosselbay" name="regionCode" scope="default" type="STRING" value="6018"/>
+        </case>
+        <case regex="(?i)northern region - limpopo">
+            <property description="Northern region - Limpopo" name="regionCode" scope="default" type="STRING" value="6019"/>
+        </case>
+        <case regex="(?i)kznr - east london">
+            <property description="KwaZulu-Natal Region - East London" name="regionCode" scope="default" type="STRING" value="6020"/>
+        </case>
+        <default>
+            <property description="Gauteng South region" name="regionCode" scope="default" type="STRING" value="6002"/>
+        </default>
+    </switch>
+    <log description="REGION_CODE">
+        <property expression="get-property('regionCode')" name="REGION_CODE"/>
+    </log>
+</sequence>

@@ -15,43 +15,59 @@
   <description>SageCRM-S_CAR</description>
   <properties>
     <za.co.dfafrica.dataservice_._SageCRMOrder_DSS>capp/DataServicesServer</za.co.dfafrica.dataservice_._SageCRMOrder_DSS>
-    <za.co.dfafrica.dataservice_._SageCRMWorkflow_DSS>capp/DataServicesServer</za.co.dfafrica.dataservice_._SageCRMWorkflow_DSS>
     <za.co.dfafrica.api_._edwareidentity>capp/EnterpriseServiceBus</za.co.dfafrica.api_._edwareidentity>
     <za.co.dfafrica.dataservice_._SageCRMProducts_DSS>capp/DataServicesServer</za.co.dfafrica.dataservice_._SageCRMProducts_DSS>
+    <za.co.dfafrica.sequence_._getUser_SQ>capp/EnterpriseServiceBus</za.co.dfafrica.sequence_._getUser_SQ>
+    <za.co.dfafrica.endpoint_._AccessBuild_EP>capp/EnterpriseServiceBus</za.co.dfafrica.endpoint_._AccessBuild_EP>
+    <za.co.dfafrica.endpoint_._EdwareIdentity_EP>capp/EnterpriseServiceBus</za.co.dfafrica.endpoint_._EdwareIdentity_EP>
+    <za.co.dfafrica.dataservice_._SageCRMCircuitNumber_DSS>capp/DataServicesServer</za.co.dfafrica.dataservice_._SageCRMCircuitNumber_DSS>
+    <za.co.dfafrica.sequence_._getCustomerId_SQ>capp/EnterpriseServiceBus</za.co.dfafrica.sequence_._getCustomerId_SQ>
+    <za.co.dfafrica.dataservice_._SageCRMOrderItems_DSS>capp/DataServicesServer</za.co.dfafrica.dataservice_._SageCRMOrderItems_DSS>
+    <za.co.dfafrica.sequence_._getNextIdentityId_SQ>capp/EnterpriseServiceBus</za.co.dfafrica.sequence_._getNextIdentityId_SQ>
+    <za.co.dfafrica.dataservice_._SageCRMCompany_DSS>capp/DataServicesServer</za.co.dfafrica.dataservice_._SageCRMCompany_DSS>
+    <za.co.dfafrica.api_._accessbuild_API>capp/EnterpriseServiceBus</za.co.dfafrica.api_._accessbuild_API>
+    <za.co.dfafrica.endpoint_._AccessBuildPost_EP>capp/EnterpriseServiceBus</za.co.dfafrica.endpoint_._AccessBuildPost_EP>
+    <za.co.dfafrica.sequence_._getRegions>capp/EnterpriseServiceBus</za.co.dfafrica.sequence_._getRegions>
+    <za.co.dfafrica.dataservice_._SageCRMWorkflow_DSS>capp/DataServicesServer</za.co.dfafrica.dataservice_._SageCRMWorkflow_DSS>
+    <za.co.dfafrica.endpoint_._AccessBuildPut_EP>capp/EnterpriseServiceBus</za.co.dfafrica.endpoint_._AccessBuildPut_EP>
+    <za.co.dfafrica.sequence_._getWorkflowInstance_SQ>capp/EnterpriseServiceBus</za.co.dfafrica.sequence_._getWorkflowInstance_SQ>
     <za.co.dfafrica.dataservice_._SageCRMEdwareIdentity_DSS>capp/DataServicesServer</za.co.dfafrica.dataservice_._SageCRMEdwareIdentity_DSS>
     <za.co.dfafrica.dataservice_._SageCRMUsers_DSS>capp/DataServicesServer</za.co.dfafrica.dataservice_._SageCRMUsers_DSS>
+    <za.co.dfafrica.sequence_._AccessBuildCreate_SQ>capp/EnterpriseServiceBus</za.co.dfafrica.sequence_._AccessBuildCreate_SQ>
+    <za.co.dfafrica.sequence_._getRegions_SQ>capp/EnterpriseServiceBus</za.co.dfafrica.sequence_._getRegions_SQ>
     <za.co.dfafrica.metadata_._edwareidentity_swagger>capp/EnterpriseServiceBus</za.co.dfafrica.metadata_._edwareidentity_swagger>
-    <za.co.dfafrica.endpoint_._AccessBuild_EP>capp/EnterpriseServiceBus</za.co.dfafrica.endpoint_._AccessBuild_EP>
-    <za.co.dfafrica.dataservice_._SageCRMCircuitNumber_DSS>capp/DataServicesServer</za.co.dfafrica.dataservice_._SageCRMCircuitNumber_DSS>
+    <za.co.dfafrica.metadata_._accessbuild_API_swagger>capp/EnterpriseServiceBus</za.co.dfafrica.metadata_._accessbuild_API_swagger>
+    <za.co.dfafrica.api_._edwareidentity_API>capp/EnterpriseServiceBus</za.co.dfafrica.api_._edwareidentity_API>
     <za.co.dfafrica.dataservice_._SageCRMOpportunity_DSS>capp/DataServicesServer</za.co.dfafrica.dataservice_._SageCRMOpportunity_DSS>
     <za.co.dfafrica.dataservice_._SageCRMAccessbuild_DSS>capp/DataServicesServer</za.co.dfafrica.dataservice_._SageCRMAccessbuild_DSS>
     <za.co.dfafrica.dataservice_._SageCRMWorkflowInstance_DSS>capp/DataServicesServer</za.co.dfafrica.dataservice_._SageCRMWorkflowInstance_DSS>
-    <za.co.dfafrica.dataservice_._SageCRMOrderItems_DSS>capp/DataServicesServer</za.co.dfafrica.dataservice_._SageCRMOrderItems_DSS>
+    <za.co.dfafrica.metadata_._accessbuild_API_metadata>capp/EnterpriseServiceBus</za.co.dfafrica.metadata_._accessbuild_API_metadata>
     <artifact.types>jaggery/app=zip,synapse/priority-executor=xml,synapse/inbound-endpoint=xml,service/rule=aar,synapse/message-store=xml,event/stream=json,service/meta=xml,datasource/datasource=xml,synapse/proxy-service=xml,bpel/workflow=zip,synapse/sequence=xml,synapse/endpointTemplate=xml,carbon/application=car,wso2/gadget=dar,synapse/api=xml,synapse/event-source=xml,synapse/message-processors=xml,event/receiver=xml,lib/dataservice/validator=jar,synapse/template=xml,synapse/endpoint=xml,lib/carbon/ui=jar,lib/synapse/mediator=jar,synapse/metadata=yaml,event/publisher=xml,synapse/local-entry=xml,synapse/task=xml,webapp/jaxws=war,registry/resource=zip,synapse/configuration=xml,service/axis2=aar,synapse/lib=zip,synapse/sequenceTemplate=xml,event/execution-plan=siddhiql,service/dataservice=dbs,web/application=war,lib/library/bundle=jar</artifact.types>
-    <za.co.dfafrica.dataservice_._SageCRMCompany_DSS>capp/DataServicesServer</za.co.dfafrica.dataservice_._SageCRMCompany_DSS>
+    <za.co.dfafrica.endpoint_._AccessBuildGetByName_EP>capp/EnterpriseServiceBus</za.co.dfafrica.endpoint_._AccessBuildGetByName_EP>
+    <za.co.dfafrica.endpoint_._AccessBuildGetAll_EP>capp/EnterpriseServiceBus</za.co.dfafrica.endpoint_._AccessBuildGetAll_EP>
   </properties>
   <dependencies>
     <dependency>
-      <groupId>za.co.dfafrica.metadata</groupId>
-      <artifactId>edwareidentity_swagger</artifactId>
-      <version>1.0.0</version>
-      <type>yaml</type>
-    </dependency>
-    <dependency>
       <groupId>za.co.dfafrica.dataservice</groupId>
-      <artifactId>SageCRMAccessbuild_DSS</artifactId>
+      <artifactId>SageCRMOrder_DSS</artifactId>
       <version>1.0.0</version>
       <type>dbs</type>
     </dependency>
     <dependency>
       <groupId>za.co.dfafrica.dataservice</groupId>
-      <artifactId>SageCRMCircuitNumber_DSS</artifactId>
+      <artifactId>SageCRMWorkflow_DSS</artifactId>
       <version>1.0.0</version>
       <type>dbs</type>
     </dependency>
     <dependency>
+      <groupId>za.co.dfafrica.endpoint</groupId>
+      <artifactId>AccessBuildPut_EP</artifactId>
+      <version>1.0.0</version>
+      <type>xml</type>
+    </dependency>
+    <dependency>
       <groupId>za.co.dfafrica.dataservice</groupId>
-      <artifactId>SageCRMCompany_DSS</artifactId>
+      <artifactId>SageCRMProducts_DSS</artifactId>
       <version>1.0.0</version>
       <type>dbs</type>
     </dependency>
@@ -63,31 +79,55 @@
     </dependency>
     <dependency>
       <groupId>za.co.dfafrica.dataservice</groupId>
+      <artifactId>SageCRMUsers_DSS</artifactId>
+      <version>1.0.0</version>
+      <type>dbs</type>
+    </dependency>
+    <dependency>
+      <groupId>za.co.dfafrica.sequence</groupId>
+      <artifactId>AccessBuildCreate_SQ</artifactId>
+      <version>1.0.0</version>
+      <type>xml</type>
+    </dependency>
+    <dependency>
+      <groupId>za.co.dfafrica.metadata</groupId>
+      <artifactId>edwareidentity_swagger</artifactId>
+      <version>1.0.0</version>
+      <type>yaml</type>
+    </dependency>
+    <dependency>
+      <groupId>za.co.dfafrica.metadata</groupId>
+      <artifactId>accessbuild_API_swagger</artifactId>
+      <version>1.0.0</version>
+      <type>yaml</type>
+    </dependency>
+    <dependency>
+      <groupId>za.co.dfafrica.endpoint</groupId>
+      <artifactId>EdwareIdentity_EP</artifactId>
+      <version>1.0.0</version>
+      <type>xml</type>
+    </dependency>
+    <dependency>
+      <groupId>za.co.dfafrica.dataservice</groupId>
+      <artifactId>SageCRMCircuitNumber_DSS</artifactId>
+      <version>1.0.0</version>
+      <type>dbs</type>
+    </dependency>
+    <dependency>
+      <groupId>za.co.dfafrica.api</groupId>
+      <artifactId>edwareidentity_API</artifactId>
+      <version>1.0.0</version>
+      <type>xml</type>
+    </dependency>
+    <dependency>
+      <groupId>za.co.dfafrica.dataservice</groupId>
       <artifactId>SageCRMOpportunity_DSS</artifactId>
       <version>1.0.0</version>
       <type>dbs</type>
     </dependency>
     <dependency>
       <groupId>za.co.dfafrica.dataservice</groupId>
-      <artifactId>SageCRMOrderItems_DSS</artifactId>
-      <version>1.0.0</version>
-      <type>dbs</type>
-    </dependency>
-    <dependency>
-      <groupId>za.co.dfafrica.dataservice</groupId>
-      <artifactId>SageCRMOrder_DSS</artifactId>
-      <version>1.0.0</version>
-      <type>dbs</type>
-    </dependency>
-    <dependency>
-      <groupId>za.co.dfafrica.dataservice</groupId>
-      <artifactId>SageCRMProducts_DSS</artifactId>
-      <version>1.0.0</version>
-      <type>dbs</type>
-    </dependency>
-    <dependency>
-      <groupId>za.co.dfafrica.dataservice</groupId>
-      <artifactId>SageCRMUsers_DSS</artifactId>
+      <artifactId>SageCRMAccessbuild_DSS</artifactId>
       <version>1.0.0</version>
       <type>dbs</type>
     </dependency>
@@ -99,9 +139,81 @@
     </dependency>
     <dependency>
       <groupId>za.co.dfafrica.dataservice</groupId>
-      <artifactId>SageCRMWorkflow_DSS</artifactId>
+      <artifactId>SageCRMOrderItems_DSS</artifactId>
       <version>1.0.0</version>
       <type>dbs</type>
+    </dependency>
+    <dependency>
+      <groupId>za.co.dfafrica.metadata</groupId>
+      <artifactId>accessbuild_API_metadata</artifactId>
+      <version>1.0.0</version>
+      <type>yaml</type>
+    </dependency>
+    <dependency>
+      <groupId>za.co.dfafrica.endpoint</groupId>
+      <artifactId>AccessBuildGetByName_EP</artifactId>
+      <version>1.0.0</version>
+      <type>xml</type>
+    </dependency>
+    <dependency>
+      <groupId>za.co.dfafrica.dataservice</groupId>
+      <artifactId>SageCRMCompany_DSS</artifactId>
+      <version>1.0.0</version>
+      <type>dbs</type>
+    </dependency>
+    <dependency>
+      <groupId>za.co.dfafrica.api</groupId>
+      <artifactId>accessbuild_API</artifactId>
+      <version>1.0.0</version>
+      <type>xml</type>
+    </dependency>
+    <dependency>
+      <groupId>za.co.dfafrica.endpoint</groupId>
+      <artifactId>AccessBuildPost_EP</artifactId>
+      <version>1.0.0</version>
+      <type>xml</type>
+    </dependency>
+    <dependency>
+      <groupId>za.co.dfafrica.endpoint</groupId>
+      <artifactId>AccessBuildGetAll_EP</artifactId>
+      <version>1.0.0</version>
+      <type>xml</type>
+    </dependency>
+    <dependency>
+      <groupId>za.co.dfafrica.sequence</groupId>
+      <artifactId>getRegions</artifactId>
+      <version>1.0.0</version>
+      <type>xml</type>
+    </dependency>
+    <dependency>
+      <groupId>za.co.dfafrica.sequence</groupId>
+      <artifactId>getCustomerId_SQ</artifactId>
+      <version>1.0.0</version>
+      <type>xml</type>
+    </dependency>
+    <dependency>
+      <groupId>za.co.dfafrica.sequence</groupId>
+      <artifactId>getNextIdentityId_SQ</artifactId>
+      <version>1.0.0</version>
+      <type>xml</type>
+    </dependency>
+    <dependency>
+      <groupId>za.co.dfafrica.sequence</groupId>
+      <artifactId>getRegions_SQ</artifactId>
+      <version>1.0.0</version>
+      <type>xml</type>
+    </dependency>
+    <dependency>
+      <groupId>za.co.dfafrica.sequence</groupId>
+      <artifactId>getUser_SQ</artifactId>
+      <version>1.0.0</version>
+      <type>xml</type>
+    </dependency>
+    <dependency>
+      <groupId>za.co.dfafrica.sequence</groupId>
+      <artifactId>getWorkflowInstance_SQ</artifactId>
+      <version>1.0.0</version>
+      <type>xml</type>
     </dependency>
   </dependencies>
   <repositories>

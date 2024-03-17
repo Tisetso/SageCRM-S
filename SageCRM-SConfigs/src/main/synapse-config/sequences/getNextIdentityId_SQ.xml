@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<sequence name="getNextIdentityId_SQ" trace="disable" xmlns="http://ws.apache.org/ns/synapse">
+    <log description="entityType" level="custom" separator=",">
+        <property expression="get-property('entityType')" name="entityType"/>
+    </log>
+    <dblookup description="nextIdentityID">
+        <connection>
+            <pool>
+                <driver>com.microsoft.sqlserver.jdbc.SQLServerDriver</driver>
+                <url>jdbc:sqlserver://DFASQL-LAB01:1433;databaseName=DFACRM_UAT01;</url>
+                <user>API_User</user>
+                <password>@ApiUs3r123!</password>
+            </pool>
+        </connection>
+        <statement>
+            <sql><![CDATA[EXEC pr_next_eware_identity_id @entityType = ?]]></sql>
+            <parameter expression="get-property('entityType')" type="VARCHAR"/>
+            <result column="nextId" name="nextIdentityID"/>
+        </statement>
+    </dblookup>
+    <log description="nextIdentityID" level="custom" separator=",">
+        <property expression="get-property('nextIdentityID')" name="nextIdentityID"/>
+    </log>
+</sequence>
